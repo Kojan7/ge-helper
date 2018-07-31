@@ -16,10 +16,14 @@ export default {
 </script>
 
 <style scoped>
-  .el {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-  }
+.el {
+  box-sizing: border-box;
+  height: 38px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0 5px 0;
+  padding: 5px;
+  background-color: beige;
+}
 </style>

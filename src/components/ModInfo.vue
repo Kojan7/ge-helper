@@ -79,8 +79,8 @@ export default {
 </script>
 
 <style scoped>
-  .info {
-    max-width: 300px;
-    margin: auto;
-  }
+.info {
+  max-width: 300px;
+  margin: auto;
+}
 </style>
