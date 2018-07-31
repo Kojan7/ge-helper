@@ -1,4 +1,4 @@
-# ge-finder
+# era-plus
 
 ## Project setup
 ```
