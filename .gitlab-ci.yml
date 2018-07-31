@@ -9,7 +9,7 @@ pages:
   - yarn install
   - yarn run build
   - rm public/*
-  - mv dist public
+  - mv dist/* public
   artifacts:
     paths:
     - public
