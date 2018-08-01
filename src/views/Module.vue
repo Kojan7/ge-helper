@@ -67,7 +67,7 @@ export default {
   },
   computed: {
     modId: function() {
-      var itemCode;
+      let itemCode;
       if (this.size <= 2) {
         if (this.item <= 2) {
           itemCode = this.item + this.size * 3; // railguns

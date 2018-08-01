@@ -1,7 +1,7 @@
 <template>
-  <div class="el" v-if="elv > 0">
+  <div class="el" v-if="elvalue > 0">
     <div class="name">{{ el.name }}</div>
-    <div class="value">{{ elv }}</div>
+    <div class="value">{{ output }}</div>
   </div>
 </template>
 
@@ -10,7 +10,19 @@ export default {
   name: "ModInfoEl",
   props: {
     el: Object,
-    elv: Number
+    elvalue: Number
+  },
+  computed: {
+    output: function() {
+      let elv = this.elvalue;
+      if (typeof this.el.modifier !== "undefined") {
+        elv = Math.round(elv / this.el.modifier * 1000) / 1000;
+      }
+      if (typeof this.el.suffix !== "undefined") {
+        elv = elv + this.el.suffix;
+      }
+      return elv;
+    }
   }
 };
 </script>
