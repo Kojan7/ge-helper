@@ -1,5 +1,5 @@
 <template>
-  <div class="info">
+  <div>
     <ModInfoEl
       v-for="el in modInfoList"
       v-bind:el="el"
@@ -77,10 +77,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.info {
-  max-width: 300px;
-  margin: auto;
-}
-</style>

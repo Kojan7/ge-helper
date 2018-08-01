@@ -1,7 +1,7 @@
 <template>
   <div class="el" v-if="elvalue > 0">
-    <div class="name">{{ el.name }}</div>
-    <div class="value">{{ output }}</div>
+    <div>{{ el.name }}</div>
+    <div>{{ output }}</div>
   </div>
 </template>
 
@@ -29,13 +29,12 @@ export default {
 
 <style scoped>
 .el {
-  box-sizing: border-box;
-  height: 38px;
+  height: 26px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 5px 0 5px 0;
+  margin: 5px;
   padding: 5px;
-  background-color: beige;
+  background-color: #d3dae3;
 }
 </style>
