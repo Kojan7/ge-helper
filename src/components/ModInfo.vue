@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='info'>
     <ModInfoEl
       v-for="el in modInfoList"
       v-bind:el="el"
@@ -77,3 +77,11 @@ export default {
   }
 };
 </script>
+<style scoped>
+.info {
+  box-sizing: border-box;
+  background-color: #d3dae3;
+  margin: 5px;
+  padding: 5px;
+}
+</style>

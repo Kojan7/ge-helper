@@ -1,19 +1,48 @@
 <template>
   <div class='info'>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    <ShipInfoTile
+      v-for="tile in layout"
+      v-bind:coord="tile"
+      v-bind:key="layout.indexOf(tile)">
+    </ShipInfoTile>
   </div>
 </template>
 <script>
+import ShipInfoTile from "@/components/ShipInfoTile.vue";
+import { GD_Shipbody, GD_Technology } from "@/data/game.js";
 export default {
   name: "ShipInfo",
   props: {
     shipId: Number
+  },
+  components: {
+    ShipInfoTile
+  },
+  data: function() {
+    return {
+      tiles: Array
+    };
+  },
+  computed: {
+    ship: function() {
+      return GD_Shipbody[this.shipId];
+    },
+    layout: function() {
+      if (this.ship[1] < 36) {
+        return GD_Technology[this.ship[1]][11].slice(0, this.ship[6]);
+      } else {
+        // workaround for titans
+        return GD_Technology[this.ship[1] - 61][11].slice(0, this.ship[6]);
+      }
+    }
   }
 };
 </script>
 <style scoped>
 .info {
+  position: relative;
   margin: 5px;
   background-color: #d3dae3;
+  height: 500px;
 }
 </style>

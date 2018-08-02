@@ -8,7 +8,7 @@
         <option value="3">狙击</option>
         <option value="4">高速</option>
         <option value="5">采掘</option>
-        <option value="5">运输</option>
+        <option value="6">运输</option>
       </select>
       <select class="select" v-model.number="size">
         <option value="0">护卫舰</option>

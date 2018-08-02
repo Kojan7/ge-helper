@@ -24,6 +24,7 @@ body {
   display: flex;
   align-items: center;
   width: 100%;
+  min-width: 300px;
   background-color: #383c4a;
   height: 40px;
   justify-content: center;
@@ -48,6 +49,7 @@ body {
 }
 
 #router-view {
+  min-width: 300px;
   max-width: 360px;
   margin: auto;
 }

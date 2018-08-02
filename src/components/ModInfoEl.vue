@@ -29,12 +29,13 @@ export default {
 
 <style scoped>
 .el {
+  font-size: 14px;
   height: 26px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 5px;
-  padding: 5px;
-  background-color: #d3dae3;
+  padding: 0 5px 0 5px;
+  margin: 1px;
+  background-color: #fff;
 }
 </style>
