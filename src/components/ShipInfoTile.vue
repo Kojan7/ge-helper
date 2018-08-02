@@ -13,8 +13,8 @@ export default {
   computed: {
     style: function() {
       return {
-        // 15 is padding
-        top: 15 + this.coord[0]*13 + "px",
+        // 30 and 15 are paddings
+        top: 30 + this.coord[0]*13 + "px",
         right: 15 + this.coord[1]*15 + (this.coord[0]%2?0:7.5) + "px"
       };
     }

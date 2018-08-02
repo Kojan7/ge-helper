@@ -1,5 +1,12 @@
 <template>
   <div class='info'>
+    <ShipBuff v-bind:buffs="ship[12]"></ShipBuff>
+    <ShipInfoEl
+      v-for="el in shipDesc"
+      v-bind:el="el"
+      v-bind:key="el.id"
+      v-bind:elvalue="ship[el.shipIndex]">
+    </ShipInfoEl>
     <ShipInfoTile
       v-for="tile in layout"
       v-bind:coord="tile"
@@ -8,19 +15,25 @@
   </div>
 </template>
 <script>
+import ShipInfoEl from "@/components/ShipInfoEl.vue";
+import ShipBuff from "@/components/ShipBuff.vue";
 import ShipInfoTile from "@/components/ShipInfoTile.vue";
 import { GD_Shipbody, GD_Technology } from "@/data/game.js";
+import { shipDesc } from "@/data/shipInfo.js";
+
 export default {
   name: "ShipInfo",
   props: {
     shipId: Number
   },
   components: {
+    ShipBuff,
+    ShipInfoEl,
     ShipInfoTile
   },
   data: function() {
     return {
-      tiles: Array
+      shipDesc
     };
   },
   computed: {

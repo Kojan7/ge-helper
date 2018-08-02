@@ -52,7 +52,7 @@
 
 <script>
 import ModInfo from "@/components/ModInfo.vue";
-import { mRetro, lRetro } from "@/data/modRetro.js";
+import { mRetro, lRetro } from "@/data/modInfo.js";
 export default {
   name: "module",
   components: {

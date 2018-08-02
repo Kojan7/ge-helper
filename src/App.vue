@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link class='router-link' to="/ship">舰体</router-link>
       <router-link class='router-link' to="/module">组件</router-link>
-      <router-link class='router-link' to="/build">组装</router-link>
+      <router-link class='router-link' to="/build">装配</router-link>
     </div>
     <router-view id='router-view'/>
   </div>
@@ -15,8 +15,6 @@ body {
 }
 #app {
   font-family: Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
 
