@@ -26,5 +26,10 @@ const shipDesc = [
   // { id: 1017, title: "量子芯片", shipIndex: 28 },
   { id: 1018, title: "智能核心", shipIndex: 31 }
 ];
+const shipLimit = [];
+shipLimit[5] = "△"; // Miner
+shipLimit[9] = "▽"; // Engine
+shipLimit[7] = "▩"; // Armor
+shipLimit[10] = "□"; // Container
 
-export { shipBuff, shipDesc };
+export { shipBuff, shipDesc, shipLimit };
