@@ -9,24 +9,24 @@
         </select>
       </div>
       <div class="selection">
-        <label>
+        <label :class="{ active: size === 'S' }">
           <input type="radio" value="S" v-model="size">S
         </label>
-        <label>
+        <label  :class="{ active: size === 'M' }">
           <input type="radio" value="M" v-model="size">M
         </label>
-        <label>
+        <label  :class="{ active: size === 'L' }">
           <input type="radio" value="L" v-model="size">L
         </label>
       </div>
       <div class="selection">
-        <label>
+        <label  :class="{ active: type === 'other' }">
           <input type="radio" value="other" v-model="type">武器，钻头，引擎，能源
         </label>
-        <label>
+        <label  :class="{ active: type === 'def' }">
           <input type="radio" value="def" v-model="type">装甲，护盾，货柜，防空
         </label>
-        <label>
+        <label  :class="{ active: type === 'core' }">
           <input type="radio" value="core" v-model="type">动力核心
         </label>
       </div>
@@ -125,6 +125,7 @@ label,
   margin: 5px;
   flex-basis: 0;
   flex-grow: 1;
+  user-select: none;
 }
 .square {
   flex-direction: column;
@@ -145,5 +146,10 @@ input {
   height: 36px;
   margin: 5px 5px 10px 5px;
   background-color: #d3dae3;
+}
+
+.active {
+  background-color: #5294e2;
+  color: white;
 }
 </style>
