@@ -4,7 +4,7 @@ shipBuff[42] = "推力";
 shipBuff[43] = "货舱";
 shipBuff[46] = "攻击力";
 shipBuff[47] = "射程";
-shipBuff[48] = "防御";
+shipBuff[48] = "血盾防空";
 const shipDesc = [
   { id: 1000, title: "槽位", shipIndex: 6 },
   { id: 1001, title: "动力", shipIndex: 7 },

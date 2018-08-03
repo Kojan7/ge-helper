@@ -4,6 +4,7 @@
       <router-link class='router-link' to="/ship">舰体</router-link>
       <router-link class='router-link' to="/module">组件</router-link>
       <router-link class='router-link' to="/build">装配</router-link>
+      <router-link class='router-link' to="/legion">军团</router-link>
     </div>
     <router-view id='router-view'/>
   </div>

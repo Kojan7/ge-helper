@@ -46,4 +46,17 @@ const modDesc = [
   { id: 51, name: "智能核心" },
   { id: 52, name: "暗物质" }
 ];
-export { mRetro, lRetro, modDesc };
+const upgradeFee = {
+  Score: 300,
+  Sdef: 75,
+  Sother: 150,
+
+  Mcore: 57600,
+  Mdef: 14400,
+  Mother: 28800,
+
+  Lcore: 3456000,
+  Ldef: 864000,
+  Lother: 1728000
+};
+export { mRetro, lRetro, modDesc, upgradeFee };
