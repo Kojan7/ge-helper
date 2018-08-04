@@ -40,17 +40,12 @@ body {
   color: #d3dae3;
   flex-basis: 0;
   flex-grow: 1;
+  z-index: 1000;
 }
 
 .router-link-active {
   background-color: #5294e2;
   color: #fff;
-}
-
-#router-view {
-  min-width: 300px;
-  max-width: 360px;
-  margin: auto;
 }
 
 .selection {
@@ -66,5 +61,6 @@ body {
   height: 36px;
   font-size: 16px;
   margin: 5px;
+  z-index: 900;
 }
 </style>

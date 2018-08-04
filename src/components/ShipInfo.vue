@@ -3,14 +3,16 @@
     <ShipBuff v-bind:buffs="ship[12]"></ShipBuff>
     <ShipInfoEl
       v-for="el in shipDesc"
-      v-bind:el="el"
-      v-bind:key="el.id"
-      v-bind:elvalue="ship[el.shipIndex]">
+      :el="el"
+      :key="el.id"
+      :elvalue="ship[el.shipIndex]">
     </ShipInfoEl>
     <ShipInfoTile
       v-for="tile in layout"
-      v-bind:coord="tile"
-      v-bind:key="layout.indexOf(tile)">
+      :coord="tile"
+      :key="layout.indexOf(tile)"
+      :padding="{top: 30, right: 15}"
+      :zoom="1">
     </ShipInfoTile>
   </div>
 </template>

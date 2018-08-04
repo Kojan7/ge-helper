@@ -31,5 +31,37 @@ shipLimit[5] = "△"; // Miner
 shipLimit[9] = "▽"; // Engine
 shipLimit[7] = "▩"; // Armor
 shipLimit[10] = "□"; // Container
-
-export { shipBuff, shipDesc, shipLimit };
+const shipChoice = {
+  type: [
+    { value: 0, text: "通用" },
+    { value: 1, text: "防御" },
+    { value: 2, text: "强袭" },
+    { value: 3, text: "狙击" },
+    { value: 4, text: "高速" },
+    { value: 5, text: "采掘" },
+    { value: 6, text: "运输" }
+  ],
+  size: [
+    { value: 0, text: "护卫舰" },
+    { value: 1, text: "驱逐舰" },
+    { value: 2, text: "巡洋舰" },
+    { value: 3, text: "战列舰" },
+    { value: 4, text: "无畏舰" },
+    { value: 5, text: "泰坦" }
+  ],
+  level: [
+    { value: 1, text: "Lv. 1" },
+    { value: 2, text: "Lv. 2" },
+    { value: 3, text: "Lv. 3" },
+    { value: 4, text: "Lv. 4" },
+    { value: 5, text: "Lv. 5" },
+    { value: 6, text: "Lv. 6" },
+    { value: 7, text: "Lv. 7" },
+    { value: 8, text: "Lv. 8" },
+    { value: 9, text: "Lv. 9" },
+    { value: 10, text: "Lv. 10" },
+    { value: 11, text: "Lv. 11" },
+    { value: 12, text: "Lv. 12" }
+  ]
+};
+export { shipBuff, shipDesc, shipLimit, shipChoice };

@@ -5,14 +5,112 @@
       <p>你的屏幕太小啦！</p>
     </div>
     <div class="desktop">
-      测试
+      <div class="left">
+        <div class="selection">
+          <select class="select" v-model.number="shipOption.type">
+            <option v-for="option in shipChoice.type"
+              :value="option.value"
+              :key="option.value">
+              {{ option.text }}
+            </option>
+          </select>
+          <select class="select" v-model.number="shipOption.size">
+            <option v-for="option in shipChoice.size"
+              :value="option.value"
+              :key="option.value">
+              {{ option.text }}
+            </option>
+          </select>
+          <select class="select" v-model.number="shipOption.level">
+            <option v-for="option in shipChoice.level"
+              :value="option.value"
+              :key="option.value">
+              {{ option.text }}
+            </option>
+          </select>
+        </div>
+        <div class="zoom">
+          缩放：
+          <input type="range" v-model.number="zoom" min="1" max="15" step="0.01"/>
+        </div>
+      </div>
+        <div class="preview" draggable="true" @dragstart="dragStart" @drag="move">
+          <ShipInfoTile
+            v-for="tile in layout"
+            :coord="tile"
+            :key="layout.indexOf(tile)"
+            :padding="padding"
+            :zoom="zoom">>
+          </ShipInfoTile>
+        </div>
     </div>
   </div>
 </template>
 
 <script>
+import ShipInfoEl from "@/components/ShipInfoEl.vue";
+import ShipBuff from "@/components/ShipBuff.vue";
+import ShipInfoTile from "@/components/ShipInfoTile.vue";
+import { GD_Shipbody, GD_Technology } from "@/data/game.js";
+import { shipDesc, shipChoice } from "@/data/shipInfo.js";
 export default {
-  name: "build"
+  name: "build",
+  components: {
+    ShipInfoTile
+  },
+  data: function() {
+    return {
+      dragX: 2,
+      dragY: 2,
+      zoom: 4,
+      padding: {
+        top: 30,
+        right: 15
+      },
+      shipChoice,
+      shipOption: {
+        type: 0,
+        size: 0,
+        level: 1
+      }
+    };
+  },
+  computed: {
+    shipId: function() {
+      return (
+        this.shipOption.size * 84 +
+        this.shipOption.type * 12 +
+        this.shipOption.level
+      );
+    },
+    ship: function() {
+      return GD_Shipbody[this.shipId];
+    },
+    layout: function() {
+      if (this.ship[1] < 36) {
+        return GD_Technology[this.ship[1]][11].slice(0, this.ship[6]);
+      } else {
+        // workaround for titans
+        return GD_Technology[this.ship[1] - 61][11].slice(0, this.ship[6]);
+      }
+    }
+  },
+  methods: {
+    dragStart: function(event) {
+      let img = new Image();
+      event.dataTransfer.setDragImage(img, 0, 0);
+      this.dragX = event.clientX;
+      this.dragY = event.clientY;
+    },
+    move: function(event) {
+      if (event.clientY > 1) {
+        this.padding.top += event.clientY - this.dragY;
+        this.dragY = event.clientY;
+        this.padding.right -= event.clientX - this.dragX;
+        this.dragX = event.clientX;
+      }
+    }
+  }
 };
 </script>
 
@@ -24,13 +122,44 @@ export default {
 }
 .desktop {
   display: none;
+  margin: 0 17px 17px 17px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 57px;
 }
+
+.left {
+  height: 100%;
+  width: 300px;
+  z-index: 900;
+}
+.preview {
+  width: 100%;
+  margin: 5px;
+}
+
+.zoom {
+  box-sizing: border-box;
+  background-color: #d3dae3;
+  display: flex;
+  align-items: center;
+  height: 36px;
+  margin: 5px;
+  padding: 3px;
+}
+
+input[type="range"] {
+  flex-grow: 1;
+}
+
 @media (min-width: 800px) and (min-height: 600px) {
   .mobile-warn {
     display: none;
   }
   .desktop {
-    display: block;
+    display: flex;
   }
 }
 </style>

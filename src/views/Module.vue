@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="module">
     <div class="selection">
       <select class="select" v-model.number="size">
         <option value="0">S</option>
@@ -94,3 +94,10 @@ export default {
   }
 };
 </script>
+<style scoped>
+.module {
+  min-width: 300px;
+  max-width: 400px;
+  margin: auto;
+}
+</style>

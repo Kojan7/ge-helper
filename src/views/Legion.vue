@@ -21,10 +21,10 @@
       </div>
       <div class="selection">
         <label  :class="{ active: type === 'other' }">
-          <input type="radio" value="other" v-model="type">武器，钻头，引擎，能源
+          <input type="radio" value="other" v-model="type">武器/钻头/引擎/能源
         </label>
         <label  :class="{ active: type === 'def' }">
-          <input type="radio" value="def" v-model="type">装甲，护盾，货柜，防空
+          <input type="radio" value="def" v-model="type">装甲/护盾/货柜/防空
         </label>
         <label  :class="{ active: type === 'core' }">
           <input type="radio" value="core" v-model="type">动力核心
@@ -111,6 +111,11 @@ export default {
 </script>
 
 <style scoped>
+.legion {
+  min-width: 300px;
+  max-width: 400px;
+  margin: auto;
+}
 input[type="radio"] {
   display: none;
 }

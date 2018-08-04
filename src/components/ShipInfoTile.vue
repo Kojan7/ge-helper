@@ -1,7 +1,7 @@
 <template>
   <div class="tile" :style="style">
-    <img draggable="false" src="@/assets/tile.svg">
-    <div class="text">{{ limit }}</div>
+    <img draggable="false" src="@/assets/tile.svg" :height="20 * zoom">
+    <div class="text" :style="textStyle">{{ limit }}</div>
   </div>
 </template>
 
@@ -10,15 +10,29 @@ import { shipLimit } from "@/data/shipInfo.js";
 export default {
   name: "ShipInfoTile",
   props: {
-    coord: Array
+    coord: Array,
+    padding: Object,
+    zoom: Number
   },
   computed: {
+    halfWidth: function() {
+      return 7.5 * this.zoom;
+    },
+    aboutHeight: function() {
+      return this.halfWidth * 26 / 15;
+    },
     style: function() {
       return {
-        // 30 and 15 are paddings
-        top: 30 + this.coord[0] * 13 + "px",
-        right: 15 + this.coord[1] * 15 + (this.coord[0] % 2 ? 0 : 7.5) + "px"
+        top: this.padding.top + this.coord[0] * this.aboutHeight + "px",
+        right:
+          this.padding.right +
+          this.coord[1] * this.halfWidth * 2 +
+          (this.coord[0] % 2 ? 0 : this.halfWidth) +
+          "px"
       };
+    },
+    textStyle: function() {
+      return { fontSize: 10 * this.zoom + "px" };
     },
     limit: function() {
       return shipLimit[this.coord[2]];
@@ -34,7 +48,6 @@ export default {
   display: inline-block;
 }
 .text {
-  font-size: 10px;
   position: absolute;
   top: 30%;
   left: 50%;
