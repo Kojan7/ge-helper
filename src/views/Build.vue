@@ -3,6 +3,7 @@
     <div class="mobile-warn">
       <img src="@/assets/error.svg" width="180" height="180">
       <p>你的屏幕太小啦！</p>
+      <p>⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄</p>
     </div>
     <div class="desktop">
       <div class="left">
@@ -29,9 +30,20 @@
             </option>
           </select>
         </div>
-        <div class="zoom">
-          缩放：
-          <input type="range" v-model.number="zoom" min="1" max="15" step="0.01"/>
+        <div class="selection">
+          <div class="left-cont">
+            缩放：
+            <input type="range" v-model.number="zoom" min="1" max="15" step="0.01"/>
+          </div>
+        </div>
+        <div class="selection">
+          <div class="left-cont not-allowed">科技</div>
+          <div class="left-cont" @click="resetView">重置显示</div>
+        </div>
+        <div class="module not-allowed">
+          <img src="@/assets/error.svg" draggable="false" width="100" height="100">
+          <p>抱歉，该功能暂不对外开放诶！</p>
+          <p>⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄</p>
         </div>
       </div>
         <div class="preview" draggable="true" @dragstart="dragStart" @drag="move">
@@ -48,11 +60,11 @@
 </template>
 
 <script>
-import ShipInfoEl from "@/components/ShipInfoEl.vue";
-import ShipBuff from "@/components/ShipBuff.vue";
+//import ShipInfoEl from "@/components/ShipInfoEl.vue";
+//import ShipBuff from "@/components/ShipBuff.vue";
 import ShipInfoTile from "@/components/ShipInfoTile.vue";
 import { GD_Shipbody, GD_Technology } from "@/data/game.js";
-import { shipDesc, shipChoice } from "@/data/shipInfo.js";
+import { shipChoice } from "@/data/shipInfo.js";
 export default {
   name: "build",
   components: {
@@ -109,6 +121,10 @@ export default {
         this.padding.right -= event.clientX - this.dragX;
         this.dragX = event.clientX;
       }
+    },
+    resetView: function() {
+      this.zoom = 4;
+      this.padding = { top: 30, right: 15 };
     }
   }
 };
@@ -132,22 +148,46 @@ export default {
 
 .left {
   height: 100%;
-  width: 300px;
+  min-width: 300px;
   z-index: 900;
 }
 .preview {
   width: 100%;
   margin: 5px;
+  cursor: grab;
 }
 
-.zoom {
+.left-cont {
   box-sizing: border-box;
+  justify-content: center;
   background-color: #d3dae3;
   display: flex;
   align-items: center;
   height: 36px;
   margin: 5px;
   padding: 3px;
+  flex-grow: 1;
+  cursor: default;
+  user-select: none;
+}
+
+.module {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #d3dae3;
+  margin: 5px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  top: 138px;
+  width: 290px;
+}
+
+.not-allowed {
+  user-select: none;
+  cursor: not-allowed;
 }
 
 input[type="range"] {
