@@ -1,5 +1,5 @@
 <template>
-  <div class="el" v-if="elvalue > 0" :style="firstEl">
+  <div class="el" v-if="elvalue !== 0" :style="firstEl">
     <div>{{ el.name }}</div>
     <div>{{ output }}</div>
   </div>
