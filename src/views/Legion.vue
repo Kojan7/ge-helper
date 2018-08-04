@@ -143,8 +143,9 @@ input {
   max-width: 82px;
   border-radius: 0;
   border-style: none;
-  background-color: white;
   text-align: center;
+  background-color: #fafbfc;
+  border-bottom: 1px solid #cfd8dc;
 }
 
 .output {
