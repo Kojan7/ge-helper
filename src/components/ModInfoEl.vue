@@ -1,5 +1,5 @@
 <template>
-  <div class="el" v-if="elvalue > 0">
+  <div class="el" v-if="elvalue > 0" :style="firstEl">
     <div>{{ el.name }}</div>
     <div>{{ output }}</div>
   </div>
@@ -22,6 +22,11 @@ export default {
         elv = elv + this.el.suffix;
       }
       return elv;
+    },
+    firstEl: function() {
+      if (this.el.name == "HP") {
+        return "border-top: none";
+      }
     }
   }
 };
@@ -34,8 +39,6 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 5px 0 5px;
-  margin: 1px;
-  background-color: #fff;
+  border-top: 1px solid #e6ebed;
 }
 </style>

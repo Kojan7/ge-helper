@@ -36,8 +36,11 @@ export default {
 <style scoped>
 .info {
   box-sizing: border-box;
-  background-color: #d3dae3;
+  background-color: #fafbfc;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
   margin: 5px;
-  padding: 5px;
+  padding: 5px 10px 5px 10px;
 }
 </style>

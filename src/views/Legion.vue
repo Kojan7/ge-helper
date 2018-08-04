@@ -126,7 +126,10 @@ label,
   align-items: center;
   justify-content: center;
   height: 50px;
-  background-color: #d3dae3;
+  background-color: #fafbfc;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
   margin: 5px;
   flex-basis: 0;
   flex-grow: 1;
@@ -137,7 +140,7 @@ label,
 }
 
 input {
-  width: 90%;
+  max-width: 82px;
   border-radius: 0;
   border-style: none;
   background-color: white;
@@ -150,11 +153,14 @@ input {
   justify-content: center;
   height: 36px;
   margin: 5px 5px 10px 5px;
-  background-color: #d3dae3;
+  background-color: #fafbfc;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
 }
 
 .active {
-  background-color: #5294e2;
+  background-color: #00bcd4;
   color: white;
 }
 </style>

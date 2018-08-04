@@ -1,10 +1,12 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link class='router-link' to="/ship">舰体</router-link>
-      <router-link class='router-link' to="/module">组件</router-link>
-      <router-link class='router-link' to="/build">装配</router-link>
-      <router-link class='router-link' to="/legion">军团</router-link>
+      <div id="nav-wrap">
+        <router-link class='router-link' to="/ship">舰体</router-link>
+        <router-link class='router-link' to="/module">组件</router-link>
+        <router-link class='router-link' to="/build">装配</router-link>
+        <router-link class='router-link' to="/legion">军团</router-link>
+      </div>
     </div>
     <router-view id='router-view'/>
   </div>
@@ -13,6 +15,7 @@
 <style>
 body {
   margin: 0;
+  background-color: #e6ebed;
 }
 #app {
   font-family: Arial, sans-serif;
@@ -20,15 +23,24 @@ body {
 }
 
 #nav {
+  position: relative;
   display: flex;
   align-items: center;
   width: 100%;
   min-width: 300px;
-  background-color: #383c4a;
+  background-color: #263238;
   height: 40px;
   justify-content: center;
   font-size: 16px;
   margin-bottom: 12px;
+  font-weight: bold;
+  z-index: 1000;
+}
+
+#nav-wrap {
+  display: flex;
+  width: 500px;
+  height: 100%;
 }
 
 .router-link {
@@ -37,15 +49,14 @@ body {
   text-decoration: none;
   align-items: center;
   justify-content: center;
-  color: #d3dae3;
+  color: #cfd8dc;
   flex-basis: 0;
   flex-grow: 1;
-  z-index: 1000;
 }
 
 .router-link-active {
-  background-color: #5294e2;
-  color: #fff;
+  box-shadow: inset 0 -4px #00bcd4;
+  color: #fafbfc;
 }
 
 .selection {
@@ -54,13 +65,15 @@ body {
   justify-content: space-between;
 }
 .select {
-  background-color: #d3dae3;
+  background-color: #fafbfc;
   flex-grow: 1;
   border-radius: 0;
   border-style: none;
   height: 36px;
   font-size: 16px;
   margin: 5px;
-  z-index: 900;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
 }
 </style>

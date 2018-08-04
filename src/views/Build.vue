@@ -110,6 +110,7 @@ export default {
   methods: {
     dragStart: function(event) {
       let img = new Image();
+      event.dataTransfer.setData("text/plain", event.target.id);
       event.dataTransfer.setDragImage(img, 0, 0);
       this.dragX = event.clientX;
       this.dragY = event.clientY;
@@ -160,7 +161,10 @@ export default {
 .left-cont {
   box-sizing: border-box;
   justify-content: center;
-  background-color: #d3dae3;
+  background-color: #fafbfc;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
   display: flex;
   align-items: center;
   height: 36px;
@@ -176,7 +180,10 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #d3dae3;
+  background-color: #fafbfc;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
   margin: 5px;
   position: absolute;
   bottom: 0;
