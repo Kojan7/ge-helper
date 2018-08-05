@@ -142,7 +142,9 @@ label,
 input {
   max-width: 82px;
   border-radius: 0;
-  border-style: none;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
   text-align: center;
   background-color: #fafbfc;
   border-bottom: 1px solid #cfd8dc;
