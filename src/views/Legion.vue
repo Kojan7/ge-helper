@@ -125,7 +125,7 @@ label,
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
+  height: 52px;
   background-color: #fafbfc;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
     0 3px 1px -2px rgba(0, 0, 0, 0.2);
@@ -140,14 +140,15 @@ label,
 }
 
 input {
-  max-width: 82px;
+  height: 20px;
+  box-sizing: border-box;
+  font-size: 16px;
+  width: 90%;
+  border: none;
   border-radius: 0;
-  border-top-style: none;
-  border-left-style: none;
-  border-right-style: none;
   text-align: center;
   background-color: #fafbfc;
-  border-bottom: 1px solid #cfd8dc;
+  border-bottom: 1px solid #00bcd4;
 }
 
 .output {
