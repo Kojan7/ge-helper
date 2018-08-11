@@ -1,6 +1,8 @@
 <template>
   <div class="tile" :style="style">
-    <img draggable="false" src="@/assets/tile.svg" :height="20 * zoom">
+    <svg :width="18 * zoom" :height="21.5 * zoom" draggable="false" xmlns="http://www.w3.org/2000/svg" viewBox="15 15 170 190">
+      <polygon style="fill:none;stroke:#263238;stroke-width:8px" points="183,158 183,62 100,14 17,62 17,158 100,206 183,158"/>
+    </svg>
     <div class="text" :style="textStyle">{{ limit }}</div>
   </div>
 </template>
@@ -16,7 +18,7 @@ export default {
   },
   computed: {
     halfWidth: function() {
-      return 7.5 * this.zoom;
+      return 10 * this.zoom;
     },
     aboutHeight: function() {
       return this.halfWidth * 26 / 15;

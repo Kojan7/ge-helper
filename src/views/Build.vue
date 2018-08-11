@@ -251,8 +251,8 @@ export default {
   user-select: none;
   cursor: not-allowed;
 }
-
-@media (min-width: 800px) and (min-height: 600px) {
+/* @media (min-width: 800px) and (min-height: 600px) { */
+@media (min-width: 100px) and (min-height: 100px) {
   .mobile-warn {
     display: none;
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="tile" :style="style">
-    <svg :height="20 * zoom" :width="20 * zoom" draggable="false" viewBox="0 0 20 20">
-      <polygon class="image" points="10,3 15.7735,13 4.2265,13" style="stroke-width:1" />
+    <svg :width="18 * zoom" :height="21.5 * zoom" draggable="false" viewBox="0 0 20 20">
+      <polygon class="image" points="10,1 18.0829,15 1.9171,15" style="stroke-width:1" />
     </svg>
     <div class="level" :style="levelStyle"> 2 </div>
   </div>
@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     halfWidth: function() {
-      return 7.5 * this.zoom;
+      return 10 * this.zoom;
     },
     aboutHeight: function() {
       return this.halfWidth * 26 / 15;
