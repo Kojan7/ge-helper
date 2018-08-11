@@ -42,11 +42,11 @@ const shipChoice = {
     { value: 6, text: "运输" }
   ],
   size: [
-    { value: 0, text: "护卫舰" },
-    { value: 1, text: "驱逐舰" },
-    { value: 2, text: "巡洋舰" },
-    { value: 3, text: "战列舰" },
-    { value: 4, text: "无畏舰" },
+    { value: 0, text: "护卫" },
+    { value: 1, text: "驱逐" },
+    { value: 2, text: "巡洋" },
+    { value: 3, text: "战列" },
+    { value: 4, text: "无畏" },
     { value: 5, text: "泰坦" }
   ],
   level: [

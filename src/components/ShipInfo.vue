@@ -56,7 +56,7 @@ export default {
 <style scoped>
 .info {
   position: relative;
-  margin: 5px;
+  margin: 10px 5px 5px 5px;
   padding: 5px 10px 5px 10px;
   background-color: #fafbfc;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),

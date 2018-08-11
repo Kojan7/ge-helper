@@ -59,4 +59,13 @@ const upgradeFee = {
   Ldef: 864000,
   Lother: 1728000
 };
-export { mRetro, lRetro, modDesc, upgradeFee };
+const modChoice = {
+  size: [
+    { value: 0, text: "S" },
+    { value: 1, text: "M" },
+    { value: 2, text: "L" },
+    { value: 3, text: "M+" },
+    { value: 4, text: "L+" }
+  ]
+};
+export { mRetro, lRetro, modDesc, upgradeFee, modChoice };

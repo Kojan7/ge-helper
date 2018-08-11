@@ -31,14 +31,14 @@
           </select>
         </div>
         <div class="selection">
-          <div class="left-cont">
+          <div class="cont-card">
             缩放：
             <input type="range" v-model.number="zoom" min="1" max="15" step="0.01"/>
           </div>
         </div>
         <div class="selection">
-          <div class="left-cont not-allowed">科技</div>
-          <div class="left-cont" @click="resetView">重置显示</div>
+          <div class="cont-card not-allowed">科技</div>
+          <div class="cont-card" @click="resetView">重置显示</div>
         </div>
         <div class="module not-allowed">
           <img src="@/assets/error.svg" draggable="false" width="100" height="100">
@@ -158,23 +158,6 @@ export default {
   cursor: grab;
 }
 
-.left-cont {
-  box-sizing: border-box;
-  justify-content: center;
-  background-color: #fafbfc;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
-  display: flex;
-  align-items: center;
-  height: 36px;
-  margin: 5px;
-  padding: 3px;
-  flex-grow: 1;
-  cursor: default;
-  user-select: none;
-}
-
 .module {
   display: flex;
   flex-direction: column;
@@ -195,10 +178,6 @@ export default {
 .not-allowed {
   user-select: none;
   cursor: not-allowed;
-}
-
-input[type="range"] {
-  flex-grow: 1;
 }
 
 @media (min-width: 800px) and (min-height: 600px) {

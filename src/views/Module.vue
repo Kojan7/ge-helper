@@ -1,13 +1,12 @@
 <template>
   <div class="module">
     <div class="selection">
-      <select class="select" v-model.number="size">
-        <option value="0">S</option>
-        <option value="1">M</option>
-        <option value="2">L</option>
-        <option value="3">M+</option>
-        <option value="4">L+</option>
-      </select>
+      <app-radio-button
+        :options="modChoice.size"
+        @chose="size=$event">
+      </app-radio-button>
+    </div>
+    <div class="selection">
       <select class="select" v-model.number="item">
         <option value="0">穿甲磁轨炮</option>
         <option value="1">高爆磁轨炮</option>
@@ -31,38 +30,31 @@
         <option value="19">货柜</option>
         <option value="20">能源舱</option>
       </select>
-      <select class="select" v-model.number="level">
-        <option value="1">Lv. 1</option>
-        <option value="2">Lv. 2</option>
-        <option value="3">Lv. 3</option>
-        <option value="4">Lv. 4</option>
-        <option value="5">Lv. 5</option>
-        <option value="6">Lv. 6</option>
-        <option value="7">Lv. 7</option>
-        <option value="8">Lv. 8</option>
-        <option value="9">Lv. 9</option>
-        <option value="10">Lv. 10</option>
-        <option value="11">Lv. 11</option>
-        <option value="12">Lv. 12</option>
-      </select>
+    </div>
+    <div class="cont-card">
+      等级：{{ this.level }}
+      <input type="range" v-model.number="level" min="1" max="12" step="1"/>
     </div>
     <ModInfo :modId="modId"></ModInfo>
   </div>
 </template>
 
 <script>
+import AppRadioButton from "@/components/AppRadioButton.vue"
 import ModInfo from "@/components/ModInfo.vue";
-import { mRetro, lRetro } from "@/data/modInfo.js";
+import { mRetro, lRetro, modChoice } from "@/data/modInfo.js";
 export default {
   name: "module",
   components: {
+    AppRadioButton,
     ModInfo
   },
   data: function() {
     return {
       size: 0,
       level: 1,
-      item: 0
+      item: 0,
+      modChoice
     };
   },
   computed: {

@@ -1,39 +1,33 @@
-/* eslint-disable vue/require-v-for-key */
 <template>
   <div class="ship">
     <div class="selection">
-      <select class="select" v-model.number="type">
-        <option v-for="option in shipChoice.type"
-          :value="option.value"
-          :key="option.value">
-          {{ option.text }}
-        </option>
-      </select>
-      <select class="select" v-model.number="size">
-        <option v-for="option in shipChoice.size"
-          :value="option.value"
-          :key="option.value">
-          {{ option.text }}
-        </option>
-      </select>
-      <select class="select" v-model.number="level">
-        <option v-for="option in shipChoice.level"
-          :value="option.value"
-          :key="option.value">
-          {{ option.text }}
-        </option>
-      </select>
+      <app-radio-button
+        :options="shipChoice.type"
+        @chose="type=$event">>
+      </app-radio-button>
+    </div>
+    <div class="selection">
+      <app-radio-button
+        :options="shipChoice.size"
+        @chose="size=$event">>
+      </app-radio-button>
+    </div>
+    <div class="cont-card">
+      等级：{{ this.level }}
+      <input type="range" v-model.number="level" min="1" max="12" step="1"/>
     </div>
     <ShipInfo :shipId="shipId"></ShipInfo>
   </div>
 </template>
 
 <script>
+import AppRadioButton from "@/components/AppRadioButton.vue"
 import ShipInfo from "@/components/ShipInfo.vue";
 import { shipChoice } from "@/data/shipInfo.js";
 export default {
   name: "ship",
   components: {
+    AppRadioButton,
     ShipInfo
   },
   data: function() {
@@ -54,7 +48,7 @@ export default {
 <style scoped>
 .ship {
   min-width: 300px;
-  max-width: 400px;
+  max-width: 600px;
   margin: auto;
 }
 </style>
