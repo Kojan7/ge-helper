@@ -1,17 +1,18 @@
 <template>
   <div class="tile" :style="style">
     <svg :width="18 * zoom" :height="21.5 * zoom" draggable="false" viewBox="0 0 20 20">
-      <polygon class="image" points="10,1 18.0829,15 1.9171,15" style="stroke-width:1" />
+      <polygon :style="imageStyle" points="10,1 18.0829,15 1.9171,15" style="stroke-width:1" />
     </svg>
     <div class="level" :style="levelStyle"> 2 </div>
   </div>
 </template>
 
 <script>
+import { modChoice } from "@/data/modInfo.js";
 export default {
   name: "ShipInfoTileMod",
   props: {
-    coord: Array,
+    mod: Object,
     padding: Object,
     zoom: Number
   },
@@ -24,16 +25,25 @@ export default {
     },
     style: function() {
       return {
-        top: this.padding.top + this.coord[0] * this.aboutHeight + "px",
+        top: this.padding.top + this.mod.coord[0] * this.aboutHeight + "px",
         right:
           this.padding.right +
-          this.coord[1] * this.halfWidth * 2 +
-          (this.coord[0] % 2 ? 0 : this.halfWidth) +
+          this.mod.coord[1] * this.halfWidth * 2 +
+          (this.mod.coord[0] % 2 ? 0 : this.halfWidth) +
           "px"
       };
     },
     levelStyle: function() {
       return { fontSize: 5 * this.zoom + "px" };
+    },
+    modInfo() {
+      return modChoice.item[this.mod.spec.item];
+    },
+    imageStyle() {
+      return {
+        fill: this.modInfo.fgColor,
+        stroke: this.modInfo.bgColor
+      };
     }
   }
 };
@@ -51,10 +61,5 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-.image {
-  fill: #ac423e;
-  stroke: #000000;
 }
 </style>

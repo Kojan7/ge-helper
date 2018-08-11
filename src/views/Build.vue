@@ -47,7 +47,7 @@
 
           <app-radio-button
             :options="modChoice.size"
-            @chose="module.size=$event">>
+            @chose="module.size=$event">
           </app-radio-button>
 
           <div class="cont-card cont-card-inside">
@@ -56,7 +56,7 @@
           </div>
             <app-radio-button
               :options="modChoice.item"
-              @chose="module.item=$event">>
+              @chose="module.item=$event">
             </app-radio-button>
 
       </div>
@@ -69,14 +69,15 @@
             :coord="tile"
             :key="layout.indexOf(tile)"
             :padding="padding"
-            :zoom="zoom">>
+            :zoom="zoom"
+            @selected="tileClick">
           </ShipInfoTile>
           <ShipInfoTileMod
-            v-for="tile in layout"
-            :coord="tile"
-            :key="layout.indexOf(tile) + 100"
+            v-for="mod in installedList"
+            :mod="mod"
+            :key="installedList.indexOf(mod) + 500"
             :padding="padding"
-            :zoom="zoom">>
+            :zoom="zoom">
           </ShipInfoTileMod>
         </div>
     </div>
@@ -187,6 +188,9 @@ export default {
     resetView: function() {
       this.zoom = 4;
       this.padding = { top: 30, right: 15 };
+    },
+    tileClick(coord) {
+      this.installedList.push({ coord: coord, modId: this.modId, spec: this.module });
     }
   }
 };
