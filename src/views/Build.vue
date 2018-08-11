@@ -40,10 +40,20 @@
           <div class="cont-card not-allowed">科技</div>
           <div class="cont-card" @click="resetView">重置显示</div>
         </div>
-        <div class="module not-allowed">
-          <img src="@/assets/error.svg" draggable="false" width="100" height="100">
-          <p>抱歉，该功能暂不对外开放诶！</p>
-          <p>⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄</p>
+        <div class="module-cont">
+
+          <app-radio-button
+            :options="modChoice.size"
+            @chose="module.size=$event">>
+          </app-radio-button>
+
+          <div class="cont-card cont-card-inside">
+            等级：{{ this.module.level }}
+            <input type="range" v-model.number="module.level" min="1" max="12" step="1"/>
+          </div>
+          <div class="module-cont-bottom">
+          </div>
+
         </div>
       </div>
         <div class="preview" draggable="true" @dragstart="dragStart" @drag="move">
@@ -54,21 +64,33 @@
             :padding="padding"
             :zoom="zoom">>
           </ShipInfoTile>
+          <ShipInfoTileMod
+            v-for="tile in layout"
+            :coord="tile"
+            :key="layout.indexOf(tile) + 100"
+            :padding="padding"
+            :zoom="zoom">>
+          </ShipInfoTileMod>
         </div>
     </div>
   </div>
 </template>
 
 <script>
+import AppRadioButton from "@/components/AppRadioButton.vue";
 //import ShipInfoEl from "@/components/ShipInfoEl.vue";
 //import ShipBuff from "@/components/ShipBuff.vue";
 import ShipInfoTile from "@/components/ShipInfoTile.vue";
+import ShipInfoTileMod from "@/components/ShipInfoTileMod.vue";
 import { GD_Shipbody, GD_Technology } from "@/data/game.js";
 import { shipChoice } from "@/data/shipInfo.js";
+import { modChoice } from "@/data/modInfo.js";
 export default {
   name: "build",
   components: {
-    ShipInfoTile
+    ShipInfoTile,
+    ShipInfoTileMod,
+    AppRadioButton
   },
   data: function() {
     return {
@@ -84,7 +106,15 @@ export default {
         type: 0,
         size: 0,
         level: 1
-      }
+      },
+      modChoice,
+      module: {
+        size: 0,
+        level: 1
+      },
+      installedList: [
+        
+      ]
     };
   },
   computed: {
@@ -132,6 +162,9 @@ export default {
 </script>
 
 <style scoped>
+.cont-card-inside {
+  flex-grow: 0;
+}
 .mobile-warn {
   display: flex;
   flex-direction: column;
@@ -158,12 +191,12 @@ export default {
   cursor: grab;
 }
 
-.module {
+.module-cont {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
-  background-color: #fafbfc;
+  background-color: #263238;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
     0 3px 1px -2px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
@@ -171,10 +204,17 @@ export default {
   position: absolute;
   bottom: 0;
   left: 0;
-  top: 138px;
+  top: 184px;
   width: 290px;
 }
 
+.module-cont-bottom {
+  box-sizing: border-box;
+  flex-grow: 1;
+  background-color: #fafbfc;
+  margin: 5px;
+  border-radius: 3px;
+}
 .not-allowed {
   user-select: none;
   cursor: not-allowed;

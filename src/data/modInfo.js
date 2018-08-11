@@ -66,6 +66,29 @@ const modChoice = {
     { value: 2, text: "L" },
     { value: 3, text: "M+" },
     { value: 4, text: "L+" }
+  ],
+  item: [
+    { value: 0, text: "穿甲磁轨炮", style: "" },
+    { value: 1, text: "高爆磁轨炮", style: "" },
+    { value: 2, text: "速射磁轨炮", style: "" },
+    { value: 3, text: "脉冲激光器", style: "" },
+    { value: 4, text: "集束激光器", style: "" },
+    { value: 5, text: "直射导弹", style: "" },
+    { value: 6, text: "左侧导弹", style: "" },
+    { value: 7, text: "右侧导弹", style: "" },
+    { value: 8, text: "绕后导弹", style: "" },
+    { value: 9, text: "脉冲防空镭射", style: "" },
+    { value: 10, text: "集束防空镭射", style: "" },
+    { value: 11, text: "采矿器", style: "" },
+    { value: 12, text: "动力核心", style: "" },
+    { value: 13, text: "标准装甲", style: "" },
+    { value: 14, text: "镜面装甲", style: "" },
+    { value: 15, text: "反应装甲", style: "" },
+    { value: 16, text: "偏转装甲", style: "" },
+    { value: 17, text: "护盾发生器", style: "" },
+    { value: 18, text: "核融合引擎", style: "" },
+    { value: 19, text: "货柜", style: "" },
+    { value: 20, text: "能源舱", style: "" }
   ]
 };
 export { mRetro, lRetro, modDesc, upgradeFee, modChoice };
