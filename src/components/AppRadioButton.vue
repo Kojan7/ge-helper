@@ -29,6 +29,7 @@ export default {
 .lbl-group {
   display: flex;
   width: 100%;
+  flex-wrap: wrap;
   overflow: auto;
 }
 .lbl {

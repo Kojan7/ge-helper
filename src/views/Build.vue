@@ -40,7 +40,10 @@
           <div class="cont-card not-allowed">科技</div>
           <div class="cont-card" @click="resetView">重置显示</div>
         </div>
-        <div class="module-cont">
+
+        <div class="selection">
+          <div class="cont-card" style="visibility: hidden;"></div>
+        </div>
 
           <app-radio-button
             :options="modChoice.size"
@@ -51,11 +54,15 @@
             等级：{{ this.module.level }}
             <input type="range" v-model.number="module.level" min="1" max="12" step="1"/>
           </div>
-          <div class="module-cont-bottom">
-          </div>
+            <app-radio-button
+              :options="modChoice.item"
+              @chose="module.item=$event">>
+            </app-radio-button>
 
-        </div>
       </div>
+
+
+
         <div class="preview" draggable="true" @dragstart="dragStart" @drag="move">
           <ShipInfoTile
             v-for="tile in layout"
@@ -84,7 +91,7 @@ import ShipInfoTile from "@/components/ShipInfoTile.vue";
 import ShipInfoTileMod from "@/components/ShipInfoTileMod.vue";
 import { GD_Shipbody, GD_Technology } from "@/data/game.js";
 import { shipChoice } from "@/data/shipInfo.js";
-import { modChoice } from "@/data/modInfo.js";
+import { mRetro, lRetro, modChoice } from "@/data/modInfo.js";
 export default {
   name: "build",
   components: {
@@ -110,11 +117,10 @@ export default {
       modChoice,
       module: {
         size: 0,
-        level: 1
+        level: 1,
+        item: 0
       },
-      installedList: [
-        
-      ]
+      installedList: []
     };
   },
   computed: {
@@ -135,6 +141,31 @@ export default {
         // workaround for titans
         return GD_Technology[this.ship[1] - 61][11].slice(0, this.ship[6]);
       }
+    },
+    modId: function() {
+      let itemCode;
+      if (this.module.size <= 2) {
+        if (this.module.item <= 2) {
+          itemCode = this.module.item + this.module.size * 3; // railguns
+        } else if (this.module.item <= 4) {
+          itemCode = 6 + this.module.item + this.module.size * 2; // lasers
+        } else if (this.module.item <= 8) {
+          itemCode = 10 + this.module.item + this.module.size * 4; // launchers
+        } else if (this.module.item <= 10) {
+          itemCode = 18 + this.module.item + this.module.size * 2; // PDL
+        } else if (this.module.item <= 12) {
+          itemCode = 3 * this.module.item + this.module.size; // miners + cores
+        } else if (this.module.item <= 16) {
+          itemCode = 26 + this.module.item + this.module.size * 4; // armors
+        } else {
+          itemCode = 3 * this.module.item + this.module.size;
+        }
+      } else if (this.module.size === 3) {
+        itemCode = mRetro[this.module.item];
+      } else if (this.module.size === 4) {
+        itemCode = lRetro[this.module.item];
+      }
+      return itemCode * 12 + this.module.level;
     }
   },
   methods: {
@@ -182,8 +213,9 @@ export default {
 
 .left {
   height: 100%;
-  min-width: 300px;
+  width: 320px;
   z-index: 900;
+  overflow: auto;
 }
 .preview {
   width: 100%;
