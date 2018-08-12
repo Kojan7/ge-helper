@@ -29,11 +29,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.buffs {
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-}
-</style>

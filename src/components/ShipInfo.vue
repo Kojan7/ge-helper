@@ -1,6 +1,6 @@
 <template>
   <div class='info'>
-    <ShipBuff v-bind:buffs="ship[12]"></ShipBuff>
+    <ShipBuff class="buff" v-bind:buffs="ship[12]"></ShipBuff>
     <ShipInfoEl
       v-for="el in shipDesc"
       :el="el"
@@ -63,5 +63,10 @@ export default {
     0 3px 1px -2px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
   height: 500px;
+}
+.buff {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
 }
 </style>

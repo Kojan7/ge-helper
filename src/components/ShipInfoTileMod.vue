@@ -1,9 +1,11 @@
 <template>
-  <div class="tile" :style="style">
+  <div class="tile"
+    :style="style"
+    @click="$emit('deleted', mod)">
     <svg :width="18 * zoom" :height="21.5 * zoom" draggable="false" viewBox="0 0 20 20">
       <polygon :style="imageStyle" points="10,1 18.0829,15 1.9171,15" style="stroke-width:1" />
     </svg>
-    <div class="level" :style="levelStyle"> 2 </div>
+    <div class="level" :style="levelStyle">{{ modSize }}{{ mod.spec.level }}</div>
   </div>
 </template>
 
@@ -34,10 +36,13 @@ export default {
       };
     },
     levelStyle: function() {
-      return { fontSize: 5 * this.zoom + "px" };
+      return { fontSize: 4 * this.zoom + "px" };
     },
     modInfo() {
       return modChoice.item[this.mod.spec.item];
+    },
+    modSize() {
+      return modChoice.size[this.mod.spec.size].text;
     },
     imageStyle() {
       return {
@@ -54,12 +59,13 @@ export default {
   user-select: none;
   position: absolute;
   display: inline-block;
+  cursor: pointer;
 }
 
 .level {
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -60%);
 }
 </style>

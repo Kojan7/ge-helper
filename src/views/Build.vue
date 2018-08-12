@@ -58,16 +58,29 @@
               :options="modChoice.item"
               @chose="module.item=$event">
             </app-radio-button>
-
       </div>
 
 
 
         <div class="preview" draggable="true" @dragstart="dragStart" @drag="move">
+          <div class="text-zone">
+            <div>警告：未计算科技和船体加成，组件不管大小都只占1格</div>
+            <ship-buff v-bind:buffs="ship[12]"></ship-buff>
+            <div :style="statsPowerColor">
+              动力：{{ statsPowerUsage }}/{{ statsPowerOutput }}
+            </div>
+            <div>能源：{{ statsEnergy }}</div>
+            <div>护盾：{{ statsShield }}（{{statsRegen}}/s）</div>
+            <div>装甲：{{ statsHP }}</div>
+            <div>速度：{{ statsSpeed }}</div>
+            <div>伤害：{{ statsDPS }} dps</div>
+            <div>开采：{{ statsMining }}</div>
+            <div>货舱：{{ statsCargo }}</div>
+          </div>
           <ShipInfoTile
             v-for="tile in layout"
             :coord="tile"
-            :key="layout.indexOf(tile)"
+            :key="layout.indexOf(tile)+ 1000"
             :padding="padding"
             :zoom="zoom"
             @selected="tileClick">
@@ -75,9 +88,10 @@
           <ShipInfoTileMod
             v-for="mod in installedList"
             :mod="mod"
-            :key="installedList.indexOf(mod) + 500"
+            :key="installedList.indexOf(mod)"
             :padding="padding"
-            :zoom="zoom">
+            :zoom="zoom"
+            @deleted="removeMod">
           </ShipInfoTileMod>
         </div>
     </div>
@@ -87,10 +101,10 @@
 <script>
 import AppRadioButton from "@/components/AppRadioButton.vue";
 //import ShipInfoEl from "@/components/ShipInfoEl.vue";
-//import ShipBuff from "@/components/ShipBuff.vue";
+import ShipBuff from "@/components/ShipBuff.vue";
 import ShipInfoTile from "@/components/ShipInfoTile.vue";
 import ShipInfoTileMod from "@/components/ShipInfoTileMod.vue";
-import { GD_Shipbody, GD_Technology } from "@/data/game.js";
+import { GD_Shipbody, GD_Technology, GD_Component } from "@/data/game.js";
 import { shipChoice } from "@/data/shipInfo.js";
 import { mRetro, lRetro, modChoice } from "@/data/modInfo.js";
 export default {
@@ -98,7 +112,8 @@ export default {
   components: {
     ShipInfoTile,
     ShipInfoTileMod,
-    AppRadioButton
+    AppRadioButton,
+    ShipBuff
   },
   data: function() {
     return {
@@ -167,6 +182,98 @@ export default {
         itemCode = lRetro[this.module.item];
       }
       return itemCode * 12 + this.module.level;
+    },
+    modInfo() {
+      return GD_Component[this.modId];
+    },
+    statsPowerUsage() {
+      let i;
+      let output = 0;
+      for (i = 0; i < this.installedList.length; i++) {
+        output += this.installedList[i].modInfo[6];
+      }
+      return output;
+    },
+    statsPowerOutput() {
+      let i;
+      let output = this.ship[7];
+      for (i = 0; i < this.installedList.length; i++) {
+        output += this.installedList[i].modInfo[7];
+      }
+      return output;
+    },
+    statsPowerColor() {
+      if (this.statsPowerUsage > this.statsPowerOutput) {
+        return "color:red";
+      } else {
+        return "";
+      }
+    },
+    statsEnergy() {
+      let i;
+      let output = this.ship[11];
+      for (i = 0; i < this.installedList.length; i++) {
+        output += this.installedList[i].modInfo[11];
+      }
+      return output;
+    },
+    statsShield() {
+      let i;
+      let output = 0;
+      for (i = 0; i < this.installedList.length; i++) {
+        output += this.installedList[i].modInfo[33];
+      }
+      return output;
+    },
+    statsRegen() {
+      let i;
+      let output = 0;
+      for (i = 0; i < this.installedList.length; i++) {
+        output += this.installedList[i].modInfo[34];
+      }
+      return output / 10;
+    },
+    statsHP() {
+      let i;
+      let output = 0;
+      for (i = 0; i < this.installedList.length; i++) {
+        output += this.installedList[i].modInfo[5];
+      }
+      return output;
+    },
+    statsSpeed() {
+      let i;
+      let thrust = this.ship[8];
+      let mass = this.ship[9];
+      for (i = 0; i < this.installedList.length; i++) {
+        thrust += this.installedList[i].modInfo[8];
+        mass += this.installedList[i].modInfo[9];
+      }
+      return Math.floor(thrust * 10000 / mass);
+    },
+    statsDPS() {
+      let i;
+      let output = 0;
+      for (i = 0; i < this.installedList.length; i++) {
+        output += this.installedList[i].modInfo[12];
+      }
+      return output;
+    },
+    statsMining() {
+      let i;
+      let output = 0;
+      for (i = 0; i < this.installedList.length; i++) {
+        output += this.installedList[i].modInfo[32];
+      }
+      return output;
+    },
+    statsCargo() {
+      let i;
+      let output = this.ship[10];
+      for (i = 0; i < this.installedList.length; i++) {
+        output += this.installedList[i].modInfo[10];
+      }
+      return output-1;
     }
   },
   methods: {
@@ -190,7 +297,20 @@ export default {
       this.padding = { top: 30, right: 15 };
     },
     tileClick(coord) {
-      this.installedList.push({ coord: coord, modId: this.modId, spec: this.module });
+      this.installedList.push({
+        coord,
+        modInfo: this.modInfo,
+        spec: this.module
+      });
+      // this is to prevent the list of modules from being updated
+      this.module = {
+        size: this.module.size,
+        level: this.module.level,
+        item: this.module.item
+      };
+    },
+    removeMod(mod) {
+      this.installedList.splice(this.installedList.indexOf(mod), 1);
     }
   }
 };
@@ -226,7 +346,9 @@ export default {
   margin: 5px;
   cursor: grab;
 }
-
+.text-zone {
+  text-align: left;
+}
 .module-cont {
   display: flex;
   flex-direction: column;
@@ -255,7 +377,7 @@ export default {
   user-select: none;
   cursor: not-allowed;
 }
-/* @media (min-width: 800px) and (min-height: 600px) { */
+/* @media (min-width: 750px) and (min-height: 600px) { */
 @media (min-width: 100px) and (min-height: 100px) {
   .mobile-warn {
     display: none;
