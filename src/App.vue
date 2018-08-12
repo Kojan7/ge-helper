@@ -13,6 +13,13 @@
 </template>
 
 <style>
+:root {
+  --dark-color: #263238;
+  --highlight-color: #00bcd4;
+  --bg-color: #fafbfc;
+  --chrome-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
 body {
   margin: 0;
   background-color: #e6ebed;
@@ -28,7 +35,7 @@ body {
   align-items: center;
   width: 100%;
   min-width: 300px;
-  background-color: #263238;
+  background-color: var(--dark-color);
   height: 40px;
   justify-content: center;
   font-size: 16px;
@@ -55,8 +62,8 @@ body {
 }
 
 .router-link-active {
-  box-shadow: inset 0 -4px #00bcd4;
-  color: #fafbfc;
+  box-shadow: inset 0 -4px var(--highlight-color);
+  color: var(--bg-color);
 }
 
 .selection {
@@ -65,15 +72,14 @@ body {
   justify-content: space-between;
 }
 .select {
-  background-color: #fafbfc;
+  background-color: var(--bg-color);
   flex-grow: 1;
   border-radius: 0;
   border-style: none;
   height: 36px;
   font-size: 16px;
   margin: 5px;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--chrome-shadow);
   border-radius: 3px;
 }
 
@@ -84,9 +90,8 @@ input[type="range"] {
 .cont-card {
   box-sizing: border-box;
   justify-content: center;
-  background-color: #fafbfc;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  background-color: var(--bg-color);
+  box-shadow: var(--chrome-shadow);
   border-radius: 3px;
   display: flex;
   align-items: center;

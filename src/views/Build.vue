@@ -1,10 +1,6 @@
 <template>
   <div class="build">
-    <div class="mobile-warn">
-      <img src="@/assets/error.svg" width="180" height="180">
-      <p>你的屏幕太小啦！</p>
-      <p>⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄</p>
-    </div>
+    <build-error-mobile></build-error-mobile>
     <div class="desktop">
       <div class="left">
         <div class="selection">
@@ -99,6 +95,7 @@
 </template>
 
 <script>
+import BuildErrorMobile from "@/components/BuildErrorMobile.vue";
 import AppRadioButton from "@/components/AppRadioButton.vue";
 //import ShipInfoEl from "@/components/ShipInfoEl.vue";
 import ShipBuff from "@/components/ShipBuff.vue";
@@ -110,6 +107,7 @@ import { mRetro, lRetro, modChoice } from "@/data/modInfo.js";
 export default {
   name: "build",
   components: {
+    BuildErrorMobile,
     ShipInfoTile,
     ShipInfoTileMod,
     AppRadioButton,
@@ -320,13 +318,9 @@ export default {
 .cont-card-inside {
   flex-grow: 0;
 }
-.mobile-warn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+
 .desktop {
-  display: none;
+  display: flex;
   margin: 0 17px 17px 17px;
   position: fixed;
   bottom: 0;
@@ -349,41 +343,16 @@ export default {
 .text-zone {
   text-align: left;
 }
-.module-cont {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: center;
-  background-color: #263238;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
-  margin: 5px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  top: 184px;
-  width: 290px;
-}
 
 .module-cont-bottom {
   box-sizing: border-box;
   flex-grow: 1;
-  background-color: #fafbfc;
+  background-color: var(--bg-color);
   margin: 5px;
   border-radius: 3px;
 }
 .not-allowed {
   user-select: none;
   cursor: not-allowed;
-}
-@media (min-width: 750px) and (min-height: 600px) {
-/* @media (min-width: 100px) and (min-height: 100px) { */
-  .mobile-warn {
-    display: none;
-  }
-  .desktop {
-    display: flex;
-  }
 }
 </style>

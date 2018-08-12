@@ -37,9 +37,8 @@ export default {
   align-items: center;
   justify-content: center;
   height: 36px;
-  background-color: #fafbfc;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  background-color: var(--bg-color);
+  box-shadow: var(--chrome-shadow);
   border-radius: 3px;
   margin: 5px;
   padding: 0 4px 0 4px;
@@ -53,7 +52,7 @@ export default {
   display: none;
 }
 .active {
-  background-color: #00bcd4;
+  background-color: var(--highlight-color);
   color: white;
 }
 </style>
