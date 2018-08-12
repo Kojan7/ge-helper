@@ -35,25 +35,26 @@
         <div class="selection">
           <div class="cont-card not-allowed">科技</div>
           <div class="cont-card" @click="resetView">重置显示</div>
+          <div class="cont-card" @click="showInput = !showInput">导入导出</div>
         </div>
 
         <div class="selection">
           <div class="cont-card" style="visibility: hidden;"></div>
         </div>
 
-          <app-radio-button
-            :options="modChoice.size"
-            @chose="module.size=$event">
-          </app-radio-button>
+        <app-radio-button
+          :options="modChoice.size"
+          @chose="module.size=$event">
+        </app-radio-button>
 
-          <div class="cont-card cont-card-inside">
-            等级：{{ this.module.level }}
-            <input type="range" v-model.number="module.level" min="1" max="12" step="1"/>
-          </div>
-            <app-radio-button
-              :options="modChoice.item"
-              @chose="module.item=$event">
-            </app-radio-button>
+        <div class="cont-card cont-card-inside">
+          等级：{{ this.module.level }}
+          <input type="range" v-model.number="module.level" min="1" max="12" step="1"/>
+        </div>
+        <app-radio-button
+          :options="modChoice.item"
+          @chose="module.item=$event">
+        </app-radio-button>
       </div>
 
 
@@ -134,7 +135,8 @@ export default {
         level: 1,
         item: 0
       },
-      installedList: []
+      installedList: [],
+      showInput: false
     };
   },
   computed: {
@@ -181,9 +183,6 @@ export default {
       }
       return itemCode * 12 + this.module.level;
     },
-    modInfo() {
-      return GD_Component[this.modId];
-    },
     stats() {
       let i;
       let powerUsage = 0;
@@ -199,18 +198,19 @@ export default {
       let cargo = this.ship[10];
 
       for (i = 0; i < this.installedList.length; i++) {
-        if (this.installedList[i].spec.size < 5) {
-          powerUsage += this.installedList[i].modInfo[6];
-          powerOutput += this.installedList[i].modInfo[7];
-          energy += this.installedList[i].modInfo[11];
-          shield += this.installedList[i].modInfo[33];
-          regen += this.installedList[i].modInfo[34];
-          hp += this.installedList[i].modInfo[5];
-          thrust += this.installedList[i].modInfo[8];
-          mass += this.installedList[i].modInfo[9];
-          dps += this.installedList[i].modInfo[12];
-          mining += this.installedList[i].modInfo[32];
-          cargo += this.installedList[i].modInfo[10];
+        if (this.installedList[i][1] < 5) {
+          let modInfo = GD_Component[this.installedList[i][4]];
+          powerUsage += modInfo[6];
+          powerOutput += modInfo[7];
+          energy += modInfo[11];
+          shield += modInfo[33];
+          regen += modInfo[34];
+          hp += modInfo[5];
+          thrust += modInfo[8];
+          mass += modInfo[9];
+          dps += modInfo[12];
+          mining += modInfo[32];
+          cargo += modInfo[10];
         }
       }
 
@@ -256,11 +256,13 @@ export default {
       this.padding = { top: 30, right: 15 };
     },
     tileClick(coord) {
-      this.installedList.push({
-        coord,
-        modInfo: this.modInfo,
-        spec: this.module
-      });
+      this.installedList.push([
+        coord, // 0
+        this.module.size, // 1
+        this.module.item, // 2
+        this.module.level, // 3
+        this.modId // 4
+      ]);
       if (this.module.size === 1) {
         this.tileExpand(
           [coord[0] + 1, coord[1] + 1 - (coord[0] % 2 ? 1 : 0)],
@@ -320,15 +322,12 @@ export default {
     },
     tileExpand(coord, size) {
       var duplicate = this.installedList.find(function(el) {
-        return el.coord[0] === coord[0] && el.coord[1] === coord[1];
+        return el[0][0] === coord[0] && el[0][1] === coord[1];
       });
       if (typeof duplicate !== "undefined") {
         this.removeMod(duplicate);
       }
-      this.installedList.push({
-        coord,
-        spec: { item: this.module.item, size }
-      });
+      this.installedList.push([coord, size, this.module.item]);
     },
     removeMod(mod) {
       this.installedList.splice(this.installedList.indexOf(mod), 1);
@@ -354,7 +353,9 @@ export default {
 
 .left {
   height: 100%;
-  width: 320px;
+  width: 290px;
+  flex-grow: 0;
+  flex-shrink: 0;
   z-index: 900;
   overflow: auto;
 }
