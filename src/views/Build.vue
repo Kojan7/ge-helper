@@ -33,8 +33,8 @@
           </div>
         </div>
         <div class="selection">
-          <div class="cont-card not-allowed">科技</div>
-          <div class="cont-card" @click="showInput = !showInput">导入/导出</div>
+          <!-- <div class="cont-card not-allowed">科技</div> -->
+          <div class="cont-card" @click="showInput = !showInput">科技/导入/导出</div>
           <div class="cont-card" @click="resetView">重置显示</div>
         </div>
 
@@ -58,11 +58,20 @@
       </div>
 
       <div v-if="showInput" class="right-window">
-        <span>导出</span>
-        <span>船体数据</span>
+        <span class="gras">科技</span>
+        <div>护卫操作：<input type="range" v-model.number="skills.operation[0]" min="0" max="30" step="1"/>：{{ skills.operation[0] }}</div>
+        <div>驱逐操作：<input type="range" v-model.number="skills.operation[1]" min="0" max="30" step="1"/>：{{ skills.operation[1] }}</div>
+        <div>巡洋操作：<input type="range" v-model.number="skills.operation[2]" min="0" max="30" step="1"/>：{{ skills.operation[2] }}</div>
+        <div>战列操作：<input type="range" v-model.number="skills.operation[3]" min="0" max="30" step="1"/>：{{ skills.operation[3] }}</div>
+        <div>无畏操作：<input type="range" v-model.number="skills.operation[4]" min="0" max="30" step="1"/>：{{ skills.operation[4] }}</div>
+        <div>泰坦操作：<input type="range" v-model.number="skills.operation[5]" min="0" max="30" step="1"/>：{{ skills.operation[5] }}</div>
+        <button @click="saveSkills">保存</button>
+        <br>
+        <span class="gras">导出</span>
+        <span>组件数据（不包括舰体）</span>
         <span>{{ outputText }}</span>
         <br>
-        <span>导入</span>
+        <span class="gras">导入</span>
         <textarea v-model="inputText" placeholder="把船体数据粘贴在这"></textarea>
         <button @click="installedList = inputTextArray">应用</button>
 
@@ -70,7 +79,7 @@
 
       <div class="preview" draggable="true" @dragstart="dragStart" @drag="move">
         <div class="text-zone">
-          <div>警告：未计算科技和船体加成，组件不管大小都只占1格</div>
+          <div>警告：除了动力外未计算科技和船体加成，组件不管大小都只占1格</div>
           <ship-buff v-bind:buffs="ship[12]"></ship-buff>
           <div :style="statsPowerColor">
             动力：{{ stats.powerUsage }}/{{ stats.powerOutput }}
@@ -147,7 +156,10 @@ export default {
       installedList: [],
       showInput: false,
       showOutput: false,
-      inputText: ""
+      inputText: "",
+      skills: {
+        operation: [0,0,0,0,0,0]
+      }
     };
   },
   computed: {
@@ -195,9 +207,10 @@ export default {
       return itemCode * 12 + this.module.level;
     },
     stats() {
+      let operationBuff = 1 + this.skills.operation[this.shipOption.size] * 0.1;
       let i;
       let powerUsage = 0;
-      let powerOutput = this.ship[7];
+      let powerOutput = Math.floor(this.ship[7] * operationBuff);
       let energy = this.ship[11];
       let shield = 0;
       let regen = 0;
@@ -253,6 +266,14 @@ export default {
     }
   },
   methods: {
+    saveSkills() {
+      localStorage.setItem("skills", JSON.stringify(this.skills));
+    },
+    loadSkills() {
+      if (localStorage.getItem("skills") !== null) {
+        this.skills = JSON.parse(localStorage.getItem("skills"));
+      }
+    },
     dragStart: function(event) {
       let img = new Image();
       event.dataTransfer.setData("text/plain", event.target.id);
@@ -349,11 +370,17 @@ export default {
     removeMod(mod) {
       this.installedList.splice(this.installedList.indexOf(mod), 1);
     }
+  },
+  beforeMount() {
+    this.loadSkills();
   }
 };
 </script>
 
 <style scoped>
+.gras {
+  font-weight: bold;
+}
 .cont-card-inside {
   flex-grow: 0;
 }
@@ -399,6 +426,7 @@ export default {
   margin: 5px;
   padding: 3px;
   cursor: default;
+  text-align: left;
 }
 
 .text-zone {
