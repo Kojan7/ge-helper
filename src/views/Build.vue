@@ -63,15 +63,15 @@
             <div>警告：未计算科技和船体加成，组件不管大小都只占1格</div>
             <ship-buff v-bind:buffs="ship[12]"></ship-buff>
             <div :style="statsPowerColor">
-              动力：{{ statsPowerUsage }}/{{ statsPowerOutput }}
+              动力：{{ stats.powerUsage }}/{{ stats.powerOutput }}
             </div>
-            <div>能源：{{ statsEnergy }}</div>
-            <div>护盾：{{ statsShield }}（{{statsRegen}}/s）</div>
-            <div>装甲：{{ statsHP }}</div>
-            <div>速度：{{ statsSpeed }}</div>
-            <div>伤害：{{ statsDPS }} dps</div>
-            <div>开采：{{ statsMining }}</div>
-            <div>货舱：{{ statsCargo }}</div>
+            <div>能源：{{ stats.energy }}</div>
+            <div>护盾：{{ stats.shield }}（{{stats.regen}}/s）</div>
+            <div>装甲：{{ stats.hp }}</div>
+            <div>速度：{{ stats.speed }}</div>
+            <div>伤害：{{ stats.dps }} dps</div>
+            <div>开采：{{ stats.mining }}</div>
+            <div>货舱：{{ stats.cargo }}</div>
           </div>
           <ShipInfoTile
             v-for="tile in layout"
@@ -184,94 +184,53 @@ export default {
     modInfo() {
       return GD_Component[this.modId];
     },
-    statsPowerUsage() {
+    stats() {
       let i;
-      let output = 0;
-      for (i = 0; i < this.installedList.length; i++) {
-        output += this.installedList[i].modInfo[6];
-      }
-      return output;
-    },
-    statsPowerOutput() {
-      let i;
-      let output = this.ship[7];
-      for (i = 0; i < this.installedList.length; i++) {
-        output += this.installedList[i].modInfo[7];
-      }
-      return output;
-    },
-    statsPowerColor() {
-      if (this.statsPowerUsage > this.statsPowerOutput) {
-        return "color:red";
-      } else {
-        return "";
-      }
-    },
-    statsEnergy() {
-      let i;
-      let output = this.ship[11];
-      for (i = 0; i < this.installedList.length; i++) {
-        output += this.installedList[i].modInfo[11];
-      }
-      return output;
-    },
-    statsShield() {
-      let i;
-      let output = 0;
-      for (i = 0; i < this.installedList.length; i++) {
-        output += this.installedList[i].modInfo[33];
-      }
-      return output;
-    },
-    statsRegen() {
-      let i;
-      let output = 0;
-      for (i = 0; i < this.installedList.length; i++) {
-        output += this.installedList[i].modInfo[34];
-      }
-      return output / 10;
-    },
-    statsHP() {
-      let i;
-      let output = 0;
-      for (i = 0; i < this.installedList.length; i++) {
-        output += this.installedList[i].modInfo[5];
-      }
-      return output;
-    },
-    statsSpeed() {
-      let i;
+      let powerUsage = 0;
+      let powerOutput = this.ship[7];
+      let energy = this.ship[11];
+      let shield = 0;
+      let regen = 0;
+      let hp = 0;
       let thrust = this.ship[8];
       let mass = this.ship[9];
+      let dps = 0;
+      let mining = 0;
+      let cargo = this.ship[10];
+
       for (i = 0; i < this.installedList.length; i++) {
+        powerUsage += this.installedList[i].modInfo[6];
+        powerOutput += this.installedList[i].modInfo[7];
+        energy += this.installedList[i].modInfo[11];
+        shield += this.installedList[i].modInfo[33];
+        regen += this.installedList[i].modInfo[34];
+        hp += this.installedList[i].modInfo[5];
         thrust += this.installedList[i].modInfo[8];
         mass += this.installedList[i].modInfo[9];
+        dps += this.installedList[i].modInfo[12];
+        mining += this.installedList[i].modInfo[32];
+        cargo += this.installedList[i].modInfo[10];
       }
-      return Math.floor(thrust * 10000 / mass);
+
+      return {
+        powerUsage,
+        powerOutput,
+        energy,
+        shield,
+        regen: regen / 10,
+        hp,
+        speed: Math.floor(thrust * 10000 / mass),
+        dps,
+        mining,
+        cargo: cargo - 1
+      };
     },
-    statsDPS() {
-      let i;
-      let output = 0;
-      for (i = 0; i < this.installedList.length; i++) {
-        output += this.installedList[i].modInfo[12];
+    statsPowerColor() {
+      let powerColor = "";
+      if (this.stats.powerUsage > this.stats.powerOutput) {
+        powerColor = "color:red";
       }
-      return output;
-    },
-    statsMining() {
-      let i;
-      let output = 0;
-      for (i = 0; i < this.installedList.length; i++) {
-        output += this.installedList[i].modInfo[32];
-      }
-      return output;
-    },
-    statsCargo() {
-      let i;
-      let output = this.ship[10];
-      for (i = 0; i < this.installedList.length; i++) {
-        output += this.installedList[i].modInfo[10];
-      }
-      return output-1;
+      return powerColor;
     }
   },
   methods: {
