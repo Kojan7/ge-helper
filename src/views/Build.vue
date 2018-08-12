@@ -34,8 +34,8 @@
         </div>
         <div class="selection">
           <div class="cont-card not-allowed">科技</div>
+          <div class="cont-card" @click="showInput = !showInput">导入/导出</div>
           <div class="cont-card" @click="resetView">重置显示</div>
-          <div class="cont-card" @click="showInput = !showInput">导入导出</div>
         </div>
 
         <div class="selection">
@@ -57,40 +57,49 @@
         </app-radio-button>
       </div>
 
+      <div v-if="showInput" class="right-window">
+        <span>导出</span>
+        <span>船体数据</span>
+        <span>{{ outputText }}</span>
+        <br>
+        <span>导入</span>
+        <textarea v-model="inputText" placeholder="把船体数据粘贴在这"></textarea>
+        <button @click="installedList = inputTextArray">应用</button>
 
+      </div>
 
-        <div class="preview" draggable="true" @dragstart="dragStart" @drag="move">
-          <div class="text-zone">
-            <div>警告：未计算科技和船体加成，组件不管大小都只占1格</div>
-            <ship-buff v-bind:buffs="ship[12]"></ship-buff>
-            <div :style="statsPowerColor">
-              动力：{{ stats.powerUsage }}/{{ stats.powerOutput }}
-            </div>
-            <div>能源：{{ stats.energy }}</div>
-            <div>护盾：{{ stats.shield }}（{{stats.regen}}/s）</div>
-            <div>装甲：{{ stats.hp }}</div>
-            <div>速度：{{ stats.speed }}</div>
-            <div>伤害：{{ stats.dps }} dps</div>
-            <div>开采：{{ stats.mining }}</div>
-            <div>货舱：{{ stats.cargo }}</div>
+      <div class="preview" draggable="true" @dragstart="dragStart" @drag="move">
+        <div class="text-zone">
+          <div>警告：未计算科技和船体加成，组件不管大小都只占1格</div>
+          <ship-buff v-bind:buffs="ship[12]"></ship-buff>
+          <div :style="statsPowerColor">
+            动力：{{ stats.powerUsage }}/{{ stats.powerOutput }}
           </div>
-          <ShipInfoTile
-            v-for="tile in layout"
-            :coord="tile"
-            :key="layout.indexOf(tile)+ 1000"
-            :padding="padding"
-            :zoom="zoom"
-            @selected="tileClick">
-          </ShipInfoTile>
-          <ShipInfoTileMod
-            v-for="mod in installedList"
-            :mod="mod"
-            :key="installedList.indexOf(mod)"
-            :padding="padding"
-            :zoom="zoom"
-            @deleted="removeMod">
-          </ShipInfoTileMod>
+          <div>能源：{{ stats.energy }}</div>
+          <div>护盾：{{ stats.shield }}（{{stats.regen}}/s）</div>
+          <div>装甲：{{ stats.hp }}</div>
+          <div>速度：{{ stats.speed }}</div>
+          <div>伤害：{{ stats.dps }} dps</div>
+          <div>开采：{{ stats.mining }}</div>
+          <div>货舱：{{ stats.cargo }}</div>
         </div>
+        <ShipInfoTile
+          v-for="tile in layout"
+          :coord="tile"
+          :key="layout.indexOf(tile)+ 1000"
+          :padding="padding"
+          :zoom="zoom"
+          @selected="tileClick">
+        </ShipInfoTile>
+        <ShipInfoTileMod
+          v-for="mod in installedList"
+          :mod="mod"
+          :key="installedList.indexOf(mod)"
+          :padding="padding"
+          :zoom="zoom"
+          @deleted="removeMod">
+        </ShipInfoTileMod>
+      </div>
     </div>
   </div>
 </template>
@@ -136,7 +145,9 @@ export default {
         item: 0
       },
       installedList: [],
-      showInput: false
+      showInput: false,
+      showOutput: false,
+      inputText: ""
     };
   },
   computed: {
@@ -233,6 +244,12 @@ export default {
         powerColor = "color:red";
       }
       return powerColor;
+    },
+    outputText() {
+      return JSON.stringify(this.installedList);
+    },
+    inputTextArray() {
+      return JSON.parse(this.inputText);
     }
   },
   methods: {
@@ -364,6 +381,26 @@ export default {
   margin: 5px;
   cursor: grab;
 }
+
+.right-window {
+  position: absolute;
+  right: 0;
+  left: 290px;
+  top: 0;
+  z-index: 200;
+  box-sizing: border-box;
+  justify-content: center;
+  background-color: var(--bg-color);
+  box-shadow: var(--chrome-shadow);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 5px;
+  padding: 3px;
+  cursor: default;
+}
+
 .text-zone {
   text-align: left;
 }
