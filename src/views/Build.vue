@@ -199,17 +199,19 @@ export default {
       let cargo = this.ship[10];
 
       for (i = 0; i < this.installedList.length; i++) {
-        powerUsage += this.installedList[i].modInfo[6];
-        powerOutput += this.installedList[i].modInfo[7];
-        energy += this.installedList[i].modInfo[11];
-        shield += this.installedList[i].modInfo[33];
-        regen += this.installedList[i].modInfo[34];
-        hp += this.installedList[i].modInfo[5];
-        thrust += this.installedList[i].modInfo[8];
-        mass += this.installedList[i].modInfo[9];
-        dps += this.installedList[i].modInfo[12];
-        mining += this.installedList[i].modInfo[32];
-        cargo += this.installedList[i].modInfo[10];
+        if (this.installedList[i].spec.size < 5) {
+          powerUsage += this.installedList[i].modInfo[6];
+          powerOutput += this.installedList[i].modInfo[7];
+          energy += this.installedList[i].modInfo[11];
+          shield += this.installedList[i].modInfo[33];
+          regen += this.installedList[i].modInfo[34];
+          hp += this.installedList[i].modInfo[5];
+          thrust += this.installedList[i].modInfo[8];
+          mass += this.installedList[i].modInfo[9];
+          dps += this.installedList[i].modInfo[12];
+          mining += this.installedList[i].modInfo[32];
+          cargo += this.installedList[i].modInfo[10];
+        }
       }
 
       return {
@@ -259,12 +261,74 @@ export default {
         modInfo: this.modInfo,
         spec: this.module
       });
+      if (this.module.size === 1) {
+        this.tileExpand(
+          [coord[0] + 1, coord[1] + 1 - (coord[0] % 2 ? 1 : 0)],
+          5
+        );
+        this.tileExpand([coord[0] + 1, coord[1] - (coord[0] % 2 ? 1 : 0)], 6);
+      } else if (this.module.size === 2) {
+        this.tileExpand(
+          [coord[0] + 1, coord[1] + 1 - (coord[0] % 2 ? 1 : 0)],
+          7
+        );
+        this.tileExpand([coord[0] + 1, coord[1] - (coord[0] % 2 ? 1 : 0)], 8);
+        this.tileExpand([coord[0] + 2, coord[1]], 9);
+        this.tileExpand([coord[0] + 2, coord[1] + 1], 5);
+        this.tileExpand([coord[0] + 2, coord[1] - 1], 6);
+      } else if (this.module.size === 3) {
+        this.tileExpand(
+          [coord[0] + 1, coord[1] + 1 - (coord[0] % 2 ? 1 : 0)],
+          10
+        );
+        this.tileExpand([coord[0] + 1, coord[1] - (coord[0] % 2 ? 1 : 0)], 11);
+        this.tileExpand([coord[0] + 2, coord[1]], 12);
+      } else if (this.module.size === 4 && this.module.item < 11) {
+        this.tileExpand(
+          [coord[0] + 1, coord[1] + 1 - (coord[0] % 2 ? 1 : 0)],
+          15
+        );
+        this.tileExpand([coord[0] + 1, coord[1] - (coord[0] % 2 ? 1 : 0)], 16);
+        this.tileExpand(
+          [coord[0] - 1, coord[1] + 1 - (coord[0] % 2 ? 1 : 0)],
+          7
+        );
+        this.tileExpand([coord[0] - 1, coord[1] - (coord[0] % 2 ? 1 : 0)], 8);
+        this.tileExpand([coord[0], coord[1] + 1], 10);
+        this.tileExpand([coord[0], coord[1] - 1], 11);
+        this.tileExpand([coord[0] - 2, coord[1]], 17);
+      } else if (this.module.size === 4) {
+        this.tileExpand(
+          [coord[0] + 1, coord[1] + 1 - (coord[0] % 2 ? 1 : 0)],
+          15
+        );
+        this.tileExpand([coord[0] + 1, coord[1] - (coord[0] % 2 ? 1 : 0)], 16);
+        this.tileExpand(
+          [coord[0] - 1, coord[1] + 1 - (coord[0] % 2 ? 1 : 0)],
+          13
+        );
+        this.tileExpand([coord[0] - 1, coord[1] - (coord[0] % 2 ? 1 : 0)], 14);
+        this.tileExpand([coord[0], coord[1] + 1], 10);
+        this.tileExpand([coord[0], coord[1] - 1], 11);
+      }
       // this is to prevent the list of modules from being updated
       this.module = {
         size: this.module.size,
         level: this.module.level,
         item: this.module.item
       };
+    },
+    tileExpand(coord, size) {
+      var duplicate = this.installedList.find(function(el) {
+        return el.coord[0] === coord[0] && el.coord[1] === coord[1];
+      });
+      if (typeof duplicate !== "undefined") {
+        this.removeMod(duplicate);
+      }
+      this.installedList.push({
+        coord,
+        spec: { item: this.module.item, size }
+      });
     },
     removeMod(mod) {
       this.installedList.splice(this.installedList.indexOf(mod), 1);

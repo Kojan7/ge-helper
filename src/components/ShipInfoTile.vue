@@ -2,7 +2,7 @@
   <div class="tile"
     :style="style"
     @click="$emit('selected', coord)">
-    <svg :width="18 * zoom" :height="21.5 * zoom" draggable="false" xmlns="http://www.w3.org/2000/svg" viewBox="15 15 170 190">
+    <svg :width="20 * zoom" :height="21.5 * zoom" draggable="false" xmlns="http://www.w3.org/2000/svg" viewBox="15 10 170 200">
       <polygon style="fill:none;stroke:#263238;stroke-width:8px" points="183,158 183,62 100,14 17,62 17,158 100,206 183,158"/>
     </svg>
     <div class="text" :style="textStyle">{{ limit }}</div>

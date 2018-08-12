@@ -65,7 +65,20 @@ const modChoice = {
     { value: 1, text: "M" },
     { value: 2, text: "L" },
     { value: 3, text: "M+" },
-    { value: 4, text: "L+" }
+    { value: 4, text: "L+" },
+    // { value: 5, text: "└" },
+    // { value: 6, text: "┘" },
+    // { value: 7, text: "╱" },
+    // { value: 8, text: "╲" },
+    // { value: 9, text: "─" },
+    // { value: 10, text: "├" },
+    // { value: 11, text: "┤" },
+    // { value: 12, text: "V" },
+    // { value: 13, text: "╔" },
+    // { value: 14, text: "╗" },
+    // { value: 15, text: "╚" },
+    // { value: 16, text: "╝" },
+    // { value: 17, text: "^" }
   ],
   item: [
     { value: 0, text: "穿甲磁轨炮", fgColor: "#ac423e", bgColor: "#000000" },
