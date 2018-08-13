@@ -7,23 +7,28 @@
       <polygon
         v-if="mod[1] === 0 && mod[2] < 17 && mod[2] > 12"
         :style="imageStyle" style="stroke-width:1"
-        points="10,0.5 18.1,5 18.1,15 10,19.5 1.9,15 1.9,5" />
+        points="10,0.5 18.1,5 18.1,15 10,19.5 1.9,15 1.9,5"/>
       <!-- for M & L & M+ sized armors top tile -->
       <polygon
         v-else-if="mod[1] < 4 && mod[2] < 17 && mod[2] > 12"
         :style="imageStyle" style="stroke-width:1"
-        points="10,0.5 18.1,5 18.1,15 20.5,19.5 -0.5,19.5 1.9,15 1.9,5" />
+        points="10,0.5 18.1,5 18.1,15 20.5,19.5 -0.5,19.5 1.9,15 1.9,5"/>
       <!-- for M & L sized armors bottom left -->
       <polygon
         v-else-if="mod[1] === 5 && mod[2] < 17 && mod[2] > 12"
         :style="imageStyle" style="stroke-width:1"
-        points=" 10,0.5 22,-15 22,15 18.1,15 10,19.5 1.9,15 1.9,5" />
+        points=" 10,0.5 22,-15 22,15 18.1,15 10,19.5 1.9,15 1.9,5"/>
       <!-- for M & L sized armors bottom right -->
       <polygon
         v-else-if="mod[1] === 6 && mod[2] < 17 && mod[2] > 12"
         :style="imageStyle" style="stroke-width:1"
-        points=" 10,0.5 18.1,5 18.1,15 10,19.5 1.9,15 -2,15 -2,-15" />
+        points=" 10,0.5 18.1,5 18.1,15 10,19.5 1.9,15 -2,15 -2,-15"/>
 
+      <!-- for S sized shield -->
+      <circle 
+        v-else-if="mod[1] === 0 && mod[2] === 17"
+        :style="imageStyle" style="stroke-width:1"
+        cx="10" cy="10" r="8"/>
       <polygon v-else-if="mod[1] === 0" :style="imageStyle" points="10,1 18.0829,15 1.9171,15" style="stroke-width:1" />
       <!-- for all L+ internal tile -->
       <polygon v-else-if="mod[1] === 4" :style="imageStyle" points="-3,-3 -3,23 23,23 23,-3" style="stroke-width:1" />

@@ -98,7 +98,7 @@ const modChoice = {
     { value: 14, text: "镜面装甲",abbr: "□", fgColor: "#39385b", bgColor: "#bdbfd0", textColor: "white" },
     { value: 15, text: "反应装甲",abbr: "□", fgColor: "#5e5c19", bgColor: "#d6d6a2", textColor: "white" },
     { value: 16, text: "偏转装甲",abbr: "□", fgColor: "#5e3a3c", bgColor: "#dfcfce", textColor: "white" },
-    { value: 17, text: "护盾发生器",abbr: "◯", fgColor: "#46adb3", bgColor: "#8b3d82", textColor: "black" },
+    { value: 17, text: "护盾发生器",abbr: "◯", fgColor: "#67dff1", bgColor: "#b2b8c1", textColor: "black" },
     { value: 18, text: "核融合引擎",abbr: "▽", fgColor: "#ddbc58", bgColor: "#888888", textColor: "black" },
     { value: 19, text: "货柜",abbr: "▧", fgColor: "#46b35e", bgColor: "#888888", textColor: "black" },
     { value: 20, text: "能源舱",abbr: "▣", fgColor: "#c4fe5e", bgColor: "#888888", textColor: "black" }
