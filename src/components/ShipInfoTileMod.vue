@@ -19,7 +19,9 @@
       <polygon v-else-if="mod[1] === 16" :style="imageStyle" points="-2,-2 25,-6.8 12,15 -2,15" style="stroke-width:1" />
       <polygon v-else :style="imageStyle" points="10,1 26.1658,29 -6.1658,29" style="stroke-width:1" />
     </svg>
-    <div v-if="mod[1] < 5" class="level" :style="levelStyle">{{ modSize }}{{ mod[3] }}</div>
+    <div v-if="mod[1] < 5" class="level" :style="levelStyle">
+      {{ modInfo.abbr }}<br>{{ modSize }}{{ mod[3] }}
+    </div>
   </div>
 </template>
 
@@ -50,7 +52,10 @@ export default {
       };
     },
     levelStyle: function() {
-      return { fontSize: 4 * this.zoom + "px" };
+      return { 
+        fontSize: 4 * this.zoom + "px",
+        color: this.modInfo.textColor
+      };
     },
     modInfo() {
       return modChoice.item[this.mod[2]];
@@ -75,11 +80,10 @@ export default {
   display: inline-block;
   cursor: pointer;
 }
-
 .level {
   position: absolute;
-  top: 60%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -60%);
+  transform: translate(-50%, -50%);
 }
 </style>
