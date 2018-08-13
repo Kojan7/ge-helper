@@ -3,7 +3,29 @@
     :style="style"
     @click="$emit('deleted', mod)">
     <svg :width="20 * zoom" :height="21.5 * zoom" draggable="false" viewBox="0 0 20 20">
-      <polygon v-if="mod[1] === 0" :style="imageStyle" points="10,1 18.0829,15 1.9171,15" style="stroke-width:1" />
+      <!-- for S sized armors -->
+      <polygon
+        v-if="mod[1] === 0 && mod[2] < 17 && mod[2] > 12"
+        :style="imageStyle" style="stroke-width:1"
+        points="10,0.5 18.1,5 18.1,15 10,19.5 1.9,15 1.9,5" />
+      <!-- for M & L & M+ sized armors top tile -->
+      <polygon
+        v-else-if="mod[1] < 4 && mod[2] < 17 && mod[2] > 12"
+        :style="imageStyle" style="stroke-width:1"
+        points="10,0.5 18.1,5 18.1,15 20.5,19.5 -0.5,19.5 1.9,15 1.9,5" />
+      <!-- for M & L sized armors bottom left -->
+      <polygon
+        v-else-if="mod[1] === 5 && mod[2] < 17 && mod[2] > 12"
+        :style="imageStyle" style="stroke-width:1"
+        points=" 10,0.5 22,-15 22,15 18.1,15 10,19.5 1.9,15 1.9,5" />
+      <!-- for M & L sized armors bottom right -->
+      <polygon
+        v-else-if="mod[1] === 6 && mod[2] < 17 && mod[2] > 12"
+        :style="imageStyle" style="stroke-width:1"
+        points=" 10,0.5 18.1,5 18.1,15 10,19.5 1.9,15 -2,15 -2,-15" />
+
+      <polygon v-else-if="mod[1] === 0" :style="imageStyle" points="10,1 18.0829,15 1.9171,15" style="stroke-width:1" />
+      <!-- for all L+ internal tile -->
       <polygon v-else-if="mod[1] === 4" :style="imageStyle" points="-3,-3 -3,23 23,23 23,-3" style="stroke-width:1" />
       <polygon v-else-if="mod[1] === 5" :style="imageStyle" points="22,-19.7 22,15 1.9171,15" style="stroke-width:1" />
       <polygon v-else-if="mod[1] === 6" :style="imageStyle" points="-2,-19.7 18.0829,15 -2,15" style="stroke-width:1" />
