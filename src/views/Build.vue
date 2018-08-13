@@ -158,7 +158,7 @@ export default {
       showOutput: false,
       inputText: "",
       skills: {
-        operation: [0,0,0,0,0,0]
+        operation: [0, 0, 0, 0, 0, 0]
       }
     };
   },
@@ -232,7 +232,9 @@ export default {
           hp += modInfo[5];
           thrust += modInfo[8];
           mass += modInfo[9];
-          dps += modInfo[12];
+          if (this.installedList[i][2] < 9) {
+            dps += modInfo[12] / (modInfo[20] / 60);
+          }
           mining += modInfo[32];
           cargo += modInfo[10];
         }
@@ -246,7 +248,7 @@ export default {
         regen: regen / 10,
         hp,
         speed: Math.floor(thrust * 10000 / mass),
-        dps,
+        dps: Math.floor(dps),
         mining,
         cargo: cargo - 1
       };
