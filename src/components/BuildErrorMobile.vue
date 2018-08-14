@@ -20,7 +20,7 @@
   background-color: #e6ebed;
   z-index: 100;
 }
-@media (min-width: 750px) and (min-height: 600px) {
+@media (min-width: 750px) and (min-height: 550px) {
   .mobile-warn {
     display: none;
   }

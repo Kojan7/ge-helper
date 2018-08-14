@@ -6,6 +6,7 @@
         <router-link class='router-link' to="/module">组件</router-link>
         <router-link class='router-link' to="/build">装配</router-link>
         <router-link class='router-link' to="/legion">军团</router-link>
+        <router-link class='router-link' to="/misc">必读</router-link>
       </div>
     </div>
     <router-view id='router-view'/>

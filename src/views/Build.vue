@@ -58,7 +58,7 @@
       </div>
 
       <div v-if="showInput" class="right-window">
-        <span class="gras">科技</span>
+        <span class="gras">技能</span>
         <div>护卫操作：<input type="range" v-model.number="skills.operation[0]" min="0" max="30" step="1"/>：{{ skills.operation[0] }}</div>
         <div>驱逐操作：<input type="range" v-model.number="skills.operation[1]" min="0" max="30" step="1"/>：{{ skills.operation[1] }}</div>
         <div>巡洋操作：<input type="range" v-model.number="skills.operation[2]" min="0" max="30" step="1"/>：{{ skills.operation[2] }}</div>
@@ -90,7 +90,6 @@
 
       <div class="preview" draggable="true" @dragstart="dragStart" @drag="move">
         <div class="text-zone">
-          <div>注意：目前只剩下能源、护盾、装甲和伤害未计算科技和船体加成。组件不管大小都只占1格</div>
           <ship-buff v-bind:buffs="ship[12]"></ship-buff>
           <div :style="statsPowerColor">
             动力：{{ stats.powerUsage }}/{{ stats.powerOutput }}

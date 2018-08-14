@@ -4,6 +4,7 @@ import Ship from './views/Ship.vue'
 import Module from './views/Module.vue'
 import Build from './views/Build.vue'
 import Legion from './views/Legion.vue'
+import Misc from './views/Misc.vue'
 
 Vue.use(Router)
 
@@ -11,7 +12,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/ship'
+      redirect: '/misc'
     },
     {
       path: '/ship',
@@ -32,6 +33,11 @@ export default new Router({
       path: '/legion',
       name: 'legion',
       component: Legion
-    }
+    },
+    {
+      path: '/misc',
+      name: 'misc',
+      component: Misc
+    },
   ]
 })
