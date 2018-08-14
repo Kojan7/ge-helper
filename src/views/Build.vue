@@ -360,7 +360,7 @@ export default {
       if (this.stats.mining === 0) {
         return 0;
       } else {
-        return Math.floor(
+        return Math.round(
           this.stats.mining *
             this.mCminingTime[0] /
             60 *
