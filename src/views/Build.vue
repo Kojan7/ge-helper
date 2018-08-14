@@ -74,15 +74,18 @@
         <div>暗物质收集：<input type="range" v-model.number="skills.dm2" min="0" max="10" step="1"/>：{{ skills.dm2 }}</div>
         
         <button @click="saveSkills">保存</button>
-        <br>
+        <br><br>
         <span class="gras">导出</span>
-        <span>组件数据（不包括舰体）</span>
-        <span>{{ outputText }}</span>
+        <div>组件数据（不包括舰体）</div>
+        <div>{{ outputText }}</div>
         <br>
         <span class="gras">导入</span>
-        <textarea v-model="inputText" placeholder="把船体数据粘贴在这"></textarea>
+        <textarea v-model="inputText" placeholder="把船体数据粘贴在这"></textarea><br>
         <button @click="installedList = inputTextArray">应用</button>
-
+        <br><br>
+        <span class="gras">矿场计算</span>
+        <div>矿场难度：<input v-model.number="mineDiff" placeholder="越精准越好"></div>
+        <div><label><input type="checkbox" id="checkbox" v-model="showMineCalc">在主页面显示</label></div>
       </div>
 
       <div class="preview" draggable="true" @dragstart="dragStart" @drag="move">
@@ -99,6 +102,13 @@
           <div>伤害：{{ stats.dps }} dps</div>
           <div>开采：{{ stats.mining }}</div>
           <div>货舱：{{ stats.cargo }}</div>
+          <div v-if="showMineCalc">
+            <br><div>矿场相关(在功能面板内设置)：</div>
+            <div>挖掘时长：{{ mCminingTime[1] }}</div>
+            <div>移动时长：{{ mCtransitTime[1] }}</div>
+            <div>总时长：{{ mCtotalTime[1] }}</div>
+            <div>沙/小时：{{ mCrocksPerHour }}</div>
+            </div>
         </div>
         <ShipInfoTile
           v-for="tile in layout"
@@ -173,7 +183,9 @@ export default {
         spaceMining: 0,
         dm1: 0,
         dm2: 0
-      }
+      },
+      mineDiff: 60.233,
+      showMineCalc: true
     };
   },
   computed: {
@@ -223,7 +235,11 @@ export default {
     stats() {
       let operationBuff = 1 + this.skills.operation[this.shipOption.size] * 0.1;
       let thrustBuff = 1 + this.skills.navigation * 0.01;
-      let miningBuff = 1 + this.skills.mining1 * 0.02 + this.skills.mining2 * 0.04 + this.skills.spaceMining * 0.02;
+      let miningBuff =
+        1 +
+        this.skills.mining1 * 0.02 +
+        this.skills.mining2 * 0.04 +
+        this.skills.spaceMining * 0.02;
 
       let shipCargoBuffArray = this.ship[12].find(function(el) {
         return el[0] === 43;
@@ -306,9 +322,50 @@ export default {
     },
     inputTextArray() {
       return JSON.parse(this.inputText);
+    },
+    mCminingTime() {
+      let miningTime = Math.ceil(
+        this.stats.cargo / (10 * this.stats.mining / this.mineDiff / 1.1)
+      );
+      if (this.stats.mining === 0) {
+        return [miningTime, "请安装采矿器"];
+      } else {
+        return [miningTime, this.toHHMMSS(miningTime)];
+      }
+    },
+    mCtransitTime() {
+      let transitTime = Math.ceil(200000 / this.stats.speed);
+      if (this.stats.mining === 0) {
+        return [transitTime, "请安装采矿器"];
+      } else {
+        return [transitTime, this.toHHMMSS(transitTime)];
+      }
+    },
+    mCtotalTime() {
+      let totalTime = this.mCminingTime[0] + this.mCtransitTime[0] * 2;
+      if (this.stats.mining === 0) {
+        return [totalTime, "请安装采矿器"];
+      } else {
+        return [totalTime, this.toHHMMSS(totalTime)];
+      }
+    },
+    mCrocksPerHour() {
+      return Math.floor(this.stats.cargo / this.mCtotalTime[0] * 3600);
     }
   },
   methods: {
+    toHHMMSS(sec) {
+      let hours = Math.floor(sec / 3600);
+      let minutes = Math.floor((sec - hours * 3600) / 60);
+      let seconds = sec - hours * 3600 - minutes * 60;
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
+      if (seconds < 10) {
+        seconds = "0" + seconds;
+      }
+      return hours + ":" + minutes + ":" + seconds;
+    },
     saveSkills() {
       localStorage.setItem("skills", JSON.stringify(this.skills));
     },
@@ -423,6 +480,7 @@ export default {
 <style scoped>
 .gras {
   font-weight: bold;
+  display: block;
 }
 .cont-card-inside {
   flex-grow: 0;
@@ -459,17 +517,16 @@ export default {
   top: 0;
   z-index: 200;
   box-sizing: border-box;
-  justify-content: center;
   background-color: var(--bg-color);
   box-shadow: var(--chrome-shadow);
   border-radius: 3px;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  display: block;
   margin: 5px;
   padding: 3px;
   cursor: default;
   text-align: left;
+  height: 100%;
+  overflow: auto;
 }
 
 .text-zone {
