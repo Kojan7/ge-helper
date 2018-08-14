@@ -21,34 +21,34 @@
       </div>
       <div class="selection">
         <label  :class="{ active: type === 'other' }">
-          <input type="radio" value="other" v-model="type">武器/钻头/引擎/能源
+          <input type="radio" value="other" v-model="type">{{ $t('other') }}
         </label>
         <label  :class="{ active: type === 'def' }">
-          <input type="radio" value="def" v-model="type">装甲/护盾/货柜/防空
+          <input type="radio" value="def" v-model="type">{{ $t('def') }}
         </label>
         <label  :class="{ active: type === 'core' }">
-          <input type="radio" value="core" v-model="type">动力核心
+          <input type="radio" value="core" v-model="type">{{ $t('core') }}
         </label>
       </div>
       <div class="selection">
         <div class="square">
-          科技
+          {{ $t('tech') }}
           <input v-model.number="tech">
         </div>
         <div class="square">
-          等级
+          {{ $t('level') }}
           <input v-model.number="level">
         </div>
         <div class="square">
-          数量
+          {{ $t('amount') }}
           <input v-model.number="amount">
         </div>  
       </div>
       <div class="output">
-        军团点：{{ lp }}（{{ techAmount }} × lv. {{ tech }}）
+        {{ $t('lp') }}{{ lp }}（{{ techAmount }} × lv. {{ tech }}）
       </div>
       <div class="output">
-        合成费：{{ upgradeFeeBeautified }}（{{ feeLp }} 军团点）
+        {{ $t('upgradeFee') }}{{ upgradeFeeBeautified }}（{{ feeLp }} {{ $t('lp') }})
       </div>
     </div>
   </div>
@@ -63,10 +63,10 @@ export default {
     return {
       name: "xianyu",
       legions: [
-        { value: "xianyu", text: "银河勘探冒险家协会" },
-        { value: "ziyou", text: "自由同盟" },
-        { value: "ucp", text: "宇宙萌宠" },
-        { value: "nanjiu", text: "银河护卫队" }
+        { value: "xianyu", text: this.$i18n.t("geaa") },
+        { value: "ziyou", text: this.$i18n.t("freeUnion") },
+        { value: "ucp", text: this.$i18n.t("cutePet") },
+        { value: "nanjiu", text: this.$i18n.t("nanjiu") }
       ],
       size: "S",
       type: "other",
@@ -166,3 +166,38 @@ input {
   color: white;
 }
 </style>
+<i18n>
+{
+  "en": {
+    "geaa": "GEAA",
+    "freeUnion": "自由同盟 (Feee Union)",
+    "cutePet": "宇宙萌宠 (Cute Pets)",
+    "nanjiu": "银河护卫队 (Galaxy Escort)",
+    "other": "weapon miner engine energy",
+    "def": "armor shield cargo PDL",
+    "core": "core",
+    "tech": "Tech.",
+    "level": "Level",
+    "amount": "Amount",
+    "lp": "LP: ",
+    "upgradeFee": "Upgrade Fee: ",
+    "lp2": "LP"
+
+  },
+  "zh": {
+    "geaa": "银河勘探冒险家协会",
+    "freeUnion": "自由同盟",
+    "cutePet": "宇宙萌宠",
+    "nanjiu": "银河护卫队",
+    "other": "武器/钻头/引擎/能源",
+    "def": "装甲/护盾/货柜/防空",
+    "core": "动力核心",
+    "tech": "科技",
+    "level": "等级",
+    "amount": "数量",
+    "lp": "军团点：",
+    "upgradeFee": "合成费：",
+    "lp2": "军团点"
+  }
+}
+</i18n>

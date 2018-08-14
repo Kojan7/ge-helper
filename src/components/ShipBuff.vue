@@ -16,7 +16,10 @@ export default {
     output: function() {
       var effectText = "";
       for (var i = 0; i < this.buffs.length; i++) {
-        effectText += shipBuff[this.buffs[i][0]];
+        effectText +=
+          this.$i18n.locale === "en"
+            ? shipBuff[this.buffs[i][0]][1]
+            : shipBuff[this.buffs[i][0]][0];
         effectText += " ";
         if (this.buffs[i][1] > 0) {
           effectText += "+";

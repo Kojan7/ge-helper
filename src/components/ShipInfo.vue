@@ -61,7 +61,7 @@ export default {
   background-color: var(--bg-color);
   box-shadow: var(--chrome-shadow);
   border-radius: 3px;
-  height: 500px;
+  height: 540px;
 }
 .buff {
   font-size: 14px;

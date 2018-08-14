@@ -8,31 +8,15 @@
     </div>
     <div class="selection">
       <select class="select" v-model.number="item">
-        <option value="0">穿甲磁轨炮</option>
-        <option value="1">高爆磁轨炮</option>
-        <option value="2">速射磁轨炮</option>
-        <option value="3">脉冲激光器</option>
-        <option value="4">集束激光器</option>
-        <option value="5">直射导弹</option>
-        <option value="6">左侧导弹</option>
-        <option value="7">右侧导弹</option>
-        <option value="8">绕后导弹</option>
-        <option value="9">脉冲防空镭射</option>
-        <option value="10">集束防空镭射</option>
-        <option value="11">采矿器</option>
-        <option value="12">动力核心</option>
-        <option value="13">标准装甲</option>
-        <option value="14">镜面装甲</option>
-        <option value="15">反应装甲</option>
-        <option value="16">偏转装甲</option>
-        <option value="17">护盾发生器</option>
-        <option value="18">核融合引擎</option>
-        <option value="19">货柜</option>
-        <option value="20">能源舱</option>
+        <option v-for="option in modChoice.item"
+          :value="option.value"
+          :key="option.value">
+          {{ $i18n.locale === "en" ? option.texten : option.text }}
+        </option>
       </select>
     </div>
     <div class="cont-card">
-      等级：{{ this.level }}
+      {{ $t('level') }}{{ this.level }}
       <input type="range" v-model.number="level" min="1" max="12" step="1"/>
     </div>
     <ModInfo :modId="modId"></ModInfo>
@@ -93,3 +77,13 @@ export default {
   margin: auto;
 }
 </style>
+<i18n>
+{
+  "en": {
+    "level": "Level: "
+  },
+  "zh": {
+    "level": "等级："
+  }
+}
+</i18n>

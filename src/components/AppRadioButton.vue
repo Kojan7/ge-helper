@@ -6,7 +6,7 @@
       :class="{ active: choice === option.value }"
     >
       <input class="dot" type="radio" :value=option.value v-model.number="choice" @change="$emit('chose', choice)">
-      {{ option.text }}
+      {{ $i18n.locale === "en" ? option.texten : option.text }}
     </label>
   </div>
 </template>

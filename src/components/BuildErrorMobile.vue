@@ -3,7 +3,7 @@
   <svg width="180" height="180">
     <path fill="none" stroke="var(--dark-color)" stroke-width="16" stroke-linecap="round" d="M89,9a81,81 0 1,0 2,0zm1,38v58m0,25v1"/>
   </svg>
-    <p>你的屏幕太小啦！</p>
+    <p>{{ $t('text') }}</p>
     <p>⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄</p>
   </div>
 </template>
@@ -26,3 +26,13 @@
   }
 }
 </style>
+<i18n>
+{
+  "en": {
+    "text": "Oopsie woopsie! Youw scween is too small! "
+  },
+  "zh": {
+    "text": "你的屏幕太小啦！"
+  }
+}
+</i18n>

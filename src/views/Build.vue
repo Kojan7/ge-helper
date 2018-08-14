@@ -8,14 +8,14 @@
             <option v-for="option in shipChoice.type"
               :value="option.value"
               :key="option.value">
-              {{ option.text }}
+              {{ $i18n.locale === "en" ? option.texten : option.text }}
             </option>
           </select>
           <select class="select" v-model.number="shipOption.size">
             <option v-for="option in shipChoice.size"
               :value="option.value"
               :key="option.value">
-              {{ option.text }}
+              {{ $i18n.locale === "en" ? option.texten : option.text }}
             </option>
           </select>
           <select class="select" v-model.number="shipOption.level">
@@ -28,14 +28,14 @@
         </div>
         <div class="selection">
           <div class="cont-card">
-            缩放：
+            {{ $t('zoom') }}
             <input type="range" v-model.number="zoom" min="1" max="15" step="0.01"/>
           </div>
         </div>
         <div class="selection">
           <!-- <div class="cont-card not-allowed">科技</div> -->
-          <div class="cont-card" @click="showInput = !showInput">功能面板</div>
-          <div class="cont-card" @click="resetView">重置显示</div>
+          <div class="cont-card" @click="showInput = !showInput">{{ $t('function') }}</div>
+          <div class="cont-card" @click="resetView">{{ $t('viewReset') }}</div>
         </div>
 
         <div class="selection">
@@ -48,7 +48,7 @@
         </app-radio-button>
 
         <div class="cont-card cont-card-inside">
-          等级：{{ this.module.level }}
+          {{ $t('level') }}{{ this.module.level }}
           <input type="range" v-model.number="module.level" min="1" max="12" step="1"/>
         </div>
         <app-radio-button
@@ -58,57 +58,56 @@
       </div>
 
       <div v-if="showInput" class="right-window">
-        <span class="gras">技能</span>
-        <div>护卫操作：<input type="range" v-model.number="skills.operation[0]" min="0" max="30" step="1"/>：{{ skills.operation[0] }}</div>
-        <div>驱逐操作：<input type="range" v-model.number="skills.operation[1]" min="0" max="30" step="1"/>：{{ skills.operation[1] }}</div>
-        <div>巡洋操作：<input type="range" v-model.number="skills.operation[2]" min="0" max="30" step="1"/>：{{ skills.operation[2] }}</div>
-        <div>战列操作：<input type="range" v-model.number="skills.operation[3]" min="0" max="30" step="1"/>：{{ skills.operation[3] }}</div>
-        <div>无畏操作：<input type="range" v-model.number="skills.operation[4]" min="0" max="30" step="1"/>：{{ skills.operation[4] }}</div>
-        <div>泰坦操作：<input type="range" v-model.number="skills.operation[5]" min="0" max="30" step="1"/>：{{ skills.operation[5] }}</div>
-        <div>导航学：<input type="range" v-model.number="skills.navigation" min="0" max="20" step="1"/>：{{ skills.navigation }}</div>
+        <span class="gras">{{ $t('skills') }}</span>
+        <div>{{ $t('operation0') }}<input type="range" v-model.number="skills.operation[0]" min="0" max="30" step="1"/>：{{ skills.operation[0] }}</div>
+        <div>{{ $t('operation1') }}<input type="range" v-model.number="skills.operation[1]" min="0" max="30" step="1"/>：{{ skills.operation[1] }}</div>
+        <div>{{ $t('operation2') }}<input type="range" v-model.number="skills.operation[2]" min="0" max="30" step="1"/>：{{ skills.operation[2] }}</div>
+        <div>{{ $t('operation3') }}<input type="range" v-model.number="skills.operation[3]" min="0" max="30" step="1"/>：{{ skills.operation[3] }}</div>
+        <div>{{ $t('operation4') }}<input type="range" v-model.number="skills.operation[4]" min="0" max="30" step="1"/>：{{ skills.operation[4] }}</div>
+        <div>{{ $t('operation5') }}<input type="range" v-model.number="skills.operation[5]" min="0" max="30" step="1"/>：{{ skills.operation[5] }}</div>
+        <div>{{ $t('navigation') }}<input type="range" v-model.number="skills.navigation" min="0" max="20" step="1"/>：{{ skills.navigation }}</div>
         <br>
-        <div>矿物开采（2%）：<input type="range" v-model.number="skills.mining1" min="0" max="30" step="1"/>：{{ skills.mining1 }}</div>
-        <div>矿物开采（4%）：<input type="range" v-model.number="skills.mining2" min="0" max="10" step="1"/>：{{ skills.mining2 }}</div>
-        <div>太空采集：<input type="range" v-model.number="skills.spaceMining" min="0" max="30" step="1"/>：{{ skills.spaceMining }}</div>
-        <div>暗物质识别：<input type="range" v-model.number="skills.dm1" min="0" max="10" step="1"/>：{{ skills.dm1 }}</div>
-        <div>暗物质收集：<input type="range" v-model.number="skills.dm2" min="0" max="10" step="1"/>：{{ skills.dm2 }}</div>
+        <div>{{ $t('mining1') }}<input type="range" v-model.number="skills.mining1" min="0" max="30" step="1"/>：{{ skills.mining1 }}</div>
+        <div>{{ $t('mining2') }}<input type="range" v-model.number="skills.mining2" min="0" max="10" step="1"/>：{{ skills.mining2 }}</div>
+        <div>{{ $t('spaceMining') }}<input type="range" v-model.number="skills.spaceMining" min="0" max="30" step="1"/>：{{ skills.spaceMining }}</div>
+        <div>{{ $t('dm1') }}<input type="range" v-model.number="skills.dm1" min="0" max="10" step="1"/>：{{ skills.dm1 }}</div>
+        <div>{{ $t('dm2') }}<input type="range" v-model.number="skills.dm2" min="0" max="10" step="1"/>：{{ skills.dm2 }}</div>
         
-        <button @click="saveSkills">保存</button>
+        <button @click="saveSkills">{{ $t('save') }}</button>
         <br><br>
-        <span class="gras">导出</span>
-        <div>组件数据（不包括舰体）</div>
+        <span class="gras">{{ $t('export') }}</span>
+        <div>{{ $t('exportDesc') }}</div>
         <div>{{ outputText }}</div>
         <br>
-        <span class="gras">导入</span>
-        <textarea v-model="inputText" placeholder="把船体数据粘贴在这"></textarea><br>
-        <button @click="installedList = inputTextArray">应用</button>
+        <span class="gras">{{ $t('import') }}</span>
+        <textarea v-model="inputText" placeholder="[]"></textarea><br>
+        <button @click="installedList = inputTextArray">{{ $t('apply') }}</button>
         <br><br>
-        <span class="gras">矿场计算</span>
-        <div>矿场难度：<input v-model.number="mineDiff" placeholder="越精准越好"></div>
-        <div><label><input type="checkbox" id="checkbox" v-model="showMineCalc">在主页面显示</label></div>
+        <span class="gras">{{ $t('miningCalc') }}</span>
+        <div>{{ $t('miningDiff') }}<input v-model.number="mineDiff" placeholder="60.233"></div>
+        <div><label><input type="checkbox" id="checkbox" v-model="showMineCalc">{{ $t('showMineCalc') }}</label></div>
       </div>
 
       <div class="preview" draggable="true" @dragstart="dragStart" @drag="move">
         <div class="text-zone">
           <ship-buff v-bind:buffs="ship[12]"></ship-buff>
           <div :style="statsPowerColor">
-            动力：{{ stats.powerUsage }}/{{ stats.powerOutput }}
+            {{ $t('power') }}{{ stats.powerUsage }}/{{ stats.powerOutput }}
           </div>
-          <div>能源：{{ stats.energy }}</div>
-          <div>护盾：{{ stats.shield }}（{{stats.regen}}/s）</div>
-          <div>装甲：{{ stats.hp }}</div>
-          <div>速度：{{ stats.speed }}</div>
-          <div>伤害：{{ stats.dps }} dps</div>
-          <div>开采：{{ stats.mining }}</div>
-          <div>货舱：{{ stats.cargo }}</div>
-          <div v-if="showMineCalc">
-            <br><div>矿场相关(在功能面板内设置)：</div>
-            <div>挖掘时长：{{ mCminingTime[1] }}</div>
-            <div>移动时长：{{ mCtransitTime[1] }}</div>
-            <div>总时长：{{ mCtotalTime[1] }}</div>
-            <div>沙/小时：{{ mCrocksPerHour }}</div>
-            <div>暗物质/趟：{{ mCDMperRun }}</div>
-            <div>暗物质/小时：{{ mCDMperHour }}</div>
+          <div>{{ $t('energy') }}{{ stats.energy }}</div>
+          <div>{{ $t('shield') }}{{ stats.shield }} ({{stats.regen}}/s)</div>
+          <div>{{ $t('hp') }}{{ stats.hp }}</div>
+          <div>{{ $t('speed') }}{{ stats.speed }}</div>
+          <div>{{ $t('dps') }}{{ stats.dps }} dps</div>
+          <div>{{ $t('mining') }}{{ stats.mining }}</div>
+          <div>{{ $t('cargo') }}{{ stats.cargo }}</div>
+          <div v-if="showMineCalc"><br>
+            <div>{{ $t('mCminingTime') }}{{ mCminingTime[1] }}</div>
+            <div>{{ $t('mCtransitTime') }}{{ mCtransitTime[1] }}</div>
+            <div>{{ $t('mCtotalTime') }}{{ mCtotalTime[1] }}</div>
+            <div>{{ $t('mCrocksPerHour') }}{{ mCrocksPerHour }}</div>
+            <div>{{ $t('mCDMperRun') }}{{ mCDMperRun }}</div>
+            <div>{{ $t('mCDMperHour') }}{{ mCDMperHour }}</div>
             </div>
         </div>
         <ShipInfoTile
@@ -332,7 +331,7 @@ export default {
         this.stats.cargo / (10 * this.stats.mining / this.mineDiff / 1.1)
       );
       if (this.stats.mining === 0) {
-        return [miningTime, "请安装采矿器"];
+        return [miningTime, "¯\\_(ツ)_/¯"];
       } else {
         return [miningTime, this.toHHMMSS(miningTime)];
       }
@@ -340,7 +339,7 @@ export default {
     mCtransitTime() {
       let transitTime = Math.ceil(200000 / this.stats.speed);
       if (this.stats.mining === 0) {
-        return [transitTime, "请安装采矿器"];
+        return [transitTime, "¯\\_(ツ)_/¯"];
       } else {
         return [transitTime, this.toHHMMSS(transitTime)];
       }
@@ -348,7 +347,7 @@ export default {
     mCtotalTime() {
       let totalTime = this.mCminingTime[0] + this.mCtransitTime[0] * 2;
       if (this.stats.mining === 0) {
-        return [totalTime, "请安装采矿器"];
+        return [totalTime, "¯\\_(ツ)_/¯"];
       } else {
         return [totalTime, this.toHHMMSS(totalTime)];
       }
@@ -553,6 +552,7 @@ export default {
 
 .text-zone {
   text-align: left;
+  line-height: 24px;
 }
 
 .module-cont-bottom {
@@ -567,3 +567,91 @@ export default {
   cursor: not-allowed;
 }
 </style>
+
+<i18n>
+{
+  "en": {
+    "zoom": "Zoom: ",
+    "function": "Fn panel",
+    "viewReset": "View reset",
+    "level": "Level: ",
+    "power": "CPU: ",
+    "energy": "Energy: ",
+    "shield": "Shield: ",
+    "hp": "HP: ",
+    "speed": "Speed: ",
+    "dps": "DPS: ",
+    "mining": "Mining: ",
+    "cargo": "Cargo: ",
+    "mCminingTime": "Mining time: ",
+    "mCtransitTime": "Moving time: ",
+    "mCtotalTime": "Total time: ",
+    "mCrocksPerHour": "rocks/h: ",
+    "mCDMperRun": "DM/run: ",
+    "mCDMperHour": "DM/h: ",
+    "skills": "Skills: ",
+    "operation0": "Frigate op: ",
+    "operation1": "Destroyer op: ",
+    "operation2": "Cruiser op: ",
+    "operation3": "Battleship op: ",
+    "operation4": "Dreadnought op: ",
+    "operation5": "Titan op: ",
+    "navigation": "Navigation: ",
+    "mining1": "Mining (2%) : ",
+    "mining2": "Mining (4%) : ",
+    "spaceMining": "Astroining: ",
+    "dm1": "DM recognition: ",
+    "dm2": "DM collection: ",
+    "save": "Save",
+    "export": "Export",
+    "exportDesc": "Modules data (hull not included)",
+    "import": "Import",
+    "apply": "Apply",
+    "miningCalc": "Mining calculation",
+    "miningDiff": "Mine difficulty",
+    "showMineCalc": "Show on layout"
+  },
+  "zh": {
+    "zoom": "缩放：",
+    "function": "功能面板",
+    "viewReset": "重置显示",
+    "level": "等级：",
+    "misc": "信息",
+    "power": "动力：",
+    "energy": "能源：",
+    "shield": "护盾：",
+    "hp": "装甲：",
+    "speed": "速度：",
+    "dps": "DPS：",
+    "mining": "开采：",
+    "cargo": "货舱：",
+    "mCminingTime": "挖掘时长：",
+    "mCtransitTime": "移动时长：",
+    "mCtotalTime": "总时长：",
+    "mCrocksPerHour": "沙/小时：",
+    "mCDMperRun": "暗物质/趟：",
+    "mCDMperHour": "暗物质/小时：",
+    "skills": "技能：",
+    "operation0": "护卫操作：",
+    "operation1": "驱逐操作：",
+    "operation2": "巡洋操作：",
+    "operation3": "战列操作：",
+    "operation4": "无畏操作：",
+    "operation5": "泰坦操作：",
+    "navigation": "导航学：",
+    "mining1": "矿物开采（2%）：",
+    "mining2": "矿物开采（4%）：",
+    "spaceMining": "太空采集：",
+    "dm1": "暗物质识别：",
+    "dm2": "暗物质收集：",
+    "save": "保存",
+    "export": "导出",
+    "exportDesc": "组件数据（不包括舰体）",
+    "import": "导入",
+    "apply": "应用",
+    "miningCalc": "矿场计算",
+    "miningDiff": "矿场难度",
+    "showMineCalc": "在主页面显示"
+  }
+}
+</i18n>

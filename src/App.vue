@@ -2,11 +2,11 @@
   <div id="app">
     <div id="nav">
       <div id="nav-wrap">
-        <router-link class='router-link' to="/ship">舰体</router-link>
-        <router-link class='router-link' to="/module">组件</router-link>
-        <router-link class='router-link' to="/build">装配</router-link>
-        <router-link class='router-link' to="/legion">军团</router-link>
-        <router-link class='router-link' to="/misc">必读</router-link>
+        <router-link class='router-link' to="/ship">{{ $t('ship') }}</router-link>
+        <router-link class='router-link' to="/module">{{ $t('module') }}</router-link>
+        <router-link class='router-link' to="/build">{{ $t('build') }}</router-link>
+        <router-link class='router-link' to="/legion">{{ $t('legion') }}</router-link>
+        <router-link class='router-link' to="/misc">{{ $t('misc') }}</router-link>
       </div>
     </div>
     <router-view id='router-view'/>
@@ -104,3 +104,22 @@ input[type="range"] {
   user-select: none;
 }
 </style>
+
+<i18n>
+{
+  "en": {
+    "ship": "Ship",
+    "module": "Module",
+    "build": "Build",
+    "legion": "Legion",
+    "misc": "Info"
+  },
+  "zh": {
+    "ship": "舰体",
+    "module": "组件",
+    "build": "装配",
+    "legion": "军团",
+    "misc": "信息"
+  }
+}
+</i18n>

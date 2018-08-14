@@ -13,7 +13,7 @@
       </app-radio-button>
     </div>
     <div class="cont-card">
-      等级：{{ this.level }}
+      {{ $t('level') }}{{ this.level }}
       <input type="range" v-model.number="level" min="1" max="12" step="1"/>
     </div>
     <ShipInfo :shipId="shipId"></ShipInfo>
@@ -52,3 +52,13 @@ export default {
   margin: auto;
 }
 </style>
+<i18n>
+{
+  "en": {
+    "level": "Level: "
+  },
+  "zh": {
+    "level": "等级："
+  }
+}
+</i18n>
