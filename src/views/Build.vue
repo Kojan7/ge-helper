@@ -34,7 +34,7 @@
         </div>
         <div class="selection">
           <!-- <div class="cont-card not-allowed">科技</div> -->
-          <div class="cont-card" @click="showInput = !showInput">科技/导入/导出</div>
+          <div class="cont-card" @click="showInput = !showInput">功能面板</div>
           <div class="cont-card" @click="resetView">重置显示</div>
         </div>
 
@@ -65,6 +65,14 @@
         <div>战列操作：<input type="range" v-model.number="skills.operation[3]" min="0" max="30" step="1"/>：{{ skills.operation[3] }}</div>
         <div>无畏操作：<input type="range" v-model.number="skills.operation[4]" min="0" max="30" step="1"/>：{{ skills.operation[4] }}</div>
         <div>泰坦操作：<input type="range" v-model.number="skills.operation[5]" min="0" max="30" step="1"/>：{{ skills.operation[5] }}</div>
+        <div>导航学：<input type="range" v-model.number="skills.navigation" min="0" max="20" step="1"/>：{{ skills.navigation }}</div>
+        <br>
+        <div>矿物开采（2%）：<input type="range" v-model.number="skills.mining1" min="0" max="30" step="1"/>：{{ skills.mining1 }}</div>
+        <div>矿物开采（4%）：<input type="range" v-model.number="skills.mining2" min="0" max="10" step="1"/>：{{ skills.mining2 }}</div>
+        <div>太空采集：<input type="range" v-model.number="skills.spaceMining" min="0" max="30" step="1"/>：{{ skills.spaceMining }}</div>
+        <div>暗物质识别：<input type="range" v-model.number="skills.dm1" min="0" max="10" step="1"/>：{{ skills.dm1 }}</div>
+        <div>暗物质收集：<input type="range" v-model.number="skills.dm2" min="0" max="10" step="1"/>：{{ skills.dm2 }}</div>
+        
         <button @click="saveSkills">保存</button>
         <br>
         <span class="gras">导出</span>
@@ -79,7 +87,7 @@
 
       <div class="preview" draggable="true" @dragstart="dragStart" @drag="move">
         <div class="text-zone">
-          <div>警告：除了动力外未计算科技和船体加成，组件不管大小都只占1格</div>
+          <div>注意：目前只剩下能源、护盾、装甲和伤害未计算科技和船体加成。组件不管大小都只占1格</div>
           <ship-buff v-bind:buffs="ship[12]"></ship-buff>
           <div :style="statsPowerColor">
             动力：{{ stats.powerUsage }}/{{ stats.powerOutput }}
@@ -158,7 +166,13 @@ export default {
       showOutput: false,
       inputText: "",
       skills: {
-        operation: [0, 0, 0, 0, 0, 0]
+        operation: [0, 0, 0, 0, 0, 0],
+        navigation: 0,
+        mining1: 0,
+        mining2: 0,
+        spaceMining: 0,
+        dm1: 0,
+        dm2: 0
       }
     };
   },
@@ -208,6 +222,33 @@ export default {
     },
     stats() {
       let operationBuff = 1 + this.skills.operation[this.shipOption.size] * 0.1;
+      let thrustBuff = 1 + this.skills.navigation * 0.01;
+      let miningBuff = 1 + this.skills.mining1 * 0.02 + this.skills.mining2 * 0.04 + this.skills.spaceMining * 0.02;
+
+      let shipCargoBuffArray = this.ship[12].find(function(el) {
+        return el[0] === 43;
+      });
+      let shipCargoBuff = 1;
+      if (typeof shipCargoBuffArray !== "undefined") {
+        shipCargoBuff += shipCargoBuffArray[1] / 10000;
+      }
+
+      let shipThrustBuffArray = this.ship[12].find(function(el) {
+        return el[0] === 42;
+      });
+      let shipThrustBuff = 1;
+      if (typeof shipThrustBuffArray !== "undefined") {
+        shipThrustBuff += shipThrustBuffArray[1] / 10000;
+      }
+
+      let shipMiningBuffArray = this.ship[12].find(function(el) {
+        return el[0] === 11;
+      });
+      let shipMiningBuff = 1;
+      if (typeof shipMiningBuffArray !== "undefined") {
+        shipMiningBuff += shipMiningBuffArray[1] / 10000;
+      }
+
       let i;
       let powerUsage = 0;
       let powerOutput = Math.floor(this.ship[7] * operationBuff);
@@ -230,13 +271,13 @@ export default {
           shield += modInfo[33];
           regen += modInfo[34];
           hp += modInfo[5];
-          thrust += modInfo[8];
+          thrust += modInfo[8] * shipThrustBuff * thrustBuff;
           mass += modInfo[9];
           if (this.installedList[i][2] < 9) {
             dps += modInfo[12] / (modInfo[20] / 60);
           }
-          mining += modInfo[32];
-          cargo += modInfo[10];
+          mining += modInfo[32] * shipMiningBuff * miningBuff;
+          cargo += modInfo[10] * shipCargoBuff;
         }
       }
 
@@ -247,10 +288,10 @@ export default {
         shield,
         regen: regen / 10,
         hp,
-        speed: Math.floor(thrust * 10000 / mass),
+        speed: Math.floor(thrust * 10000 / mass) + 1,
         dps: Math.floor(dps),
-        mining,
-        cargo: cargo - 1
+        mining: Math.floor(mining),
+        cargo: Math.floor(cargo - 1)
       };
     },
     statsPowerColor() {
