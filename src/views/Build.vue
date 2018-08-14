@@ -107,6 +107,8 @@
             <div>移动时长：{{ mCtransitTime[1] }}</div>
             <div>总时长：{{ mCtotalTime[1] }}</div>
             <div>沙/小时：{{ mCrocksPerHour }}</div>
+            <div>暗物质/趟：{{ mCDMperRun }}</div>
+            <div>暗物质/小时：{{ mCDMperHour }}</div>
             </div>
         </div>
         <ShipInfoTile
@@ -239,6 +241,7 @@ export default {
         this.skills.mining1 * 0.02 +
         this.skills.mining2 * 0.04 +
         this.skills.spaceMining * 0.02;
+      let dmRate = 1 + this.skills.dm1 * 0.1 + this.skills.dm2 * 0.15;
 
       let shipCargoBuffArray = this.ship[12].find(function(el) {
         return el[0] === 43;
@@ -306,7 +309,8 @@ export default {
         speed: Math.floor(thrust * 10000 / mass) + 1,
         dps: Math.floor(dps),
         mining: Math.floor(mining),
-        cargo: Math.floor(cargo - 1)
+        cargo: Math.floor(cargo - 1),
+        dmRate
       };
     },
     statsPowerColor() {
@@ -322,6 +326,7 @@ export default {
     inputTextArray() {
       return JSON.parse(this.inputText);
     },
+    //index 0 = secs, index 1 = HH:MM:SS
     mCminingTime() {
       let miningTime = Math.ceil(
         this.stats.cargo / (10 * this.stats.mining / this.mineDiff / 1.1)
@@ -350,6 +355,24 @@ export default {
     },
     mCrocksPerHour() {
       return Math.floor(this.stats.cargo / this.mCtotalTime[0] * 3600);
+    },
+    mCDMperRun() {
+      if (this.stats.mining === 0) {
+        return 0;
+      } else {
+        return Math.floor(
+          this.stats.mining *
+            this.mCminingTime[0] /
+            60 *
+            this.stats.dmRate *
+            (Math.pow(this.stats.cargo * this.mineDiff, -0.19) * 1820.794 -
+              1.10674) /
+            1000000
+        );
+      }
+    },
+    mCDMperHour() {
+      return Math.round(this.mCDMperRun / this.mCtotalTime[0] * 360000000) / 100000
     }
   },
   methods: {
