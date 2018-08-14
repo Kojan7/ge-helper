@@ -5,7 +5,7 @@
     <p>{{ $t('repo') }}</p>
     <a href="https://github.com/zyntuz/era-plus">https://github.com/zyntuz/era-plus</a>
     <p><button @click="clearStorage">{{ $t('clear') }}</button>{{ $t('clearDesc') }} </p>
-    <p>{{ $t('appVer') }}0.3<br>{{ $t('dataVer') }}2018-07-31</p>
+    <p>{{ $t('appVer') }}0.3.1<br>{{ $t('dataVer') }}2018-07-31</p>
     <h3>{{ $t('buildDesc') }}</h3>
     <p>{{ $t('computer') }}</p>
     <p>{{ $t('warning') }}</p>
