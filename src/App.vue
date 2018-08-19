@@ -26,7 +26,7 @@ body {
   background-color: #e6ebed;
 }
 #app {
-  font-family: Arial, sans-serif;
+  font-family: Arial, "Microsoft YaHei", sans-serif;
   text-align: center;
 }
 
@@ -104,22 +104,3 @@ input[type="range"] {
   user-select: none;
 }
 </style>
-
-<i18n>
-{
-  "en": {
-    "ship": "Ship",
-    "module": "Module",
-    "build": "Build",
-    "legion": "Legion",
-    "misc": "Info"
-  },
-  "zh": {
-    "ship": "舰体",
-    "module": "组件",
-    "build": "装配",
-    "legion": "军团",
-    "misc": "信息"
-  }
-}
-</i18n>

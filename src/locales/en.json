@@ -1,1 +1,7 @@
-{}
+{
+  "ship": "Ship",
+  "module": "Module",
+  "build": "Build",
+  "legion": "Legion",
+  "misc": "Info"
+}
