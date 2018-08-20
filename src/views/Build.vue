@@ -1,7 +1,7 @@
 <template>
   <div class="build">
     <div class="desktop">
-      <div class="left">
+      <div v-if="isLeftShown" class="left">
         <div class="selection">
           <select class="select" v-model.number="shipOption.type">
             <option v-for="option in shipChoice.type"
@@ -48,6 +48,7 @@
         <div class="selection">
           <div class="cont-card" @click="showInput = !showInput">{{ $t('function') }}</div>
           <div class="cont-card" @click="resetView">{{ $t('viewReset') }}</div>
+          <div class="cont-card" @click="isLeftShown = false">{{ $t('hide') }}</div>
         </div>
 
         <div class="selection">
@@ -70,6 +71,7 @@
           @chose="module.item=$event">
         </app-radio-button>
       </div>
+      <div class="expand-btn" v-else @click="isLeftShown = true">+</div>
 
       <div v-if="showInput" class="right-window">
         <button @click="clearMod">{{ $t('clearMod') }}</button>
@@ -173,6 +175,7 @@ export default {
   },
   data: function() {
     return {
+      isLeftShown: true,
       panX: 2,
       panY: 2,
       panStart: true,
@@ -533,7 +536,19 @@ export default {
 .cont-card-inside {
   flex-grow: 0;
 }
-
+.expand-btn {
+  top: 0;
+  right: 0;
+  line-height: 26px;
+  text-align: center;
+  height: 26px;
+  width: 26px;
+  border-radius: 13px;
+  position: absolute;
+  background-color: var(--highlight-color);
+  color: var(--bg-color);
+  cursor: pointer;
+}
 .desktop {
   display: flex;
   margin: 0 17px 17px 17px;
@@ -637,7 +652,8 @@ export default {
     "miningCalc": "Mining calculation",
     "miningDiff": "Mine difficulty",
     "showMineCalc": "Show on layout",
-    "clearMod": "Clear modules"
+    "clearMod": "Clear modules",
+    "hide": "Hide"
   },
   "zh": {
     "zoom": "缩放",
@@ -680,7 +696,8 @@ export default {
     "miningCalc": "矿场计算",
     "miningDiff": "矿场难度",
     "showMineCalc": "在主页面显示",
-    "clearMod": "清空组件"
+    "clearMod": "清空组件",
+    "hide": "隐藏"
   }
 }
 </i18n>
