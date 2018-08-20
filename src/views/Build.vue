@@ -110,7 +110,7 @@
         <div><label><input type="checkbox" id="checkbox" v-model="showMineCalc">{{ $t('showMineCalc') }}</label></div>
       </div>
 
-      <div class="preview" draggable="true" @dragstart="dragStart" @drag="move">
+      <div class="preview" draggable="true" v-hammer:pan="pan">
         <div class="text-zone">
           <ship-buff v-bind:buffs="ship[12]"></ship-buff>
           <div :style="statsPowerColor">
@@ -176,8 +176,9 @@ export default {
   },
   data: function() {
     return {
-      dragX: 2,
-      dragY: 2,
+      panX: 2,
+      panY: 2,
+      panStart: true,
       zoom: 4,
       padding: {
         top: 30,
@@ -395,7 +396,9 @@ export default {
       }
     },
     mCDMperHour() {
-      return Math.round(this.mCDMperRun / this.mCtotalTime[0] * 360000000) / 100000
+      return (
+        Math.round(this.mCDMperRun / this.mCtotalTime[0] * 360000000) / 100000
+      );
     }
   },
   methods: {
@@ -419,19 +422,19 @@ export default {
         this.skills = JSON.parse(localStorage.getItem("skills"));
       }
     },
-    dragStart: function(event) {
-      let img = new Image();
-      event.dataTransfer.setData("text/plain", event.target.id);
-      event.dataTransfer.setDragImage(img, 0, 0);
-      this.dragX = event.clientX;
-      this.dragY = event.clientY;
-    },
-    move: function(event) {
-      if (event.clientY > 1) {
-        this.padding.top += event.clientY - this.dragY;
-        this.dragY = event.clientY;
-        this.padding.right -= event.clientX - this.dragX;
-        this.dragX = event.clientX;
+    pan: function(event) {
+      if (this.panStart) {
+        this.panX = event.deltaX;
+        this.panY = event.deltaY;
+        this.panStart = false;
+      } else {
+        this.padding.top += event.deltaY - this.panY;
+        this.panY = event.deltaY;
+        this.padding.right -= event.deltaX - this.panX;
+        this.panX = event.deltaX;
+      }
+      if (event.isFinal) {
+        this.panStart = true;
       }
     },
     resetView: function() {

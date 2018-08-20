@@ -10,7 +10,8 @@
   "dependencies": {
     "vue": "^2.5.16",
     "vue-i18n": "^8.0.0",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue2-hammer": "^2.0.1"
   },
   "devDependencies": {
     "@kazupon/vue-i18n-loader": "^0.3.0",
