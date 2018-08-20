@@ -18,22 +18,35 @@
               {{ $i18n.locale === "en" ? option.texten : option.text }}
             </option>
           </select>
-          <select class="select" v-model.number="shipOption.level">
+          <!-- <select class="select" v-model.number="shipOption.level">
             <option v-for="option in shipChoice.level"
               :value="option.value"
               :key="option.value">
               {{ option.text }}
             </option>
-          </select>
+          </select> -->
         </div>
         <div class="selection">
-          <div class="cont-card">
-            {{ $t('zoom') }}
-            <input type="range" v-model.number="zoom" min="1" max="15" step="0.01"/>
-          </div>
+          <app-slider
+            @input="shipOption.level=$event"
+            :text="$t('level')"
+            :min=1
+            :max=12
+            :value="shipOption.level">
+          </app-slider>
         </div>
         <div class="selection">
-          <!-- <div class="cont-card not-allowed">科技</div> -->
+          <app-slider
+            @input="zoom=$event"
+            :text="$t('zoom')"
+            :min=1
+            :max=15
+            :step=0.01
+            :value="zoom"
+            :displayOutput=false>
+          </app-slider>
+        </div>
+        <div class="selection">
           <div class="cont-card" @click="showInput = !showInput">{{ $t('function') }}</div>
           <div class="cont-card" @click="resetView">{{ $t('viewReset') }}</div>
         </div>
@@ -46,11 +59,13 @@
           :options="modChoice.size"
           @chose="module.size=$event">
         </app-radio-button>
-
-        <div class="cont-card cont-card-inside">
-          {{ $t('level') }}{{ this.module.level }}
-          <input type="range" v-model.number="module.level" min="1" max="12" step="1"/>
-        </div>
+        <app-slider
+          @input="module.level=$event"
+          :text="$t('level')"
+          :min=1
+          :max=12
+          :value="module.level">
+        </app-slider>
         <app-radio-button
           :options="modChoice.item"
           @chose="module.item=$event">
@@ -59,7 +74,7 @@
 
       <div v-if="showInput" class="right-window">
         <span class="gras">{{ $t('skills') }}</span>
-        <div>{{ $t('operation0') }}<input type="range" v-model.number="skills.operation[0]" min="0" max="30" step="1"/>：{{ skills.operation[0] }}</div>
+        <!-- <div>{{ $t('operation0') }}<input type="range" v-model.number="skills.operation[0]" min="0" max="30" step="1"/>：{{ skills.operation[0] }}</div> -->
         <div>{{ $t('operation1') }}<input type="range" v-model.number="skills.operation[1]" min="0" max="30" step="1"/>：{{ skills.operation[1] }}</div>
         <div>{{ $t('operation2') }}<input type="range" v-model.number="skills.operation[2]" min="0" max="30" step="1"/>：{{ skills.operation[2] }}</div>
         <div>{{ $t('operation3') }}<input type="range" v-model.number="skills.operation[3]" min="0" max="30" step="1"/>：{{ skills.operation[3] }}</div>
@@ -67,7 +82,13 @@
         <div>{{ $t('operation5') }}<input type="range" v-model.number="skills.operation[5]" min="0" max="30" step="1"/>：{{ skills.operation[5] }}</div>
         <div>{{ $t('navigation') }}<input type="range" v-model.number="skills.navigation" min="0" max="20" step="1"/>：{{ skills.navigation }}</div>
         <br>
-        <div>{{ $t('mining1') }}<input type="range" v-model.number="skills.mining1" min="0" max="30" step="1"/>：{{ skills.mining1 }}</div>
+        <app-slider
+          @input="skills.mining1=$event"
+          :text="$t('mining1')"
+          :min=0
+          :max=30
+          :value="skills.mining1">
+        </app-slider>
         <div>{{ $t('mining2') }}<input type="range" v-model.number="skills.mining2" min="0" max="10" step="1"/>：{{ skills.mining2 }}</div>
         <div>{{ $t('spaceMining') }}<input type="range" v-model.number="skills.spaceMining" min="0" max="30" step="1"/>：{{ skills.spaceMining }}</div>
         <div>{{ $t('dm1') }}<input type="range" v-model.number="skills.dm1" min="0" max="10" step="1"/>：{{ skills.dm1 }}</div>
@@ -134,6 +155,7 @@
 <script>
 import BuildErrorMobile from "@/components/BuildErrorMobile.vue";
 import AppRadioButton from "@/components/AppRadioButton.vue";
+import AppSlider from "@/components/AppSlider.vue";
 //import ShipInfoEl from "@/components/ShipInfoEl.vue";
 import ShipBuff from "@/components/ShipBuff.vue";
 import ShipInfoTile from "@/components/ShipInfoTile.vue";
@@ -148,6 +170,7 @@ export default {
     ShipInfoTile,
     ShipInfoTileMod,
     AppRadioButton,
+    AppSlider,
     ShipBuff
   },
   data: function() {
@@ -571,10 +594,10 @@ export default {
 <i18n>
 {
   "en": {
-    "zoom": "Zoom: ",
+    "zoom": "Zoom",
     "function": "Fn panel",
     "viewReset": "View reset",
-    "level": "Level: ",
+    "level": "Level",
     "power": "CPU: ",
     "energy": "Energy: ",
     "shield": "Shield: ",
@@ -612,10 +635,10 @@ export default {
     "showMineCalc": "Show on layout"
   },
   "zh": {
-    "zoom": "缩放：",
+    "zoom": "缩放",
     "function": "功能面板",
     "viewReset": "重置显示",
-    "level": "等级：",
+    "level": "等级",
     "misc": "信息",
     "power": "动力：",
     "energy": "能源：",
