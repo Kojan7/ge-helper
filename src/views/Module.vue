@@ -15,22 +15,27 @@
         </option>
       </select>
     </div>
-    <div class="cont-card">
-      {{ $t('level') }}{{ this.level }}
-      <input type="range" v-model.number="level" min="1" max="12" step="1"/>
-    </div>
+    <app-slider
+      @input="level=$event"
+      :text="$t('level')"
+      :min=1
+      :max=12
+      :value="level">
+    </app-slider>
     <ModInfo :modId="modId"></ModInfo>
   </div>
 </template>
 
 <script>
 import AppRadioButton from "@/components/AppRadioButton.vue"
+import AppSlider from "@/components/AppSlider.vue"
 import ModInfo from "@/components/ModInfo.vue";
 import { mRetro, lRetro, modChoice } from "@/data/modInfo.js";
 export default {
   name: "module",
   components: {
     AppRadioButton,
+    AppSlider,
     ModInfo
   },
   data: function() {
@@ -80,10 +85,10 @@ export default {
 <i18n>
 {
   "en": {
-    "level": "Level: "
+    "level": "Level"
   },
   "zh": {
-    "level": "等级："
+    "level": "等级"
   }
 }
 </i18n>

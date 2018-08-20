@@ -37,7 +37,7 @@ const shipChoice = {
     { value: 1, text: "防御", texten: "Defensive" },
     { value: 2, text: "强袭", texten: "Assault" },
     { value: 3, text: "狙击", texten: "Sniper" },
-    { value: 4, text: "高速", texten: "High-speed" },
+    { value: 4, text: "高速", texten: "High-spd" },
     { value: 5, text: "采掘", texten: "Miner" },
     { value: 6, text: "运输", texten: "Transport" }
   ],
@@ -45,23 +45,23 @@ const shipChoice = {
     { value: 0, text: "护卫", texten: "Frigate" },
     { value: 1, text: "驱逐", texten: "Destroyer" },
     { value: 2, text: "巡洋", texten: "Cruiser" },
-    { value: 3, text: "战列", texten: "Battleship" },
-    { value: 4, text: "无畏", texten: "DD" },
+    { value: 3, text: "战列", texten: "BS" },
+    { value: 4, text: "无畏", texten: "Dread." },
     { value: 5, text: "泰坦", texten: "Titan" }
   ],
   level: [
-    { value: 1, text: "Lv. 1" },
-    { value: 2, text: "Lv. 2" },
-    { value: 3, text: "Lv. 3" },
-    { value: 4, text: "Lv. 4" },
-    { value: 5, text: "Lv. 5" },
-    { value: 6, text: "Lv. 6" },
-    { value: 7, text: "Lv. 7" },
-    { value: 8, text: "Lv. 8" },
-    { value: 9, text: "Lv. 9" },
-    { value: 10, text: "Lv. 10" },
-    { value: 11, text: "Lv. 11" },
-    { value: 12, text: "Lv. 12" }
+    { value: 1, text: "Lv 1" },
+    { value: 2, text: "Lv 2" },
+    { value: 3, text: "Lv 3" },
+    { value: 4, text: "Lv 4" },
+    { value: 5, text: "Lv 5" },
+    { value: 6, text: "Lv 6" },
+    { value: 7, text: "Lv 7" },
+    { value: 8, text: "Lv 8" },
+    { value: 9, text: "Lv 9" },
+    { value: 10, text: "Lv 10" },
+    { value: 11, text: "Lv 11" },
+    { value: 12, text: "Lv 12" }
   ]
 };
 export { shipBuff, shipDesc, shipLimit, shipChoice };

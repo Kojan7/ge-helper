@@ -12,22 +12,27 @@
         @chose="size=$event">>
       </app-radio-button>
     </div>
-    <div class="cont-card">
-      {{ $t('level') }}{{ this.level }}
-      <input type="range" v-model.number="level" min="1" max="12" step="1"/>
-    </div>
+    <app-slider
+      @input="level=$event"
+      :text="$t('level')"
+      :min=1
+      :max=12
+      :value="level">
+    </app-slider>
     <ShipInfo :shipId="shipId"></ShipInfo>
   </div>
 </template>
 
 <script>
 import AppRadioButton from "@/components/AppRadioButton.vue"
+import AppSlider from "@/components/AppSlider.vue"
 import ShipInfo from "@/components/ShipInfo.vue";
 import { shipChoice } from "@/data/shipInfo.js";
 export default {
   name: "ship",
   components: {
     AppRadioButton,
+    AppSlider,
     ShipInfo
   },
   data: function() {
@@ -55,10 +60,10 @@ export default {
 <i18n>
 {
   "en": {
-    "level": "Level: "
+    "level": "Level"
   },
   "zh": {
-    "level": "等级："
+    "level": "等级"
   }
 }
 </i18n>
