@@ -1,6 +1,5 @@
 <template>
   <div class="build">
-    <build-error-mobile></build-error-mobile>
     <div class="desktop">
       <div class="left">
         <div class="selection">
@@ -154,7 +153,6 @@
 </template>
 
 <script>
-import BuildErrorMobile from "@/components/BuildErrorMobile.vue";
 import AppRadioButton from "@/components/AppRadioButton.vue";
 import AppSlider from "@/components/AppSlider.vue";
 //import ShipInfoEl from "@/components/ShipInfoEl.vue";
@@ -167,7 +165,6 @@ import { mRetro, lRetro, modChoice } from "@/data/modInfo.js";
 export default {
   name: "build",
   components: {
-    BuildErrorMobile,
     ShipInfoTile,
     ShipInfoTileMod,
     AppRadioButton,
