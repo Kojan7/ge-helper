@@ -73,6 +73,7 @@
       </div>
 
       <div v-if="showInput" class="right-window">
+        <button @click="clearMod">{{ $t('clearMod') }}</button>
         <span class="gras">{{ $t('skills') }}</span>
         <!-- <div>{{ $t('operation0') }}<input type="range" v-model.number="skills.operation[0]" min="0" max="30" step="1"/>：{{ skills.operation[0] }}</div> -->
         <div>{{ $t('operation1') }}<input type="range" v-model.number="skills.operation[1]" min="0" max="30" step="1"/>：{{ skills.operation[1] }}</div>
@@ -437,6 +438,9 @@ export default {
       this.zoom = 4;
       this.padding = { top: 30, right: 15 };
     },
+    clearMod() {
+      this.installedList = [];
+    },
     tileClick(coord) {
       this.installedList.push([
         coord, // 0
@@ -632,7 +636,8 @@ export default {
     "apply": "Apply",
     "miningCalc": "Mining calculation",
     "miningDiff": "Mine difficulty",
-    "showMineCalc": "Show on layout"
+    "showMineCalc": "Show on layout",
+    "clearMod": "Clear modules"
   },
   "zh": {
     "zoom": "缩放",
@@ -674,7 +679,8 @@ export default {
     "apply": "应用",
     "miningCalc": "矿场计算",
     "miningDiff": "矿场难度",
-    "showMineCalc": "在主页面显示"
+    "showMineCalc": "在主页面显示",
+    "clearMod": "清空组件"
   }
 }
 </i18n>
