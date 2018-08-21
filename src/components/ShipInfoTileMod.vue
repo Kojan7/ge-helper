@@ -2,7 +2,7 @@
   <div class="tile"
     :style="style"
     @click="$emit('deleted', mod)">
-    <svg :width="17.321 * zoom" :height="20 * zoom" draggable="false" viewBox="0 0 20 20">
+    <svg :width="256 * zoom" :height="256 * zoom" draggable="false" viewBox="0 0 20 20">
       <!-- for S sized armors -->
       <polygon
         v-if="mod[1] === 0 && mod[2] < 17 && mod[2] > 12"
@@ -63,7 +63,7 @@ export default {
   },
   computed: {
     halfWidth: function() {
-      return 8.161 * this.zoom;
+      return 106 * this.zoom;
     },
     aboutHeight: function() {
       return this.halfWidth * 26 / 15;
@@ -80,7 +80,7 @@ export default {
     },
     levelStyle: function() {
       return { 
-        fontSize: 4 * this.zoom + "px",
+        fontSize: 42 * this.zoom + "px",
         color: this.modInfo.textColor
       };
     },

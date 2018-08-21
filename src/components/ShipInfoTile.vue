@@ -2,8 +2,8 @@
   <div class="tile"
     :style="style"
     @click="$emit('selected', xycoord)">
-    <svg :width="17.321 * zoom" :height="20 * zoom" version="1.1" viewBox="0 0 17.321 20">
-      <path d="m8.661 0.57735 8.1603 4.7113-1e-6 9.4226-8.1603 4.7113-8.1603-4.7113 2.5e-7 -9.4226z" fill="none" stroke="var(--dark-color)"/>
+    <svg :width="256*zoom" :height="256*zoom" version="1.1" viewBox="0 0 256 256">
+      <path d="m128 5.7735 105.85 61.113v122.23l-105.85 61.113-105.85-61.113 4e-6 -122.23z" fill="none" stroke="var(--dark-color)" stroke-width="10"/>
     </svg>
     <div class="text" :style="textStyle">{{ limit }}</div>
   </div>
@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     halfWidth: function() {
-      return 8.161 * this.zoom;
+      return 106 * this.zoom;
     },
     aboutHeight: function() {
       return this.halfWidth * 26 / 15;
@@ -36,7 +36,7 @@ export default {
       };
     },
     textStyle: function() {
-      return { fontSize: 10 * this.zoom + "px" };
+      return { fontSize: 180 * this.zoom + "px" };
     },
     limit: function() {
       return shipLimit[this.coord[2]];

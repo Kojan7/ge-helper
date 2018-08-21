@@ -38,9 +38,9 @@
           <app-slider
             @input="zoom=$event"
             :text="$t('zoom')"
-            :min=1
-            :max=15
-            :step=0.01
+            :min=0.1
+            :max=1
+            :step=0.002
             :value="zoom"
             :displayOutput=false>
           </app-slider>
@@ -179,7 +179,7 @@ export default {
       panX: 2,
       panY: 2,
       panStart: true,
-      zoom: 4,
+      zoom: 0.3,
       padding: {
         top: 30,
         right: 15
@@ -438,7 +438,7 @@ export default {
       }
     },
     resetView: function() {
-      this.zoom = 4;
+      this.zoom = 0.3;
       this.padding = { top: 30, right: 15 };
     },
     clearMod() {

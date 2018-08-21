@@ -11,8 +11,8 @@
       v-for="tile in layout"
       :coord="tile"
       :key="layout.indexOf(tile)"
-      :padding="{top: 30, right: 15}"
-      :zoom="1">
+      :padding="{top: 50, right: 15}"
+      :zoom="0.06">
     </ShipInfoTile>
   </div>
 </template>
