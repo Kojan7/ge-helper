@@ -2,8 +2,8 @@
   <div class="tile"
     :style="style"
     @click="$emit('selected', xycoord)">
-    <svg :width="20 * zoom" :height="21.5 * zoom" draggable="false" xmlns="http://www.w3.org/2000/svg" viewBox="15 10 170 200">
-      <polygon style="fill:none;stroke:#263238;stroke-width:8px" points="183,158 183,62 100,14 17,62 17,158 100,206 183,158"/>
+    <svg :width="17.321 * zoom" :height="20 * zoom" version="1.1" viewBox="0 0 17.321 20">
+      <path d="m8.661 0.57735 8.1603 4.7113-1e-6 9.4226-8.1603 4.7113-8.1603-4.7113 2.5e-7 -9.4226z" fill="none" stroke="var(--dark-color)"/>
     </svg>
     <div class="text" :style="textStyle">{{ limit }}</div>
   </div>
@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     halfWidth: function() {
-      return 10 * this.zoom;
+      return 8.161 * this.zoom;
     },
     aboutHeight: function() {
       return this.halfWidth * 26 / 15;
