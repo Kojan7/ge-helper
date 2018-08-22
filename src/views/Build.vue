@@ -74,7 +74,7 @@
       <div class="expand-btn" v-else @click="isLeftShown = true">+</div>
 
       <div v-if="showInput" class="right-window">
-        <button @click="clearMod">{{ $t('clearMod') }}</button>
+        <button @click="clearMod">{{ $t('clearMod') }}</button><button @click="showInput = !showInput"><b>{{ $t('exit') }}</b></button>
         <span class="gras">{{ $t('skills') }}</span>
         <div>{{ $t('operation0') }}<input type="range" v-model.number="skills.operation[0]" min="0" max="30" step="1"/>：{{ skills.operation[0] }}</div>
         <div>{{ $t('operation1') }}<input type="range" v-model.number="skills.operation[1]" min="0" max="30" step="1"/>：{{ skills.operation[1] }}</div>
@@ -600,9 +600,9 @@ export default {
 .right-window {
   position: absolute;
   right: 0;
-  left: 290px;
+  left: 0;
   top: 0;
-  z-index: 200;
+  z-index: 1200;
   box-sizing: border-box;
   background-color: var(--bg-color);
   box-shadow: var(--chrome-shadow);
@@ -677,7 +677,8 @@ export default {
     "miningDiff": "Mine difficulty",
     "showMineCalc": "Show on layout",
     "clearMod": "Clear modules",
-    "hide": "Hide"
+    "hide": "Hide",
+    "exit": "Return"
   },
   "zh": {
     "zoom": "缩放",
@@ -721,7 +722,8 @@ export default {
     "miningDiff": "矿场难度",
     "showMineCalc": "在主页面显示",
     "clearMod": "清空组件",
-    "hide": "隐藏"
+    "hide": "隐藏",
+    "exit": "返回"
   }
 }
 </i18n>
