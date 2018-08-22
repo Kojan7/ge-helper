@@ -76,7 +76,7 @@
       <div v-if="showInput" class="right-window">
         <button @click="clearMod">{{ $t('clearMod') }}</button>
         <span class="gras">{{ $t('skills') }}</span>
-        <!-- <div>{{ $t('operation0') }}<input type="range" v-model.number="skills.operation[0]" min="0" max="30" step="1"/>：{{ skills.operation[0] }}</div> -->
+        <div>{{ $t('operation0') }}<input type="range" v-model.number="skills.operation[0]" min="0" max="30" step="1"/>：{{ skills.operation[0] }}</div>
         <div>{{ $t('operation1') }}<input type="range" v-model.number="skills.operation[1]" min="0" max="30" step="1"/>：{{ skills.operation[1] }}</div>
         <div>{{ $t('operation2') }}<input type="range" v-model.number="skills.operation[2]" min="0" max="30" step="1"/>：{{ skills.operation[2] }}</div>
         <div>{{ $t('operation3') }}<input type="range" v-model.number="skills.operation[3]" min="0" max="30" step="1"/>：{{ skills.operation[3] }}</div>
@@ -91,10 +91,34 @@
           :max=30
           :value="skills.mining1">
         </app-slider>
-        <div>{{ $t('mining2') }}<input type="range" v-model.number="skills.mining2" min="0" max="10" step="1"/>：{{ skills.mining2 }}</div>
-        <div>{{ $t('spaceMining') }}<input type="range" v-model.number="skills.spaceMining" min="0" max="30" step="1"/>：{{ skills.spaceMining }}</div>
-        <div>{{ $t('dm1') }}<input type="range" v-model.number="skills.dm1" min="0" max="10" step="1"/>：{{ skills.dm1 }}</div>
-        <div>{{ $t('dm2') }}<input type="range" v-model.number="skills.dm2" min="0" max="10" step="1"/>：{{ skills.dm2 }}</div>
+        <app-slider
+          @input="skills.mining2=$event"
+          :text="$t('mining2')"
+          :min=0
+          :max=10
+          :value="skills.mining2">
+        </app-slider>
+        <app-slider
+          @input="skills.spaceMining=$event"
+          :text="$t('spaceMining')"
+          :min=0
+          :max=30
+          :value="skills.spaceMining">
+        </app-slider>
+        <app-slider
+          @input="skills.dm1=$event"
+          :text="$t('dm1')"
+          :min=0
+          :max=10
+          :value="skills.dm1">
+        </app-slider>
+        <app-slider
+          @input="skills.dm2=$event"
+          :text="$t('dm2')"
+          :min=0
+          :max=10
+          :value="skills.dm2">
+        </app-slider>
         
         <button @click="saveSkills">{{ $t('save') }}</button>
         <br><br>
@@ -641,7 +665,7 @@ export default {
     "navigation": "Navigation: ",
     "mining1": "Mining (2%) : ",
     "mining2": "Mining (4%) : ",
-    "spaceMining": "Astroining: ",
+    "spaceMining": "Astro Mining: ",
     "dm1": "DM recognition: ",
     "dm2": "DM collection: ",
     "save": "Save",
