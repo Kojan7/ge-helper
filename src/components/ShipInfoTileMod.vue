@@ -2,15 +2,32 @@
   <div class="tile"
     :style="style"
     @click="$emit('deleted', mod)">
-    <svg :width="256 * zoom" :height="256 * zoom" draggable="false" viewBox="0 0 20 20">
-      <!-- for S sized armors -->
-      <polygon
-        v-if="mod[1] === 0 && mod[2] < 17 && mod[2] > 12"
-        :style="imageStyle" style="stroke-width:1"
-        points="10,0.5 18.1,5 18.1,15 10,19.5 1.9,15 1.9,5"/>
+    <svg v-if="mod[1] === 0" :width="256 * zoom" :height="256 * zoom" draggable="false" viewBox="0 0 256 256">
+      <g v-if="mod[1] === 0"> <!-- S sized -->
+        <!-- bed tile -->
+        <path d="m128 5.7735 105.85 61.113v122.23l-105.85 61.113-105.85-61.113 4e-6 -122.23z" fill="#808080" stroke="#000" stroke-width="10"/>
+        <!-- rail and laser -->
+        <path v-if="mod[2] < 5" :style="imageStyle" transform="matrix(.54434 0 0 1 58.324 15.556)" d="m128 24.069 90.007 155.9h-180.01z" stroke-width="10"/>
+        <!-- core -->
+        <g v-else-if="mod[2] === 12">
+          <path d="m128 24.776 89.395 51.612v103.22l-89.395 51.612-89.395-51.612 3e-6 -103.22z" fill="#47e1f1" stroke="#fdfefd" stroke-dasharray="46, 23" stroke-dashoffset="23" stroke-width="23"/>
+          <circle cx="128" cy="128" r="58.676" fill="#ceffff" stroke-width="0"/>
+        </g>
+        <!-- armor -->
+        <path v-else-if="mod[2] < 17 && mod[2] > 12" :style="imageStyle" d="m128 24.776 89.395 51.612v103.22l-89.395 51.612-89.395-51.612 3e-6 -103.22z" stroke-width="23"/>
+        <!-- engine -->
+        <g v-else-if="mod[2] === 18">
+          <path transform="matrix(1.062 0 0 .81208 -7.9357 62.41)" d="m128 208.27-45.622-79.019h91.243z" fill="#fffff5" stroke-width="0"/>
+          <path transform="matrix(1.173 0 0 1.3419 -22.148 -14.836)" d="m128 48.818 49.908 86.444h-99.817z" fill="#ddbc58" stroke="#000" stroke-width="7"/>
+        </g>
+        <!-- else -->
+        <path v-else :style="imageStyle" d="m128 24.776 89.395 154.84h-178.79z" stroke-width="10"/>
+      </g>
+    </svg>
+    <svg v-else :width="256 * zoom" :height="256 * zoom" draggable="false" viewBox="0 0 20 20">
       <!-- for M & L & M+ sized armors top tile -->
       <polygon
-        v-else-if="mod[1] < 4 && mod[2] < 17 && mod[2] > 12"
+        v-if="mod[1] < 4 && mod[2] < 17 && mod[2] > 12"
         :style="imageStyle" style="stroke-width:1"
         points="10,0.5 18.1,5 18.1,15 20.5,19.5 -0.5,19.5 1.9,15 1.9,5"/>
       <!-- for M & L sized armors bottom left -->
@@ -23,13 +40,6 @@
         v-else-if="mod[1] === 6 && mod[2] < 17 && mod[2] > 12"
         :style="imageStyle" style="stroke-width:1"
         points=" 10,0.5 18.1,5 18.1,15 10,19.5 1.9,15 -2,15 -2,-15"/>
-
-      <!-- for S sized shield -->
-      <circle 
-        v-else-if="mod[1] === 0 && mod[2] === 17"
-        :style="imageStyle" style="stroke-width:1"
-        cx="10" cy="10" r="8"/>
-      <polygon v-else-if="mod[1] === 0" :style="imageStyle" points="10,1 18.0829,15 1.9171,15" style="stroke-width:1" />
       <!-- for all L+ internal tile -->
       <polygon v-else-if="mod[1] === 4" :style="imageStyle" points="-3,-3 -3,23 23,23 23,-3" style="stroke-width:1" />
       <polygon v-else-if="mod[1] === 5" :style="imageStyle" points="22,-19.7 22,15 1.9171,15" style="stroke-width:1" />
@@ -47,7 +57,7 @@
       <polygon v-else :style="imageStyle" points="10,1 26.1658,29 -6.1658,29" style="stroke-width:1" />
     </svg>
     <div v-if="mod[1] < 5" class="level" :style="levelStyle">
-      {{ modInfo.abbr }}<br>{{ modSize }}{{ mod[3] }}
+      <span  v-if="mod[1] > 0 || (mod[2] > 4 && mod[2] < 9)">{{ modInfo.abbr }}<br></span>{{ modSize }}{{ mod[3] }}
     </div>
   </div>
 </template>
@@ -63,7 +73,7 @@ export default {
   },
   computed: {
     halfWidth: function() {
-      return 106 * this.zoom;
+      return 120 * this.zoom;
     },
     aboutHeight: function() {
       return this.halfWidth * 26 / 15;

@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     halfWidth: function() {
-      return 106 * this.zoom;
+      return 120 * this.zoom;
     },
     aboutHeight: function() {
       return this.halfWidth * 26 / 15;
