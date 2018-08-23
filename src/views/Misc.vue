@@ -1,6 +1,6 @@
 <template>
   <div class="misc">
-    <h1>{{ $t('title') }} 0.5.0</h1>
+    <h1>{{ $t('title') }} 0.5.1</h1>
     <locale-changer></locale-changer>
     <h3 style="color:red">{{ $t('important') }}</h3>
     <p>{{ $t('repo') }}</p>
