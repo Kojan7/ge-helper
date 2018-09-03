@@ -82,13 +82,3 @@ export default {
   margin: auto;
 }
 </style>
-<i18n>
-{
-  "en": {
-    "level": "Level"
-  },
-  "zh": {
-    "level": "等级"
-  }
-}
-</i18n>

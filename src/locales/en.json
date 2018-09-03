@@ -1,7 +1,18 @@
 {
-  "ship": "Ship",
-  "module": "Module",
-  "build": "Build",
-  "legion": "Legion",
-  "misc": "Info"
+  "level": "Level",
+  "ship": {
+    "title": "Ship"
+  },
+  "module": {
+    "title": "Module"
+  },
+  "build": {
+    "title": "Build"
+  },
+  "legion": {
+    "title": "Legion"
+  },
+  "misc": {
+    "title": "Info"
+  }
 }

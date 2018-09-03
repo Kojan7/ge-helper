@@ -1,7 +1,18 @@
 {
-  "ship": "舰体",
-  "module": "组件",
-  "build": "装配",
-  "legion": "军团",
-  "misc": "信息"
+  "level": "等级",
+  "ship": {
+    "title": "舰体"
+  },
+  "module": {
+    "title": "组件"
+  },
+  "build": {
+    "title": "装配"
+  },
+  "legion": {
+    "title": "军团"
+  },
+  "misc": {
+    "title": "信息"
+  }
 }

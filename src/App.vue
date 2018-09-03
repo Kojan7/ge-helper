@@ -2,11 +2,11 @@
   <div id="app">
     <div id="nav">
       <div id="nav-wrap">
-        <router-link class='router-link' to="/ship">{{ $t('ship') }}</router-link>
-        <router-link class='router-link' to="/module">{{ $t('module') }}</router-link>
-        <router-link class='router-link' to="/build">{{ $t('build') }}</router-link>
-        <router-link class='router-link' to="/legion">{{ $t('legion') }}</router-link>
-        <router-link class='router-link' to="/misc">{{ $t('misc') }}</router-link>
+        <router-link class='router-link' to="/ship">{{ $t('ship.title') }}</router-link>
+        <router-link class='router-link' to="/module">{{ $t('module.title') }}</router-link>
+        <router-link class='router-link' to="/build">{{ $t('build.title') }}</router-link>
+        <router-link class='router-link' to="/legion">{{ $t('legion.title') }}</router-link>
+        <router-link class='router-link' to="/misc">{{ $t('misc.title') }}</router-link>
       </div>
     </div>
     <router-view id='router-view'/>
