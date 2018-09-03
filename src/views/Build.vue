@@ -54,11 +54,12 @@
         <div class="selection">
           <div class="cont-card" style="visibility: hidden;"></div>
         </div>
-
-        <app-radio-button
-          :options="modChoice.size"
-          @chose="module.size=$event">
-        </app-radio-button>
+        <div class="selection">
+          <app-radio-button
+            :options="modChoice.size"
+            @chose="module.size=$event">
+          </app-radio-button>
+        </div>
         <app-slider
           @input="module.level=$event"
           :text="$t('level')"
@@ -66,10 +67,12 @@
           :max=12
           :value="module.level">
         </app-slider>
-        <app-radio-button
-          :options="modChoice.item"
-          @chose="module.item=$event">
-        </app-radio-button>
+        <div class="selection">
+          <app-radio-button
+            :options="modChoice.item"
+            @chose="module.item=$event">
+          </app-radio-button>
+        </div>
       </div>
       <div class="expand-btn" v-else @click="isLeftShown = true">+</div>
 

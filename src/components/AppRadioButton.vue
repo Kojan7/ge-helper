@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       choice: this.options[0].value
-    }
+    };
   }
 };
 </script>
@@ -29,19 +29,19 @@ export default {
 .lbl-group {
   display: flex;
   width: 100%;
+  border-radius: 3px;
   flex-wrap: wrap;
   overflow: auto;
+  margin: 5px;
+  box-shadow: var(--chrome-shadow);
+  background-color: var(--bg-color);
 }
 .lbl {
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 36px;
-  background-color: var(--bg-color);
-  box-shadow: var(--chrome-shadow);
-  border-radius: 3px;
-  margin: 5px;
-  padding: 0 4px 0 4px;
+  padding: 0 4px;
   flex-basis: 0;
   flex-grow: 1;
   flex-shrink: 0;
