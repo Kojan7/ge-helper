@@ -1,182 +1,180 @@
 <template>
   <div class="build">
-    <div class="desktop">
-      <div v-if="isLeftShown" class="left">
-        <div class="selection">
-          <select class="select" v-model.number="shipOption.type">
-            <option v-for="option in shipChoice.type"
-              :value="option.value"
-              :key="option.value">
-              {{ $i18n.locale === "en" ? option.texten : option.text }}
-            </option>
-          </select>
-          <select class="select" v-model.number="shipOption.size">
-            <option v-for="option in shipChoice.size"
-              :value="option.value"
-              :key="option.value">
-              {{ $i18n.locale === "en" ? option.texten : option.text }}
-            </option>
-          </select>
-          <!-- <select class="select" v-model.number="shipOption.level">
-            <option v-for="option in shipChoice.level"
-              :value="option.value"
-              :key="option.value">
-              {{ option.text }}
-            </option>
-          </select> -->
-        </div>
-        <div class="selection">
-          <app-slider
-            @input="shipOption.level=$event"
-            :text="$t('level')"
-            :min=1
-            :max=12
-            :value="shipOption.level">
-          </app-slider>
-        </div>
-        <div class="selection">
-          <app-slider
-            @input="zoom=$event"
-            :text="$t('zoom')"
-            :min=0.1
-            :max=1
-            :step=0.002
-            :value="zoom"
-            :displayOutput=false>
-          </app-slider>
-        </div>
-        <div class="selection">
-          <div class="cont-card" @click="showInput = !showInput">{{ $t('function') }}</div>
-          <div class="cont-card" @click="resetView">{{ $t('viewReset') }}</div>
-          <div class="cont-card" @click="isLeftShown = false">{{ $t('hide') }}</div>
-        </div>
-
-        <div class="selection">
-          <div class="cont-card" style="visibility: hidden;"></div>
-        </div>
-        <div class="selection">
-          <app-radio-button
-            :options="modChoice.size"
-            @chose="module.size=$event">
-          </app-radio-button>
-        </div>
+    <div v-if="isLeftShown" class="left">
+      <div class="selection">
+        <select class="select" v-model.number="shipOption.type">
+          <option v-for="option in shipChoice.type"
+            :value="option.value"
+            :key="option.value">
+            {{ $i18n.locale === "en" ? option.texten : option.text }}
+          </option>
+        </select>
+        <select class="select" v-model.number="shipOption.size">
+          <option v-for="option in shipChoice.size"
+            :value="option.value"
+            :key="option.value">
+            {{ $i18n.locale === "en" ? option.texten : option.text }}
+          </option>
+        </select>
+        <!-- <select class="select" v-model.number="shipOption.level">
+          <option v-for="option in shipChoice.level"
+            :value="option.value"
+            :key="option.value">
+            {{ option.text }}
+          </option>
+        </select> -->
+      </div>
+      <div class="selection">
         <app-slider
-          @input="module.level=$event"
+          @input="shipOption.level=$event"
           :text="$t('level')"
           :min=1
           :max=12
-          :value="module.level">
+          :value="shipOption.level">
         </app-slider>
-        <div class="selection">
-          <app-radio-button
-            :options="modChoice.item"
-            @chose="module.item=$event">
-          </app-radio-button>
+      </div>
+      <div class="selection">
+        <app-slider
+          @input="zoom=$event"
+          :text="$t('zoom')"
+          :min=0.1
+          :max=1
+          :step=0.002
+          :value="zoom"
+          :displayOutput=false>
+        </app-slider>
+      </div>
+      <div class="selection">
+        <div class="cont-card" @click="showInput = !showInput">{{ $t('function') }}</div>
+        <div class="cont-card" @click="resetView">{{ $t('viewReset') }}</div>
+        <div class="cont-card" @click="isLeftShown = false">{{ $t('hide') }}</div>
+      </div>
+
+      <div class="selection">
+        <div class="cont-card" style="visibility: hidden;"></div>
+      </div>
+      <div class="selection">
+        <app-radio-button
+          :options="modChoice.size"
+          @chose="module.size=$event">
+        </app-radio-button>
+      </div>
+      <app-slider
+        @input="module.level=$event"
+        :text="$t('level')"
+        :min=1
+        :max=12
+        :value="module.level">
+      </app-slider>
+      <div class="selection">
+        <app-radio-button
+          :options="modChoice.item"
+          @chose="module.item=$event">
+        </app-radio-button>
+      </div>
+    </div>
+    <div class="expand-btn" v-else @click="isLeftShown = true">+</div>
+
+    <div v-if="showInput" class="right-window">
+      <button @click="clearMod">{{ $t('clearMod') }}</button><button @click="showInput = !showInput"><b>{{ $t('exit') }}</b></button>
+      <span class="gras">{{ $t('skills') }}</span>
+      <div>{{ $t('operation0') }}<input type="range" v-model.number="skills.operation[0]" min="0" max="30" step="1"/>：{{ skills.operation[0] }}</div>
+      <div>{{ $t('operation1') }}<input type="range" v-model.number="skills.operation[1]" min="0" max="30" step="1"/>：{{ skills.operation[1] }}</div>
+      <div>{{ $t('operation2') }}<input type="range" v-model.number="skills.operation[2]" min="0" max="30" step="1"/>：{{ skills.operation[2] }}</div>
+      <div>{{ $t('operation3') }}<input type="range" v-model.number="skills.operation[3]" min="0" max="30" step="1"/>：{{ skills.operation[3] }}</div>
+      <div>{{ $t('operation4') }}<input type="range" v-model.number="skills.operation[4]" min="0" max="30" step="1"/>：{{ skills.operation[4] }}</div>
+      <div>{{ $t('operation5') }}<input type="range" v-model.number="skills.operation[5]" min="0" max="30" step="1"/>：{{ skills.operation[5] }}</div>
+      <div>{{ $t('navigation') }}<input type="range" v-model.number="skills.navigation" min="0" max="20" step="1"/>：{{ skills.navigation }}</div>
+      <br>
+      <app-slider
+        @input="skills.mining1=$event"
+        :text="$t('mining1')"
+        :min=0
+        :max=30
+        :value="skills.mining1">
+      </app-slider>
+      <app-slider
+        @input="skills.mining2=$event"
+        :text="$t('mining2')"
+        :min=0
+        :max=10
+        :value="skills.mining2">
+      </app-slider>
+      <app-slider
+        @input="skills.spaceMining=$event"
+        :text="$t('spaceMining')"
+        :min=0
+        :max=30
+        :value="skills.spaceMining">
+      </app-slider>
+      <app-slider
+        @input="skills.dm1=$event"
+        :text="$t('dm1')"
+        :min=0
+        :max=10
+        :value="skills.dm1">
+      </app-slider>
+      <app-slider
+        @input="skills.dm2=$event"
+        :text="$t('dm2')"
+        :min=0
+        :max=10
+        :value="skills.dm2">
+      </app-slider>
+      
+      <button @click="saveSkills">{{ $t('save') }}</button>
+      <br><br>
+      <span class="gras">{{ $t('export') }}</span>
+      <div>{{ $t('exportDesc') }}</div>
+      <div>{{ outputText }}</div>
+      <br>
+      <span class="gras">{{ $t('import') }}</span>
+      <textarea v-model="inputText" placeholder="[]"></textarea><br>
+      <button @click="installedList = inputTextArray">{{ $t('apply') }}</button>
+      <br><br>
+      <span class="gras">{{ $t('miningCalc') }}</span>
+      <div>{{ $t('miningDiff') }}<input v-model.number="mineDiff" placeholder="60.233"></div>
+      <div><label><input type="checkbox" id="checkbox" v-model="showMineCalc">{{ $t('showMineCalc') }}</label></div>
+    </div>
+
+    <div class="preview" draggable="true" v-hammer:pan="pan">
+      <div class="text-zone">
+        <ship-buff v-bind:buffs="ship[12]"></ship-buff>
+        <div :style="statsPowerColor">
+          {{ $t('power') }}{{ stats.powerUsage }}/{{ stats.powerOutput }}
         </div>
-      </div>
-      <div class="expand-btn" v-else @click="isLeftShown = true">+</div>
-
-      <div v-if="showInput" class="right-window">
-        <button @click="clearMod">{{ $t('clearMod') }}</button><button @click="showInput = !showInput"><b>{{ $t('exit') }}</b></button>
-        <span class="gras">{{ $t('skills') }}</span>
-        <div>{{ $t('operation0') }}<input type="range" v-model.number="skills.operation[0]" min="0" max="30" step="1"/>：{{ skills.operation[0] }}</div>
-        <div>{{ $t('operation1') }}<input type="range" v-model.number="skills.operation[1]" min="0" max="30" step="1"/>：{{ skills.operation[1] }}</div>
-        <div>{{ $t('operation2') }}<input type="range" v-model.number="skills.operation[2]" min="0" max="30" step="1"/>：{{ skills.operation[2] }}</div>
-        <div>{{ $t('operation3') }}<input type="range" v-model.number="skills.operation[3]" min="0" max="30" step="1"/>：{{ skills.operation[3] }}</div>
-        <div>{{ $t('operation4') }}<input type="range" v-model.number="skills.operation[4]" min="0" max="30" step="1"/>：{{ skills.operation[4] }}</div>
-        <div>{{ $t('operation5') }}<input type="range" v-model.number="skills.operation[5]" min="0" max="30" step="1"/>：{{ skills.operation[5] }}</div>
-        <div>{{ $t('navigation') }}<input type="range" v-model.number="skills.navigation" min="0" max="20" step="1"/>：{{ skills.navigation }}</div>
-        <br>
-        <app-slider
-          @input="skills.mining1=$event"
-          :text="$t('mining1')"
-          :min=0
-          :max=30
-          :value="skills.mining1">
-        </app-slider>
-        <app-slider
-          @input="skills.mining2=$event"
-          :text="$t('mining2')"
-          :min=0
-          :max=10
-          :value="skills.mining2">
-        </app-slider>
-        <app-slider
-          @input="skills.spaceMining=$event"
-          :text="$t('spaceMining')"
-          :min=0
-          :max=30
-          :value="skills.spaceMining">
-        </app-slider>
-        <app-slider
-          @input="skills.dm1=$event"
-          :text="$t('dm1')"
-          :min=0
-          :max=10
-          :value="skills.dm1">
-        </app-slider>
-        <app-slider
-          @input="skills.dm2=$event"
-          :text="$t('dm2')"
-          :min=0
-          :max=10
-          :value="skills.dm2">
-        </app-slider>
-        
-        <button @click="saveSkills">{{ $t('save') }}</button>
-        <br><br>
-        <span class="gras">{{ $t('export') }}</span>
-        <div>{{ $t('exportDesc') }}</div>
-        <div>{{ outputText }}</div>
-        <br>
-        <span class="gras">{{ $t('import') }}</span>
-        <textarea v-model="inputText" placeholder="[]"></textarea><br>
-        <button @click="installedList = inputTextArray">{{ $t('apply') }}</button>
-        <br><br>
-        <span class="gras">{{ $t('miningCalc') }}</span>
-        <div>{{ $t('miningDiff') }}<input v-model.number="mineDiff" placeholder="60.233"></div>
-        <div><label><input type="checkbox" id="checkbox" v-model="showMineCalc">{{ $t('showMineCalc') }}</label></div>
-      </div>
-
-      <div class="preview" draggable="true" v-hammer:pan="pan">
-        <div class="text-zone">
-          <ship-buff v-bind:buffs="ship[12]"></ship-buff>
-          <div :style="statsPowerColor">
-            {{ $t('power') }}{{ stats.powerUsage }}/{{ stats.powerOutput }}
+        <div>{{ $t('energy') }}{{ stats.energy }}</div>
+        <div>{{ $t('shield') }}{{ stats.shield }} ({{stats.regen}}/s)</div>
+        <div>{{ $t('hp') }}{{ stats.hp }}</div>
+        <div>{{ $t('speed') }}{{ stats.speed }}</div>
+        <div>{{ $t('dps') }}{{ stats.dps }} dps</div>
+        <div>{{ $t('mining') }}{{ stats.mining }}</div>
+        <div>{{ $t('cargo') }}{{ stats.cargo }}</div>
+        <div v-if="showMineCalc"><br>
+          <div>{{ $t('mCminingTime') }}{{ mCminingTime[1] }}</div>
+          <div>{{ $t('mCtransitTime') }}{{ mCtransitTime[1] }}</div>
+          <div>{{ $t('mCtotalTime') }}{{ mCtotalTime[1] }}</div>
+          <div>{{ $t('mCrocksPerHour') }}{{ mCrocksPerHour }}</div>
+          <div>{{ $t('mCDMperRun') }}{{ mCDMperRun }}</div>
+          <div>{{ $t('mCDMperHour') }}{{ mCDMperHour }}</div>
           </div>
-          <div>{{ $t('energy') }}{{ stats.energy }}</div>
-          <div>{{ $t('shield') }}{{ stats.shield }} ({{stats.regen}}/s)</div>
-          <div>{{ $t('hp') }}{{ stats.hp }}</div>
-          <div>{{ $t('speed') }}{{ stats.speed }}</div>
-          <div>{{ $t('dps') }}{{ stats.dps }} dps</div>
-          <div>{{ $t('mining') }}{{ stats.mining }}</div>
-          <div>{{ $t('cargo') }}{{ stats.cargo }}</div>
-          <div v-if="showMineCalc"><br>
-            <div>{{ $t('mCminingTime') }}{{ mCminingTime[1] }}</div>
-            <div>{{ $t('mCtransitTime') }}{{ mCtransitTime[1] }}</div>
-            <div>{{ $t('mCtotalTime') }}{{ mCtotalTime[1] }}</div>
-            <div>{{ $t('mCrocksPerHour') }}{{ mCrocksPerHour }}</div>
-            <div>{{ $t('mCDMperRun') }}{{ mCDMperRun }}</div>
-            <div>{{ $t('mCDMperHour') }}{{ mCDMperHour }}</div>
-            </div>
-        </div>
-        <ShipInfoTile
-          v-for="tile in layout"
-          :coord="tile"
-          :key="layout.indexOf(tile)+ 1000"
-          :padding="padding"
-          :zoom="zoom"
-          @selected="tileClick">
-        </ShipInfoTile>
-        <ShipInfoTileMod
-          v-for="mod in installedList"
-          :mod="mod"
-          :key="installedList.indexOf(mod)"
-          :padding="padding"
-          :zoom="zoom"
-          @deleted="removeMod">
-        </ShipInfoTileMod>
       </div>
+      <ShipInfoTile
+        v-for="tile in layout"
+        :coord="tile"
+        :key="layout.indexOf(tile)+ 1000"
+        :padding="padding"
+        :zoom="zoom"
+        @selected="tileClick">
+      </ShipInfoTile>
+      <ShipInfoTileMod
+        v-for="mod in installedList"
+        :mod="mod"
+        :key="installedList.indexOf(mod)"
+        :padding="padding"
+        :zoom="zoom"
+        @deleted="removeMod">
+      </ShipInfoTileMod>
     </div>
   </div>
 </template>
@@ -560,9 +558,6 @@ export default {
   font-weight: bold;
   display: block;
 }
-.cont-card-inside {
-  flex-grow: 0;
-}
 .expand-btn {
   top: 0;
   right: 0;
@@ -576,7 +571,7 @@ export default {
   color: var(--bg-color);
   cursor: pointer;
 }
-.desktop {
+.build {
   display: flex;
   margin: 0 17px 17px 17px;
   position: fixed;
@@ -597,7 +592,7 @@ export default {
 .preview {
   width: 100%;
   margin: 5px;
-  cursor: grab;
+  cursor: move;
 }
 
 .right-window {
@@ -630,10 +625,6 @@ export default {
   background-color: var(--bg-color);
   margin: 5px;
   border-radius: 3px;
-}
-.not-allowed {
-  user-select: none;
-  cursor: not-allowed;
 }
 </style>
 
