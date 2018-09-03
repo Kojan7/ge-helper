@@ -48,7 +48,7 @@
         {{ $t('lp') }}{{ lp }}（{{ techAmount }} × lv. {{ tech }}）
       </div>
       <div class="output">
-        {{ $t('upgradeFee') }}{{ upgradeFeeBeautified }}（{{ feeLp }} {{ $t('lp') }})
+        {{ $t('upgradeFee') }}{{ $i18n.locale === "en" ? upgradeFee : upgradeFeeBeautifiedCN }}（{{ feeLp }} {{ $t('lp2') }})
       </div>
     </div>
   </div>
@@ -94,7 +94,7 @@ export default {
         this.amount
       );
     },
-    upgradeFeeBeautified: function() {
+    upgradeFeeBeautifiedCN: function() {
       if (this.upgradeFee < 10000) {
         return this.upgradeFee;
       } else if (this.upgradeFee < 100000000) {
