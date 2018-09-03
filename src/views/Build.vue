@@ -36,7 +36,7 @@
       <div class="selection">
         <app-slider
           @input="zoom=$event"
-          :text="$t('zoom')"
+          :text="$t('build.zoom')"
           :min=0.1
           :max=1
           :step=0.002
@@ -45,9 +45,9 @@
         </app-slider>
       </div>
       <div class="selection">
-        <div class="cont-card" @click="showInput = !showInput">{{ $t('function') }}</div>
-        <div class="cont-card" @click="resetView">{{ $t('viewReset') }}</div>
-        <div class="cont-card" @click="isLeftShown = false">{{ $t('hide') }}</div>
+        <div class="cont-card" @click="showInput = !showInput">{{ $t('build.function') }}</div>
+        <div class="cont-card" @click="resetView">{{ $t('build.viewReset') }}</div>
+        <div class="cont-card" @click="isLeftShown = false">{{ $t('build.hide') }}</div>
       </div>
 
       <div class="selection">
@@ -61,7 +61,7 @@
       </div>
       <app-slider
         @input="module.level=$event"
-        :text="$t('level')"
+        :text="$t('build.level')"
         :min=1
         :max=12
         :value="module.level">
@@ -76,87 +76,87 @@
     <div class="expand-btn" v-else @click="isLeftShown = true">+</div>
 
     <div v-if="showInput" class="right-window">
-      <button @click="clearMod">{{ $t('clearMod') }}</button><button @click="showInput = !showInput"><b>{{ $t('exit') }}</b></button>
-      <span class="gras">{{ $t('skills') }}</span>
-      <div>{{ $t('operation0') }}<input type="range" v-model.number="skills.operation[0]" min="0" max="30" step="1"/>：{{ skills.operation[0] }}</div>
-      <div>{{ $t('operation1') }}<input type="range" v-model.number="skills.operation[1]" min="0" max="30" step="1"/>：{{ skills.operation[1] }}</div>
-      <div>{{ $t('operation2') }}<input type="range" v-model.number="skills.operation[2]" min="0" max="30" step="1"/>：{{ skills.operation[2] }}</div>
-      <div>{{ $t('operation3') }}<input type="range" v-model.number="skills.operation[3]" min="0" max="30" step="1"/>：{{ skills.operation[3] }}</div>
-      <div>{{ $t('operation4') }}<input type="range" v-model.number="skills.operation[4]" min="0" max="30" step="1"/>：{{ skills.operation[4] }}</div>
-      <div>{{ $t('operation5') }}<input type="range" v-model.number="skills.operation[5]" min="0" max="30" step="1"/>：{{ skills.operation[5] }}</div>
-      <div>{{ $t('navigation') }}<input type="range" v-model.number="skills.navigation" min="0" max="20" step="1"/>：{{ skills.navigation }}</div>
+      <button @click="clearMod">{{ $t('build.clearMod') }}</button><button @click="showInput = !showInput"><b>{{ $t('build.exit') }}</b></button>
+      <span class="gras">{{ $t('build.skills') }}</span>
+      <div>{{ $t('build.operation0') }}<input type="range" v-model.number="skills.operation[0]" min="0" max="30" step="1"/>：{{ skills.operation[0] }}</div>
+      <div>{{ $t('build.operation1') }}<input type="range" v-model.number="skills.operation[1]" min="0" max="30" step="1"/>：{{ skills.operation[1] }}</div>
+      <div>{{ $t('build.operation2') }}<input type="range" v-model.number="skills.operation[2]" min="0" max="30" step="1"/>：{{ skills.operation[2] }}</div>
+      <div>{{ $t('build.operation3') }}<input type="range" v-model.number="skills.operation[3]" min="0" max="30" step="1"/>：{{ skills.operation[3] }}</div>
+      <div>{{ $t('build.operation4') }}<input type="range" v-model.number="skills.operation[4]" min="0" max="30" step="1"/>：{{ skills.operation[4] }}</div>
+      <div>{{ $t('build.operation5') }}<input type="range" v-model.number="skills.operation[5]" min="0" max="30" step="1"/>：{{ skills.operation[5] }}</div>
+      <div>{{ $t('build.navigation') }}<input type="range" v-model.number="skills.navigation" min="0" max="20" step="1"/>：{{ skills.navigation }}</div>
       <br>
       <app-slider
         @input="skills.mining1=$event"
-        :text="$t('mining1')"
+        :text="$t('build.mining1')"
         :min=0
         :max=30
         :value="skills.mining1">
       </app-slider>
       <app-slider
         @input="skills.mining2=$event"
-        :text="$t('mining2')"
+        :text="$t('build.mining2')"
         :min=0
         :max=10
         :value="skills.mining2">
       </app-slider>
       <app-slider
         @input="skills.spaceMining=$event"
-        :text="$t('spaceMining')"
+        :text="$t('build.spaceMining')"
         :min=0
         :max=30
         :value="skills.spaceMining">
       </app-slider>
       <app-slider
         @input="skills.dm1=$event"
-        :text="$t('dm1')"
+        :text="$t('build.dm1')"
         :min=0
         :max=10
         :value="skills.dm1">
       </app-slider>
       <app-slider
         @input="skills.dm2=$event"
-        :text="$t('dm2')"
+        :text="$t('build.dm2')"
         :min=0
         :max=10
         :value="skills.dm2">
       </app-slider>
       
-      <button @click="saveSkills">{{ $t('save') }}</button>
+      <button @click="saveSkills">{{ $t('build.save') }}</button>
       <br><br>
-      <span class="gras">{{ $t('export') }}</span>
-      <div>{{ $t('exportDesc') }}</div>
+      <span class="gras">{{ $t('build.export') }}</span>
+      <div>{{ $t('build.exportDesc') }}</div>
       <div>{{ outputText }}</div>
       <br>
-      <span class="gras">{{ $t('import') }}</span>
+      <span class="gras">{{ $t('build.import') }}</span>
       <textarea v-model="inputText" placeholder="[]"></textarea><br>
-      <button @click="installedList = inputTextArray">{{ $t('apply') }}</button>
+      <button @click="installedList = inputTextArray">{{ $t('build.apply') }}</button>
       <br><br>
-      <span class="gras">{{ $t('miningCalc') }}</span>
-      <div>{{ $t('miningDiff') }}<input v-model.number="mineDiff" placeholder="60.233"></div>
-      <div><label><input type="checkbox" id="checkbox" v-model="showMineCalc">{{ $t('showMineCalc') }}</label></div>
+      <span class="gras">{{ $t('build.miningCalc') }}</span>
+      <div>{{ $t('build.miningDiff') }}<input v-model.number="mineDiff" placeholder="60.233"></div>
+      <div><label><input type="checkbox" id="checkbox" v-model="showMineCalc">{{ $t('build.showMineCalc') }}</label></div>
     </div>
 
     <div class="preview" draggable="true" v-hammer:pan="pan">
       <div class="text-zone">
         <ship-buff v-bind:buffs="ship[12]"></ship-buff>
         <div :style="statsPowerColor">
-          {{ $t('power') }}{{ stats.powerUsage }}/{{ stats.powerOutput }}
+          {{ $t('build.power') }}{{ stats.powerUsage }}/{{ stats.powerOutput }}
         </div>
-        <div>{{ $t('energy') }}{{ stats.energy }}</div>
-        <div>{{ $t('shield') }}{{ stats.shield }} ({{stats.regen}}/s)</div>
-        <div>{{ $t('hp') }}{{ stats.hp }}</div>
-        <div>{{ $t('speed') }}{{ stats.speed }}</div>
-        <div>{{ $t('dps') }}{{ stats.dps }} dps</div>
-        <div>{{ $t('mining') }}{{ stats.mining }}</div>
-        <div>{{ $t('cargo') }}{{ stats.cargo }}</div>
+        <div>{{ $t('build.energy') }}{{ stats.energy }}</div>
+        <div>{{ $t('build.shield') }}{{ stats.shield }} ({{stats.regen}}/s)</div>
+        <div>{{ $t('build.hp') }}{{ stats.hp }}</div>
+        <div>{{ $t('build.speed') }}{{ stats.speed }}</div>
+        <div>{{ $t('build.dps') }}{{ stats.dps }} dps</div>
+        <div>{{ $t('build.mining') }}{{ stats.mining }}</div>
+        <div>{{ $t('build.cargo') }}{{ stats.cargo }}</div>
         <div v-if="showMineCalc"><br>
-          <div>{{ $t('mCminingTime') }}{{ mCminingTime[1] }}</div>
-          <div>{{ $t('mCtransitTime') }}{{ mCtransitTime[1] }}</div>
-          <div>{{ $t('mCtotalTime') }}{{ mCtotalTime[1] }}</div>
-          <div>{{ $t('mCrocksPerHour') }}{{ mCrocksPerHour }}</div>
-          <div>{{ $t('mCDMperRun') }}{{ mCDMperRun }}</div>
-          <div>{{ $t('mCDMperHour') }}{{ mCDMperHour }}</div>
+          <div>{{ $t('build.mCminingTime') }}{{ mCminingTime[1] }}</div>
+          <div>{{ $t('build.mCtransitTime') }}{{ mCtransitTime[1] }}</div>
+          <div>{{ $t('build.mCtotalTime') }}{{ mCtotalTime[1] }}</div>
+          <div>{{ $t('build.mCrocksPerHour') }}{{ mCrocksPerHour }}</div>
+          <div>{{ $t('build.mCDMperRun') }}{{ mCDMperRun }}</div>
+          <div>{{ $t('build.mCDMperHour') }}{{ mCDMperHour }}</div>
           </div>
       </div>
       <ShipInfoTile
