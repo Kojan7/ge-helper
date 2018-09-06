@@ -78,13 +78,55 @@
     <div v-if="showInput" class="right-window">
       <button @click="clearMod">{{ $t('build.clearMod') }}</button><button @click="showInput = !showInput"><b>{{ $t('build.exit') }}</b></button>
       <span class="gras">{{ $t('build.skills') }}</span>
-      <div>{{ $t('build.operation0') }}<input type="range" v-model.number="skills.operation[0]" min="0" max="30" step="1"/>：{{ skills.operation[0] }}</div>
-      <div>{{ $t('build.operation1') }}<input type="range" v-model.number="skills.operation[1]" min="0" max="30" step="1"/>：{{ skills.operation[1] }}</div>
-      <div>{{ $t('build.operation2') }}<input type="range" v-model.number="skills.operation[2]" min="0" max="30" step="1"/>：{{ skills.operation[2] }}</div>
-      <div>{{ $t('build.operation3') }}<input type="range" v-model.number="skills.operation[3]" min="0" max="30" step="1"/>：{{ skills.operation[3] }}</div>
-      <div>{{ $t('build.operation4') }}<input type="range" v-model.number="skills.operation[4]" min="0" max="30" step="1"/>：{{ skills.operation[4] }}</div>
-      <div>{{ $t('build.operation5') }}<input type="range" v-model.number="skills.operation[5]" min="0" max="30" step="1"/>：{{ skills.operation[5] }}</div>
-      <div>{{ $t('build.navigation') }}<input type="range" v-model.number="skills.navigation" min="0" max="20" step="1"/>：{{ skills.navigation }}</div>
+      <app-slider
+        @input="skills.operation.splice(0, 1, $event)"
+        :text="$t('build.operation0')"
+        :min=0
+        :max=30
+        :value="skills.operation[0]">
+      </app-slider>
+      <app-slider
+        @input="skills.operation.splice(1, 1, $event)"
+        :text="$t('build.operation1')"
+        :min=0
+        :max=30
+        :value="skills.operation[1]">
+      </app-slider>
+      <app-slider
+        @input="skills.operation.splice(2, 1, $event)"
+        :text="$t('build.operation2')"
+        :min=0
+        :max=30
+        :value="skills.operation[2]">
+      </app-slider>
+      <app-slider
+        @input="skills.operation.splice(3, 1, $event)"
+        :text="$t('build.operation3')"
+        :min=0
+        :max=30
+        :value="skills.operation[3]">
+      </app-slider>
+      <app-slider
+        @input="skills.operation.splice(4, 1, $event)"
+        :text="$t('build.operation4')"
+        :min=0
+        :max=30
+        :value="skills.operation[4]">
+      </app-slider>
+      <app-slider
+        @input="skills.operation.splice(5, 1, $event)"
+        :text="$t('build.operation5')"
+        :min=0
+        :max=30
+        :value="skills.operation[5]">
+      </app-slider>
+      <app-slider
+        @input="skills.navigation=$event"
+        :text="$t('build.navigation')"
+        :min=0
+        :max=20
+        :value="skills.navigation">
+      </app-slider>
       <br>
       <app-slider
         @input="skills.mining1=$event"
