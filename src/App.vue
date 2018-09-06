@@ -6,7 +6,7 @@
         <router-link class='router-link' to="/module">{{ $t('module.title') }}</router-link>
         <router-link class='router-link' to="/build">{{ $t('build.title') }}</router-link>
         <router-link class='router-link' to="/legion">{{ $t('legion.title') }}</router-link>
-        <router-link class='router-link' to="/misc">{{ $t('misc.title') }}</router-link>
+        <router-link class='router-link' to="/home">{{ $t('home.title') }}</router-link>
       </div>
     </div>
     <router-view id='router-view'/>

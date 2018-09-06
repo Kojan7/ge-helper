@@ -1,5 +1,5 @@
 <template>
-  <div class="misc">
+  <div class="home">
     <h1>{{ $t('title') }} 0.5.3</h1>
     <locale-changer></locale-changer>
     <h3 style="color:red">{{ $t('important') }}</h3>
@@ -17,7 +17,7 @@
 import LocaleChanger from "@/components/LocaleChanger.vue";
 
 export default {
-  name: "misc",
+  name: "home",
   components: {
     LocaleChanger
   },
@@ -29,7 +29,7 @@ export default {
 };
 </script>
 <style scoped>
-.misc {
+.home {
   padding: 8px;
   min-width: 300px;
   max-width: 600px;
