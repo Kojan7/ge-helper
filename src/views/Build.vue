@@ -61,7 +61,7 @@
       </div>
       <app-slider
         @input="module.level=$event"
-        :text="$t('build.level')"
+        :text="$t('level')"
         :min=1
         :max=12
         :value="module.level">
