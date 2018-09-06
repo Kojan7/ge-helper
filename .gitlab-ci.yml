@@ -9,7 +9,6 @@ pages:
   - yarn install
   - yarn run build
   - rm public/*
-  - rm dist/js/*.map
   - mv dist/* public
   artifacts:
     paths:
