@@ -15,6 +15,11 @@ export default new Router({
       redirect: '/home'
     },
     {
+      path: '/home',
+      name: 'home',
+      component: Home
+    },
+    {
       path: '/ship',
       name: 'ship',
       component: Ship
@@ -33,11 +38,6 @@ export default new Router({
       path: '/legion',
       name: 'legion',
       component: Legion
-    },
-    {
-      path: '/home',
-      name: 'home',
-      component: Home
     },
   ]
 })
