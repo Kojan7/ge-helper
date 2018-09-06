@@ -103,4 +103,21 @@ input[type="range"] {
   cursor: default;
   user-select: none;
 }
+
+.btn {
+  font-size: 16px;
+  line-height: 36px;
+  text-align: center;
+  background-color: var(--highlight-color);
+  box-shadow: var(--chrome-shadow);
+  border-radius: 3px;
+  display: inline-block;
+  height: 36px;
+  margin: 5px;
+  padding: 0 10px;
+  cursor: pointer;
+  user-select: none;
+  color: var(--bg-color);
+  font-weight: bold;
+}
 </style>

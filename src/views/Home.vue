@@ -5,7 +5,9 @@
     <h3 style="color:red">{{ $t('important') }}</h3>
     <p>{{ $t('repo') }}</p>
     <a href="https://github.com/zyntuz/era-plus">https://github.com/zyntuz/era-plus</a>
-    <p><button @click="clearStorage">{{ $t('clear') }}</button>{{ $t('clearDesc') }} </p>
+    <br>
+    <div class="btn" @click="clearStorage">{{ $t('clear') }}</div>
+    <p>{{ $t('clearDesc') }} </p>
     <p>{{ $t('dataVer') }}2018-07-31</p>
     <h3>{{ $t('buildDesc') }}</h3>
     <p>{{ $t('computer') }}</p>
@@ -17,7 +19,7 @@
 import LocaleChanger from "@/components/LocaleChanger.vue";
 
 export default {
-  name: "home",
+  name: "Home",
   components: {
     LocaleChanger
   },

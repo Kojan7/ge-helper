@@ -76,7 +76,7 @@
     <div class="expand-btn" v-else @click="isLeftShown = true">+</div>
 
     <div v-if="showInput" class="right-window">
-      <button @click="clearMod">{{ $t('build.clearMod') }}</button><button @click="showInput = !showInput"><b>{{ $t('build.exit') }}</b></button>
+      <div class="btn" @click="clearMod">{{ $t('build.clearMod') }}</div><div class="btn" @click="showInput = !showInput"><b>{{ $t('build.exit') }}</b></div>
       <span class="gras">{{ $t('build.skills') }}</span>
       <app-slider
         @input="skills.operation.splice(0, 1, $event)"
@@ -164,7 +164,7 @@
         :value="skills.dm2">
       </app-slider>
       
-      <button @click="saveSkills">{{ $t('build.save') }}</button>
+      <div class="btn" @click="saveSkills">{{ $t('build.save') }}</div>
       <br><br>
       <span class="gras">{{ $t('build.export') }}</span>
       <div>{{ $t('build.exportDesc') }}</div>
@@ -172,7 +172,7 @@
       <br>
       <span class="gras">{{ $t('build.import') }}</span>
       <textarea v-model="inputText" placeholder="[]"></textarea><br>
-      <button @click="installedList = inputTextArray">{{ $t('build.apply') }}</button>
+      <div class="btn" @click="installedList = inputTextArray">{{ $t('build.apply') }}</div>
       <br><br>
       <span class="gras">{{ $t('build.miningCalc') }}</span>
       <div>{{ $t('build.miningDiff') }}<input v-model.number="mineDiff" placeholder="60.233"></div>
