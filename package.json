@@ -41,7 +41,13 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "quotes": [
+        2,
+        "single"
+      ],
+      "eol-last": 2
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }
