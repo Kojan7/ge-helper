@@ -6,7 +6,7 @@ import store from './store'
 import './registerServiceWorker'
 import i18n from './i18n'
 import './touch'
-import './plugins/vuetify'
+import './vuetify'
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 

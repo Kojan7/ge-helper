@@ -1,0 +1,17 @@
+{
+  "home": {
+    "title": "主页"
+  },
+  "module": {
+    "title": "组件"
+  },
+  "hull": {
+    "title": "舰体"
+  },
+  "build": {
+    "title": "组装"
+  },
+  "legion": {
+    "title": "军团"
+  }
+}

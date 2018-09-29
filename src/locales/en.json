@@ -1,3 +1,17 @@
 {
-  "message": "hello i18n !!"
+  "home": {
+    "title": "Info"
+  },
+  "module": {
+    "title": "Module"
+  },
+  "hull": {
+    "title": "Hull"
+  },
+  "build": {
+    "title": "Build"
+  },
+  "legion": {
+    "title": "Legion"
+  }
 }

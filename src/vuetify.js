@@ -9,6 +9,7 @@ import {
   VIcon,
   VGrid,
   VToolbar,
+  VMenu,
   transitions
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
@@ -23,13 +24,14 @@ Vue.use(Vuetify, {
     VIcon,
     VGrid,
     VToolbar,
+    VMenu,
     transitions
   },
   theme: {
-    primary: '#ee44aa',
-    secondary: '#424242',
-    accent: '#82B1FF',
-    error: '#FF5252',
+    primary: '#009688',
+    secondary: '#263238',
+    accent: '#00bcd4',
+    error: '#ff5252',
     info: '#2196F3',
     success: '#4CAF50',
     warning: '#FFC107'
