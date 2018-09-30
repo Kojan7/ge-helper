@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Module from './views/Module.vue'
+import Hull from './views/Hull.vue'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/module',
       name: 'module',
       component: Module
+    },
+    {
+      path: '/hull',
+      name: 'hull',
+      component: Hull
     },
     {
       path: '/about',

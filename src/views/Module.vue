@@ -1,6 +1,6 @@
 <template>
-  <div class="module">
-      <v-flex xs12 d-flex elevation-2 align-center class="row padding">
+  <v-layout column justify-center>
+      <v-flex d-flex elevation-2 align-center class="row padding">
         <v-slider
           v-model="level"
           label="Level"
@@ -20,20 +20,19 @@
           {{ $i18n.locale === "en" ? option.texten : option.text }}
         </v-btn>
       </v-btn-toggle>
-      <v-flex xs12 d-flex>
+      <v-flex d-flex>
         <v-select
-          :items="modChoice.item"
-          :item-value="modChoice.item.value"
           v-model.number="item"
+          :items="$i18n.locale === 'en' ? modChoice.item : modChoice.itemcn"
           solo>
         </v-select>
       </v-flex>
     <ModInfo :modId="modId"></ModInfo>
-  </div>
+  </v-layout>
 </template>
 
 <script>
-import ModInfo from "@/components/ModInfo.vue";
+import ModInfo from '@/components/ModInfo.vue';
 export default {
   name: 'module',
   components: {

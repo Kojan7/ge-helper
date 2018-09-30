@@ -1,29 +1,27 @@
 <template>
-  <div class="home">
-    <v-layout justify-center>
-      <v-flex sm6>
-        <v-card>
-          <v-card-title primary-title>
-            <div class="headline">{{ $t('home.database') }}</div>
-          </v-card-title>
-          <v-card-text>
-            <div v-if="dataCorrupt">{{ $t('home.dataCorrupt') }}</div>
-            <div v-else-if="dataOutdated">{{ $t('home.dataOutdated') }}</div>
-            <div v-else>Current version: {{ dataVersion }} </div>
-          </v-card-text>
-            <input type="file" id="uploaded-file" ref="uploadedFile" accept=".json" @change="handleFile"/>
-          <v-card-actions>
-            <v-btn flat color="primary" @click="$refs.uploadedFile.click()">
-              {{ $t('home.upload') }}
-            </v-btn>
-          <v-btn flat color="error" @click="resetData">
-            {{ $t('reset') }}
+  <v-layout justify-center>
+    <v-flex sm6>
+      <v-card>
+        <v-card-title primary-title>
+          <div class="headline">{{ $t('home.database') }}</div>
+        </v-card-title>
+        <v-card-text>
+          <div v-if="dataCorrupt">{{ $t('home.dataCorrupt') }}</div>
+          <div v-else-if="dataOutdated">{{ $t('home.dataOutdated') }}</div>
+          <div v-else>Current version: {{ dataVersion }} </div>
+        </v-card-text>
+          <input type="file" id="uploaded-file" ref="uploadedFile" accept=".json" @change="handleFile"/>
+        <v-card-actions>
+          <v-btn flat color="primary" @click="$refs.uploadedFile.click()">
+            {{ $t('home.upload') }}
           </v-btn>
-        </v-card-actions>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </div>
+        <v-btn flat color="error" @click="resetData">
+          {{ $t('reset') }}
+        </v-btn>
+      </v-card-actions>
+      </v-card>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
