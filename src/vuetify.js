@@ -10,6 +10,8 @@ import {
   VGrid,
   VToolbar,
   VMenu,
+  VCard,
+  VDialog,
   transitions
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
@@ -25,6 +27,8 @@ Vue.use(Vuetify, {
     VGrid,
     VToolbar,
     VMenu,
+    VCard,
+    VDialog,
     transitions
   },
   theme: {

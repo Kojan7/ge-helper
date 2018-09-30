@@ -16,5 +16,8 @@ new Vue({
   router,
   store,
   i18n,
+  beforeCreate() {
+    this.$store.commit('initData');
+  },
   render: h => h(App)
 }).$mount('#app')

@@ -1,6 +1,15 @@
 {
+  "reset": "Reset",
+  "error": {
+    "title": "Error",
+    "desc": "Oops, something went wrong."
+  },
   "home": {
-    "title": "Info"
+    "title": "Home",
+    "database": "Database",
+    "upload": "Upload & apply",
+    "dataCorrupt": "Database is missing or corrupt",
+    "dataOutdated": "Database is outdated or incompatible"
   },
   "module": {
     "title": "Module"

@@ -39,7 +39,7 @@ export default {
         return this.$store.state.isDrawerShown;
       },
       set(value) {
-        this.$store.commit('updateIsDrawerShown', value);
+        this.$store.commit('setIsDrawerShown', value);
       }
     }
   }
