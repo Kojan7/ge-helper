@@ -1,4 +1,4 @@
-# gec
+# GE Helper
 
 ## Project setup
 ```

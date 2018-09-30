@@ -1,7 +1,7 @@
 <template>
   <v-toolbar dark color="secondary" app>
     <v-toolbar-side-icon @click="$store.commit('toggleIsDrawerShown')"></v-toolbar-side-icon>
-    <v-toolbar-title></v-toolbar-title>
+    <v-toolbar-title>GE Helper</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-menu>
       <v-btn icon slot="activator">
