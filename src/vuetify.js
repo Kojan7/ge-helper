@@ -6,12 +6,15 @@ import {
   VFooter,
   VList,
   VBtn,
+  VBtnToggle,
   VIcon,
   VGrid,
   VToolbar,
   VMenu,
   VCard,
   VDialog,
+  VSelect,
+  VSlider,
   transitions
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
@@ -23,12 +26,15 @@ Vue.use(Vuetify, {
     VFooter,
     VList,
     VBtn,
+    VBtnToggle,
     VIcon,
     VGrid,
     VToolbar,
     VMenu,
     VCard,
     VDialog,
+    VSelect,
+    VSlider,
     transitions
   },
   theme: {

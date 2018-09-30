@@ -13,9 +13,9 @@
           </v-card-text>
             <input type="file" id="uploaded-file" ref="uploadedFile" accept=".json" @change="handleFile"/>
           <v-card-actions>
-          <v-btn flat color="primary">
-            <label for="uploaded-file">{{ $t('home.upload') }}</label>
-          </v-btn>
+            <v-btn flat color="primary" @click="$refs.uploadedFile.click()">
+              {{ $t('home.upload') }}
+            </v-btn>
           <v-btn flat color="error" @click="resetData">
             {{ $t('reset') }}
           </v-btn>
@@ -79,7 +79,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 #uploaded-file {
   display: none;
 }
