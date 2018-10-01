@@ -15,6 +15,9 @@ import {
   VDialog,
   VSelect,
   VSlider,
+  VTextarea,
+  VTextField,
+  VSwitch,
   transitions
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
@@ -35,6 +38,9 @@ Vue.use(Vuetify, {
     VDialog,
     VSelect,
     VSlider,
+    VTextarea,
+    VTextField,
+    VSwitch,
     transitions
   },
   theme: {

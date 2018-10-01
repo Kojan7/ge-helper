@@ -15,9 +15,9 @@
           <v-btn flat color="primary" @click="$refs.uploadedFile.click()">
             {{ $t('home.upload') }}
           </v-btn>
-        <v-btn flat color="error" @click="resetData">
-          {{ $t('reset') }}
-        </v-btn>
+          <v-btn flat color="error" @click="resetData">
+            {{ $t('reset') }}
+          </v-btn>
       </v-card-actions>
       </v-card>
     </v-flex>

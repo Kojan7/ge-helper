@@ -97,10 +97,10 @@ export default {
       };
     },
     modInfo() {
-      return modChoice.item[this.mod[2]];
+      return this.modChoice.item[this.mod[2]];
     },
     modSize() {
-      return modChoice.size[this.mod[1]].text;
+      return this.modChoice.size[this.mod[1]].text;
     },
     imageStyle() {
       return {

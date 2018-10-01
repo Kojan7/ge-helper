@@ -7,8 +7,7 @@
           :min="1"
           :max="12"
           step="1"
-          ticks="always"
-          tick-size="2"
+          thumb-label="always"
           always-dirty>
         </v-slider>
       </v-flex>
@@ -17,7 +16,7 @@
           v-for="option in shipChoice.type"
           :key="option.value"
           :value="option.value">
-          {{ $i18n.locale === "en" ? option.texten : option.text }}
+          {{ $i18n.locale === "en" ? option.text : option.textcn }}
         </v-btn>
       </v-btn-toggle>
       <v-btn-toggle class="btn-toggle row" mandatory v-model.number="size">
@@ -25,7 +24,7 @@
           v-for="option in shipChoice.size"
           :key="option.value"
           :value="option.value">
-          {{ $i18n.locale === "en" ? option.texten : option.text }}
+          {{ $i18n.locale === "en" ? option.text : option.textcn }}
         </v-btn>
       </v-btn-toggle>
       <ship-info :shipId="shipId"></ship-info>

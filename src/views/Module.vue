@@ -7,8 +7,7 @@
           :min="1"
           :max="12"
           step="1"
-          ticks="always"
-          tick-size="2"
+          thumb-label="always"
           always-dirty>
         </v-slider>
       </v-flex>
@@ -38,7 +37,7 @@ export default {
   components: {
     ModInfo
   },
-  data: function() {
+  data() {
     return {
       size: 0,
       level: 1,
