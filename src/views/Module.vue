@@ -45,39 +45,14 @@ export default {
     };
   },
   computed: {
-    mRetro() {
-      return this.$store.state.data.mRetro;
-    },
-    lRetro() {
-      return this.$store.state.data.lRetro;
+    modMap() {
+      return this.$store.state.data.modMap;
     },
     modChoice() {
       return this.$store.state.data.modChoice;
     },
     modId() {
-      let itemCode;
-      if (this.size <= 2) {
-        if (this.item <= 2) {
-          itemCode = this.item + this.size * 3; // railguns
-        } else if (this.item <= 4) {
-          itemCode = 6 + this.item + this.size * 2; // lasers
-        } else if (this.item <= 8) {
-          itemCode = 10 + this.item + this.size * 4; // launchers
-        } else if (this.item <= 10) {
-          itemCode = 18 + this.item + this.size * 2; // PDL
-        } else if (this.item <= 12) {
-          itemCode = 3 * this.item + this.size; // miners + cores
-        } else if (this.item <= 16) {
-          itemCode = 26 + this.item + this.size * 4; // armors
-        } else {
-          itemCode = 3 * this.item + this.size;
-        }
-      } else if (this.size === 3) {
-        itemCode = this.mRetro[this.item];
-      } else if (this.size === 4) {
-        itemCode = this.lRetro[this.item];
-      }
-      return itemCode * 12 + this.level;
+      return this.modMap[this.size][this.item] + this.level
     }
   }
 };

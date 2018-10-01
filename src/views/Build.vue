@@ -289,11 +289,8 @@ export default {
     shipChoice() {
       return this.$store.state.data.shipChoice;
     },
-    mRetro() {
-      return this.$store.state.data.mRetro;
-    },
-    lRetro() {
-      return this.$store.state.data.lRetro;
+    modMap() {
+      return this.$store.state.data.modMap;
     },
     modChoice() {
       return this.$store.state.data.modChoice;
@@ -317,29 +314,7 @@ export default {
       }
     },
     modId() {
-      let itemCode;
-      if (this.module.size <= 2) {
-        if (this.module.item <= 2) {
-          itemCode = this.module.item + this.module.size * 3; // railguns
-        } else if (this.module.item <= 4) {
-          itemCode = 6 + this.module.item + this.module.size * 2; // lasers
-        } else if (this.module.item <= 8) {
-          itemCode = 10 + this.module.item + this.module.size * 4; // launchers
-        } else if (this.module.item <= 10) {
-          itemCode = 18 + this.module.item + this.module.size * 2; // PDL
-        } else if (this.module.item <= 12) {
-          itemCode = 3 * this.module.item + this.module.size; // miners + cores
-        } else if (this.module.item <= 16) {
-          itemCode = 26 + this.module.item + this.module.size * 4; // armors
-        } else {
-          itemCode = 3 * this.module.item + this.module.size;
-        }
-      } else if (this.module.size === 3) {
-        itemCode = this.mRetro[this.module.item];
-      } else if (this.module.size === 4) {
-        itemCode = this.lRetro[this.module.item];
-      }
-      return itemCode * 12 + this.module.level;
+      return this.modMap[this.module.size][this.module.item] + this.module.level
     },
     stats() {
       let operationBuff = 1 + this.skills.operation[this.shipOption.size] * 0.1;
@@ -556,7 +531,7 @@ export default {
         );
         this.tileExpand([coord[0] + 1, coord[1] - (coord[0] % 2 ? 1 : 0)], 11);
         this.tileExpand([coord[0] + 2, coord[1]], 12);
-      } else if (this.module.size === 4 && this.module.item < 11) {
+      } else if (this.module.size === 4 && (this.module.item < 11 || this.module.item > 20)) {
         this.tileExpand(
           [coord[0] + 1, coord[1] + 1 - (coord[0] % 2 ? 1 : 0)],
           15
