@@ -1,6 +1,7 @@
 {
   "reset": "Reset",
   "level": "Level",
+  "add": "Add",
   "error": {
     "title": "Error",
     "desc": "Oops, something went wrong."
@@ -12,7 +13,8 @@
     "upload": "Upload & apply",
     "dataCorrupt": "Database is missing or corrupt",
     "dataOutdated": "Database is outdated or incompatible",
-    "about": "About GE Helper"
+    "about": "About",
+    "plugins": "Plugins"
   },
   "module": {
     "title": "Module"

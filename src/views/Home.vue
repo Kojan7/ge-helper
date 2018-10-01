@@ -27,6 +27,18 @@
           <div>{{ $t('home.currentVer') }}: {{ appVersion }} </div>
         </v-card-text>
       </v-card>
+      <v-card class="margin-top">
+        <v-card-title primary-title>
+          <div class="headline">{{ $t('home.plugins') }}</div>
+        </v-card-title>
+        <v-card-text>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn flat color="primary" @click="$refs.uploadedFile.click()">
+            {{ $t('add') }}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
   </v-layout>
 </template>
 
