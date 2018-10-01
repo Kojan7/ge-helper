@@ -1,9 +1,9 @@
 <template>
-  <v-layout column justify-center>
+  <v-layout class="main-view" column justify-center>
       <v-flex d-flex elevation-2 align-center class="row padding">
         <v-slider
           v-model="level"
-          label="Level"
+          :label="$t('level')"
           :min="1"
           :max="12"
           step="1"

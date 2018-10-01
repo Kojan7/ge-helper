@@ -1,6 +1,6 @@
 <template>
-  <v-layout justify-center>
-    <v-flex sm6>
+  <v-layout class="main-view" justify-center>
+    <v-flex>
       <v-card>
         <v-card-title primary-title>
           <div class="headline">{{ $t('home.database') }}</div>
@@ -8,7 +8,7 @@
         <v-card-text>
           <div v-if="dataCorrupt">{{ $t('home.dataCorrupt') }}</div>
           <div v-else-if="dataOutdated">{{ $t('home.dataOutdated') }}</div>
-          <div v-else>Current version: {{ dataVersion }} </div>
+          <div v-else>{{ $t('home.currentVer') }}: {{ dataVersion }} </div>
         </v-card-text>
           <input type="file" id="uploaded-file" ref="uploadedFile" accept=".json" @change="handleFile"/>
         <v-card-actions>
@@ -25,19 +25,8 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
-
 export default {
   name: 'home',
-  components: {
-    HelloWorld
-  },
-  data() {
-    return {
-      showError: false
-    };
-  },
   computed: {
     dataVersion() {
       return (

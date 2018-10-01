@@ -28,8 +28,7 @@ export default {
         { title: 'module', icon: 'all_out' },
         { title: 'hull', icon: 'send' },
         { title: 'build', icon: 'gamepad' },
-        { title: 'legion', icon: 'group' },
-        { title: 'about', icon: 'info' }
+        { title: 'legion', icon: 'group' }
       ]
     };
   },

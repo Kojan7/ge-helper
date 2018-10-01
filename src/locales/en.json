@@ -1,5 +1,6 @@
 {
   "reset": "Reset",
+  "level": "Level",
   "error": {
     "title": "Error",
     "desc": "Oops, something went wrong."
@@ -7,6 +8,7 @@
   "home": {
     "title": "Home",
     "database": "Database",
+    "currentVer": "Current version",
     "upload": "Upload & apply",
     "dataCorrupt": "Database is missing or corrupt",
     "dataOutdated": "Database is outdated or incompatible"

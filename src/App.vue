@@ -21,3 +21,10 @@ export default {
   }
 }
 </script>
+
+<style>
+.main-view {
+  max-width: 700px;
+  margin: auto;
+}
+</style>
