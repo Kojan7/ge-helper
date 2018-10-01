@@ -59,7 +59,6 @@ export default {
 </script>
 <style scoped>
 .btn-toggle {
-  width: 100%;
   flex-grow: 1;
   flex-basis: 1;
 }

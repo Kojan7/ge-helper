@@ -59,7 +59,6 @@ export default {
 .btn-toggle {
   overflow-x: auto;
   overflow-y: hidden;
-  width: 100%;
   flex-grow: 1;
   flex-basis: 1;
 }
