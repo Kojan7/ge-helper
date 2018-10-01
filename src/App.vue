@@ -27,4 +27,7 @@ export default {
   max-width: 700px;
   margin: auto;
 }
+.margin-top {
+  margin-top: 18px;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <v-layout class="main-view" column justify-center>
-      <v-flex d-flex elevation-2 align-center class="row padding">
+      <v-flex d-flex elevation-2 align-center class="row padding margin-top">
         <v-slider
           v-model="level"
           :label="$t('level')"

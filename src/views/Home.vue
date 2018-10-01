@@ -1,7 +1,6 @@
 <template>
-  <v-layout class="main-view" justify-center>
-    <v-flex>
-      <v-card>
+  <v-layout class="main-view" column justify-center>
+      <v-card class="margin-top">
         <v-card-title primary-title>
           <div class="headline">{{ $t('home.database') }}</div>
         </v-card-title>
@@ -18,9 +17,16 @@
           <v-btn flat color="error" @click="resetData">
             {{ $t('reset') }}
           </v-btn>
-      </v-card-actions>
+        </v-card-actions>
       </v-card>
-    </v-flex>
+      <v-card class="margin-top">
+        <v-card-title primary-title>
+          <div class="headline">{{ $t('home.about') }}</div>
+        </v-card-title>
+        <v-card-text>
+          <div>{{ $t('home.currentVer') }}: {{ appVersion }} </div>
+        </v-card-text>
+      </v-card>
   </v-layout>
 </template>
 
@@ -28,6 +34,9 @@
 export default {
   name: 'home',
   computed: {
+    appVersion() {
+      return this.$store.state.appVersion
+    },
     dataVersion() {
       return (
         this.$store.state.data.version +

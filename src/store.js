@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    appVersion: '0.7.0',
     dataVersion: 1,
     isDrawerShown: null,
     data: {}

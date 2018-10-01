@@ -11,7 +11,8 @@
     "currentVer": "Current version",
     "upload": "Upload & apply",
     "dataCorrupt": "Database is missing or corrupt",
-    "dataOutdated": "Database is outdated or incompatible"
+    "dataOutdated": "Database is outdated or incompatible",
+    "about": "About GE Helper"
   },
   "module": {
     "title": "Module"
