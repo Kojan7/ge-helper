@@ -8,6 +8,9 @@ export default new Vuex.Store({
     appVersion: '0.7.0',
     dataVersion: 1,
     isDrawerShown: null,
+    plugins: [
+      {name: '基建', icon: 'account_balance', src:'https://ge-helper.gitlab.io/plugins/building.html'},
+    ],
     data: {}
   },
   mutations: {
@@ -17,9 +20,12 @@ export default new Vuex.Store({
     toggleIsDrawerShown(state) {
       state.isDrawerShown = !state.isDrawerShown
     },
-    initData(state) {
+    init(state) {
       if (localStorage.getItem('database')) {
         state.data = JSON.parse(localStorage.getItem('database'))
+      }
+      if (localStorage.getItem('plugins')) {
+        state.plugins = JSON.parse(localStorage.getItem('plugins'))
       }
     },
     setData(state, data) {
@@ -29,8 +35,19 @@ export default new Vuex.Store({
     resetData(state) {
       state.data = {}
       localStorage.removeItem('database');
+    },
+    removePlugin(state, index) {
+      state.plugins.splice(index, 1);
+      localStorage.setItem('plugins', JSON.stringify(state.plugins));
+    },
+    addPlugin(state, plugin) {
+      state.plugins.push({
+        name: plugin.name,
+        icon: plugin.icon,
+        src: plugin.src
+      });
+      localStorage.setItem('plugins', JSON.stringify(state.plugins));
     }
-
   },
   actions: {
 

@@ -5,6 +5,7 @@ import Module from './views/Module.vue'
 import Hull from './views/Hull.vue'
 import Build from './views/Build.vue'
 import Legion from './views/Legion.vue'
+import Plugins from './views/Plugins.vue'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/legion',
       name: 'legion',
       component: Legion
+    },
+    {
+      path: '/plugins/:index',
+      name: 'plugins',
+      component: Plugins
     },
     // {
     //   path: '/about',
