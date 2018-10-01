@@ -9,7 +9,8 @@ export default new Vuex.Store({
     dataVersion: 1,
     isDrawerShown: null,
     plugins: [
-      {name: '基建', icon: 'account_balance', src:'https://ge-helper.gitlab.io/plugins/building.html'},
+      {name: 'Building', icon: 'account_balance', src:'https://ge-helper.gitlab.io/plugins/en/building.html'},
+      {name: '基建', icon: 'account_balance', src:'https://ge-helper.gitlab.io/plugins/cn/building.html'}
     ],
     data: {}
   },
