@@ -3,6 +3,7 @@
   "resetAll": "Reset all",
   "level": "Level",
   "add": "Add",
+  "cancel": "Cancel",
   "error": {
     "title": "Error",
     "desc": "Oops, something went wrong."

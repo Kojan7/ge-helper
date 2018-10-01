@@ -3,6 +3,7 @@
   "resetAll": "全部重置",
   "level": "等级",
   "add": "添加",
+  "cancel": "取消",
   "error": {
     "title": "错误",
     "desc": "哎呀，出了点问题。"

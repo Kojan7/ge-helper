@@ -75,6 +75,12 @@
                   @click="addPlugin">
                   {{ $t('add') }}
                 </v-btn>
+                <v-btn
+                  color="error"
+                  flat
+                  @click="pluginAddPanel = false">
+                  {{ $t('cancel') }}
+                </v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
