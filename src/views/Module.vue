@@ -12,7 +12,7 @@
         </v-slider>
       </v-flex>
       <v-btn-toggle class="btn-toggle row" mandatory v-model.number="size">
-        <v-btn flat d-flex class="btn-toggle row"
+        <v-btn flat class="btn-toggle row"
           v-for="option in modChoice.size"
           :key="option.value"
           :value="option.value">

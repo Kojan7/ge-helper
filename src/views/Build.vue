@@ -44,7 +44,7 @@
       </v-card>
       <v-card class="left left-scroll">
         <v-btn-toggle class="btn-toggle" mandatory v-model.number="module.size">
-          <v-btn flat d-flex class="btn-toggle"
+          <v-btn flat class="btn-toggle"
             v-for="option in modChoice.size"
             :key="option.value"
             :value="option.value">
@@ -53,7 +53,7 @@
         </v-btn-toggle>
           <v-flex>
             <v-btn-toggle class="btn-toggle-vertical" mandatory v-model.number="module.level">
-              <v-btn flat d-flex class="btn-toggle"
+              <v-btn flat class="btn-toggle"
                 v-for="option in shipChoice.level"
                 :key="option.value"
                 :value="option.value">
@@ -61,7 +61,7 @@
               </v-btn>
             </v-btn-toggle>
             <v-btn-toggle d-flex class="btn-toggle-wrap" mandatory v-model.number="module.item">
-              <v-btn flat d-flex class="btn-toggle row"
+              <v-btn flat class="btn-toggle row"
                 v-for="option in $i18n.locale === 'en' ? modChoice.item : modChoice.itemcn"
                 :key="option.value"
                 :value="option.value">
