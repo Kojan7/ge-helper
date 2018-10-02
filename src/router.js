@@ -10,7 +10,6 @@ import Plugins from './views/Plugins.vue'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
