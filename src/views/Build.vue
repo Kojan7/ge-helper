@@ -42,34 +42,36 @@
           </v-btn>
         </v-card-actions>
       </v-card>
-      <v-card class="left left-scroll">
-        <v-btn-toggle class="btn-toggle" mandatory v-model.number="module.size">
-          <v-btn flat class="btn-toggle"
-            v-for="option in modChoice.size"
-            :key="option.value"
-            :value="option.value">
-            {{ $i18n.locale === "en" ? option.texten : option.text }}
-          </v-btn>
-        </v-btn-toggle>
-          <v-flex>
-            <v-btn-toggle class="btn-toggle-vertical" mandatory v-model.number="module.level">
-              <v-btn flat class="btn-toggle"
-                v-for="option in shipChoice.level"
-                :key="option.value"
-                :value="option.value">
-                {{ option.text }}
-              </v-btn>
-            </v-btn-toggle>
-            <v-btn-toggle d-flex class="btn-toggle-wrap" mandatory v-model.number="module.item">
-              <v-btn flat class="btn-toggle row"
-                v-for="option in $i18n.locale === 'en' ? modChoice.item : modChoice.itemcn"
-                :key="option.value"
-                :value="option.value">
-                {{ option.text }}
-              </v-btn>
-            </v-btn-toggle>
-          </v-flex>
-      </v-card>
+      <div>
+        <v-flex d-flex>
+          <v-btn-toggle dark class="btn-toggle" mandatory v-model.number="module.size">
+            <v-btn flat class="btn-toggle"
+              v-for="option in modChoice.size"
+              :key="option.value"
+              :value="option.value">
+              {{ $i18n.locale === "en" ? option.texten : option.text }}
+            </v-btn>
+          </v-btn-toggle>
+        </v-flex>
+        <v-flex d-flex wrap="false">
+          <v-btn-toggle dark class="btn-toggle-vertical" mandatory v-model.number="module.level">
+            <v-btn flat class="btn-toggle"
+              v-for="option in shipChoice.level"
+              :key="option.value"
+              :value="option.value">
+              {{ option.text }}
+            </v-btn>
+          </v-btn-toggle>
+          <v-btn-toggle d-flex class="btn-toggle-wrap" mandatory v-model.number="module.item">
+            <v-btn flat class="btn-toggle row"
+              v-for="option in $i18n.locale === 'en' ? modChoice.item : modChoice.itemcn"
+              :key="option.value"
+              :value="option.value">
+              {{ option.text }}
+            </v-btn>
+          </v-btn-toggle>
+        </v-flex>
+      </div>
     </v-layout>
     <v-btn v-else icon color="primary" @click="isLeftShown = true">
       <v-icon>add</v-icon>
@@ -448,7 +450,7 @@ export default {
             this.stats.dmRate *
             (Math.pow(this.stats.cargo * this.mineDiff, -0.19) * 1820.794 -
               1.10674)) /
-            1000000
+          1000000
         );
       }
     },
@@ -599,7 +601,6 @@ export default {
 .btn-toggle {
   overflow-x: auto;
   overflow-y: hidden;
-  width: 100%;
   flex-grow: 1;
   flex-basis: 1;
 }
@@ -608,7 +609,7 @@ export default {
 }
 .btn-toggle-wrap {
   flex-wrap: wrap;
-  width: 200px;
+  flex-grow: 1;
 }
 .left-layout {
   position: relative;
@@ -617,13 +618,11 @@ export default {
 }
 .right-layout {
   position: relative;
+  overflow-y: auto;
 }
 .left {
   padding: 0 10px;
   margin-bottom: 12px;
-}
-.left-scroll {
-  overflow-y: auto;
 }
 .row {
   height: 32px;
