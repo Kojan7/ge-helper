@@ -371,15 +371,15 @@ export default {
           powerUsage += modInfo[6];
           powerOutput += modInfo[7];
           energy += modInfo[11];
-          shield += modInfo[33];
-          regen += modInfo[34];
+          shield += modInfo[34];
+          regen += modInfo[35];
           hp += modInfo[5];
           thrust += modInfo[8] * shipThrustBuff * thrustBuff;
           mass += modInfo[9];
           if (this.installedList[i][2] < 9) {
             dps += modInfo[12] / (modInfo[20] / 60);
           }
-          mining += modInfo[32] * shipMiningBuff * miningBuff;
+          mining += modInfo[33] * shipMiningBuff * miningBuff;
           cargo += modInfo[10] * shipCargoBuff;
         }
       }
@@ -615,10 +615,10 @@ export default {
   position: relative;
   width: 300px;
   flex-grow: 0;
+  overflow-y: auto;
 }
 .right-layout {
   position: relative;
-  overflow-y: auto;
 }
 .left {
   padding: 0 10px;
