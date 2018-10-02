@@ -9,7 +9,7 @@
           <div v-else-if="dataOutdated">{{ $t('home.dataOutdated') }}</div>
           <div v-else>{{ $t('home.currentVer') }}: {{ dataVersion }} </div>
         </v-card-text>
-          <input type="file" id="uploaded-file" ref="uploadedFile" accept=".json" @change="handleFile"/>
+          <input type="file" id="uploaded-file" ref="uploadedFile" accept=".json, .txt, .csv, .doc" @change="handleFile"/>
         <v-card-actions>
           <v-btn flat color="primary" @click="$refs.uploadedFile.click()">
             {{ $t('home.upload') }}
