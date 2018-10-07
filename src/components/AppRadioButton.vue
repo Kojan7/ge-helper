@@ -1,0 +1,78 @@
+<template>
+  <!--
+      <app-radio-button
+        :options="options"
+        @chose="option = $event">
+      </app-radio-button>
+
+      data() {
+        return {
+          option: 0,
+          options: [
+            { value: 0, textzh: "第一", texten: "first" },
+            { value: 1, textzh: "第二", texten: "second" },
+          ],
+        }
+      }
+   -->
+  <div class="lbl-group">
+    <label class="lbl"
+      v-for="option in options"
+      :key="option.value"
+      :class="{ active: choice === option.value }">
+      <input class="dot" type="radio"
+        :value="option.value"
+        v-model="choice"
+        @change="$emit('chose', choice)">
+      {{ $i18n.locale === "en" ? option.texten : option.textzh }}
+    </label>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'AppRadioButton',
+  props: {
+    options: Array,
+    defaultChoice: {
+      type: Number,
+      default: 0,
+    },
+  },
+  data() {
+    return {
+      choice: this.defaultChoice,
+    };
+  },
+};
+</script>
+
+<style scoped>
+.lbl-group {
+  display: flex;
+  width: 100%;
+  overflow: auto;
+  box-shadow: var(--elevation);
+  background-color: var(--base-color);
+  border-radius: 3px;
+}
+.lbl {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 0;
+  white-space: nowrap;
+  user-select: none;
+}
+.dot {
+  display: none;
+}
+.active {
+  background-color: var(--primary-color);
+  color: var(--dark-text-color);
+}
+</style>

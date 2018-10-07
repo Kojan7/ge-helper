@@ -12,5 +12,11 @@ new Vue({
   router,
   store,
   i18n,
+  beforeCreate() {
+    this.$store.commit('init');
+    if (localStorage.getItem('locale')) {
+      this.$i18n.locale = JSON.parse(localStorage.getItem('locale'));
+    }
+  },
   render: h => h(App),
 }).$mount('#app');

@@ -22,7 +22,8 @@ export default {
   --text-color: black;
   --dark-text-color: white;
   --alt-text-color: grey;
-  --primary-color: #4a90d9;
+  --primary-color: #3f51b5;
+  --alt-primary-color: #E3E6F2;
   --elevation:
     0 2px 2px 0 rgba(0, 0, 0, 0.14),
     0 1px 5px 0 rgba(0, 0, 0, 0.12),
@@ -42,11 +43,47 @@ body {
   padding: 10px;
   max-width: 700px;
 }
+.hl {
+  font-size: 24px;
+  line-height: 32px;
+
+}
+.content {
+  padding: 20px 10px;
+}
 .card {
-  display: flex;
+  display: block;
   box-shadow: var(--elevation);
   background-color: var(--base-color);
   border-radius: 3px;
   padding: 10px;
+  margin-bottom: 20px;
+}
+.btn {
+  cursor: pointer;
+  border-radius: 3px;
+  border: 1px solid var(--primary-color);
+  color:var(--primary-color);
+  display: inline-block;
+  line-height: 32px;
+  padding: 0 15px;
+  user-select: none;
+}
+.btn:hover {
+  background-color: var(--alt-primary-color);
+}
+.btn:active {
+  background-color: var(--primary-color);
+  color: var(--dark-text-color);
+}
+.select {
+  background-color: var(--base-color);
+  flex-grow: 1;
+  border-radius: 0;
+  border-style: none;
+  height: 36px;
+  font-size: 16px;
+  box-shadow: var(--elevation);
+  border-radius: 3px;
 }
 </style>

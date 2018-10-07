@@ -1,4 +1,5 @@
 {
+  "title": "GE Helper",
   "reset": "Reset",
   "resetAll": "Reset all",
   "level": "Level",
@@ -11,6 +12,7 @@
   "home": {
     "title": "Home",
     "database": "Database",
+    "settings": "Settings",
     "currentVer": "Current version",
     "upload": "Upload & apply",
     "dataCorrupt": "Database is missing or corrupt",
