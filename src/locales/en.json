@@ -1,3 +1,74 @@
 {
-  "message": "hello i18n !!"
+  "reset": "Reset",
+  "resetAll": "Reset all",
+  "level": "Level",
+  "add": "Add",
+  "cancel": "Cancel",
+  "error": {
+    "title": "Error",
+    "desc": "Oops, something went wrong."
+  },
+  "home": {
+    "title": "Home",
+    "database": "Database",
+    "currentVer": "Current version",
+    "upload": "Upload & apply",
+    "dataCorrupt": "Database is missing or corrupt",
+    "dataOutdated": "Database is outdated or incompatible",
+    "about": "About",
+    "plugins": "Plugins"
+  },
+  "module": {
+    "title": "Module"
+  },
+  "hull": {
+    "title": "Hull"
+  },
+  "build": {
+    "title": "Build",
+    "zoom": "Zoom",
+    "function": "Fn panel",
+    "viewReset": "View reset",
+    "power": "CPU: ",
+    "energy": "Energy: ",
+    "shield": "Shield: ",
+    "hp": "HP: ",
+    "speed": "Speed: ",
+    "dps": "DPS: ",
+    "mining": "Mining: ",
+    "cargo": "Cargo: ",
+    "mCminingTime": "Mining time: ",
+    "mCtransitTime": "Moving time: ",
+    "mCtotalTime": "Total time: ",
+    "mCrocksPerHour": "rocks/h: ",
+    "mCDMperRun": "DM/run: ",
+    "mCDMperHour": "DM/h: ",
+    "skills": "Skills: ",
+    "operation0": "Frigate op: ",
+    "operation1": "Destroyer op: ",
+    "operation2": "Cruiser op: ",
+    "operation3": "Battleship op: ",
+    "operation4": "Dreadnought op: ",
+    "operation5": "Titan op: ",
+    "navigation": "Navigation: ",
+    "mining1": "Mining (2%) : ",
+    "mining2": "Mining (4%) : ",
+    "spaceMining": "Astro Mining: ",
+    "dm1": "DM recognition: ",
+    "dm2": "DM collection: ",
+    "save": "Save",
+    "export": "Export",
+    "exportDesc": "Modules data (hull not included)",
+    "import": "Import",
+    "apply": "Apply",
+    "miningCalc": "Mining calculation",
+    "miningDiff": "Mine difficulty",
+    "showMineCalc": "Show on layout",
+    "clearMod": "Clear modules",
+    "hide": "Hide",
+    "exit": "Return"
+  },
+  "legion": {
+    "title": "Legion"
+  }
 }
