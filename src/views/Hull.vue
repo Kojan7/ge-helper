@@ -2,20 +2,17 @@
   <div class="hull">
     <app-radio-button class="first"
       :options="shipChoice.type"
-      @chose="type=$event">>
-    </app-radio-button>
+      @chose="type=$event"/>
     <app-radio-button
       :options="shipChoice.size"
-      @chose="size=$event">>
-    </app-radio-button>
+      @chose="size=$event"/>
     <app-slider
       @input="level=$event"
       :text="$t('level')"
       :min=1
       :max=12
-      :value="level">
-    </app-slider>
-    <hull-info :shipId="shipId"></hull-info>
+      :value="level"/>
+    <hull-info :shipId="shipId"/>
   </div>
 </template>
 

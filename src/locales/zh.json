@@ -5,9 +5,10 @@
   "level": "等级",
   "add": "添加",
   "cancel": "取消",
-  "error": {
+  "errors": {
     "title": "错误",
-    "desc": "哎呀，出了点问题。"
+    "desc": "哎呀，出了点问题。",
+    "nullModule": "该组件并不存在。"
   },
   "home": {
     "title": "主页",

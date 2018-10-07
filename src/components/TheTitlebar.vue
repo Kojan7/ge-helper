@@ -42,6 +42,7 @@ export default {
   justify-content: space-between;
   align-items: stretch;
   box-shadow: var(--elevation);
+  z-index: 1000;
 }
 .title, .link, .menu {
   display: inline-flex;

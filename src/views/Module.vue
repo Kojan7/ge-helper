@@ -3,8 +3,7 @@
     <div class="inputs">
       <app-radio-button
         :options="modChoice.size"
-        @chose="size=$event">
-      </app-radio-button>
+        @chose="size=$event"/>
       <select class="select" v-model.number="item">
         <option v-for="option in modChoice.item"
           :value="option.value"
@@ -17,10 +16,9 @@
         :text="$t('level')"
         :min=1
         :max=12
-        :value="level">
-      </app-slider>
+        :value="level"/>
     </div>
-    <ModInfo :modId="modId"></ModInfo>
+    <ModInfo :modId="modId"/>
   </div>
 </template>
 

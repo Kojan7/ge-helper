@@ -6,6 +6,9 @@
       v-bind:key="el.id"
       v-bind:elvalue="info[el.id]">
     </ModInfoEl>
+    <span v-if="Number.isNaN(modId)">
+      {{ $t('errors.nullModule') }}
+    </span>
   </div>
 </template>
 
@@ -28,6 +31,10 @@ export default {
       return this.$store.state.data.modDesc;
     },
     info() {
+      if (Number.isNaN(this.modId)) {
+        // use a 0 filled array for module that doesn't exist
+        return new Array(99).fill(0);
+      }
       return this.component[this.modId];
     },
   },

@@ -5,9 +5,10 @@
   "level": "Level",
   "add": "Add",
   "cancel": "Cancel",
-  "error": {
+  "errors": {
     "title": "Error",
-    "desc": "Oops, something went wrong."
+    "desc": "Oops, something went wrong.",
+    "nullModule": "This module does not exist."
   },
   "home": {
     "title": "Home",
