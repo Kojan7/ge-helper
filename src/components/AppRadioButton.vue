@@ -35,7 +35,6 @@ export default {
   props: {
     options: Array,
     defaultChoice: {
-      type: Number,
       default: 0,
     },
   },
@@ -49,6 +48,7 @@ export default {
 
 <style scoped>
 .lbl-group {
+  box-sizing: border-box;
   display: flex;
   width: 100%;
   overflow: auto;
@@ -67,6 +67,7 @@ export default {
   flex-shrink: 0;
   white-space: nowrap;
   user-select: none;
+  cursor: pointer;
 }
 .dot {
   display: none;

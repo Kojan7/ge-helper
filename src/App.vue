@@ -23,7 +23,7 @@ export default {
   --dark-text-color: white;
   --alt-text-color: grey;
   --primary-color: #3f51b5;
-  --alt-primary-color: #E3E6F2;
+  --alt-primary-color: #d5dbf3;
   --elevation:
     0 2px 2px 0 rgba(0, 0, 0, 0.14),
     0 1px 5px 0 rgba(0, 0, 0, 0.12),
@@ -78,7 +78,7 @@ body {
 }
 .select {
   background-color: var(--base-color);
-  flex-grow: 1;
+  width: 100%;
   border-radius: 0;
   border-style: none;
   height: 36px;
