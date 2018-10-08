@@ -4,6 +4,7 @@ import Home from './views/Home.vue';
 import Module from './views/Module.vue';
 import Hull from './views/Hull.vue';
 import Build from './views/Build.vue';
+import Legion from './views/Legion.vue';
 
 Vue.use(Router);
 
@@ -32,6 +33,11 @@ export default new Router({
       path: '/build',
       name: 'build',
       component: Build,
+    },
+    {
+      path: '/legion',
+      name: 'legion',
+      component: Legion,
     },
   ],
 });
