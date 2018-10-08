@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     appVersion: '1.0.0',
-    dataVersion: 1,
+    dataVersion: 2,
     data: {},
   },
   mutations: {

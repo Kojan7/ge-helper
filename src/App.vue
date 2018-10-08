@@ -68,6 +68,7 @@ body {
   line-height: 32px;
   padding: 0 15px;
   user-select: none;
+  margin-right: 8px;
 }
 .btn:hover {
   background-color: var(--alt-primary-color);

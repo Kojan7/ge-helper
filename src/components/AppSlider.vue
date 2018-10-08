@@ -59,7 +59,7 @@ input[type="range"] {
   -webkit-appearance: none;
   width: 100%;
   margin: 0px 0;
-  background-color: var(--base-color);
+  background-color: inherit;
 }
 input[type="range"]:focus {
   outline: none;

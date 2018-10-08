@@ -107,7 +107,4 @@ export default {
 #uploaded-file {
   display: none;
 }
-.btn {
-  margin-right: 8px;
-}
 </style>

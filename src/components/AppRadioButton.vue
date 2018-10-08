@@ -55,9 +55,10 @@ export default {
   box-shadow: var(--elevation);
   background-color: var(--base-color);
   border-radius: 3px;
+  align-content: stretch;
+  height: 36px;
 }
 .lbl {
-  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,6 +69,7 @@ export default {
   white-space: nowrap;
   user-select: none;
   cursor: pointer;
+  min-height: 36px;
 }
 .dot {
   display: none;
