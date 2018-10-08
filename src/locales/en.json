@@ -19,7 +19,8 @@
     "dataCorrupt": "Database is missing or corrupt",
     "dataOutdated": "Database is outdated or incompatible",
     "about": "About",
-    "plugins": "Plugins"
+    "plugins": "Plugins",
+    "useDefault": "Use the built-in database"
   },
   "module": {
     "title": "Module"

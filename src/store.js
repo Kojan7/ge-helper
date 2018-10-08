@@ -1,6 +1,7 @@
 /* eslint no-param-reassign: 0 */
 import Vue from 'vue';
 import Vuex from 'vuex';
+import GEdatabase from '@/GEdatabase.json';
 
 Vue.use(Vuex);
 
@@ -8,6 +9,7 @@ export default new Vuex.Store({
   state: {
     appVersion: '1.0.0',
     dataVersion: 2,
+    defaultData: GEdatabase,
     data: {},
   },
   mutations: {
@@ -18,6 +20,10 @@ export default new Vuex.Store({
     },
     setData(state, data) {
       state.data = data;
+      localStorage.setItem('database', JSON.stringify(state.data));
+    },
+    useDefaultData(state) {
+      state.data = state.defaultData;
       localStorage.setItem('database', JSON.stringify(state.data));
     },
     resetData(state) {

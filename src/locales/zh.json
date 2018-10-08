@@ -19,7 +19,8 @@
     "dataCorrupt": "数据库丢失或损坏",
     "dataOutdated": "数据库陈旧或不兼容",
     "about": "关于",
-    "plugins": "插件"
+    "plugins": "插件",
+    "useDefault": "使用内置数据库"
   },
   "module": {
     "title": "组件"

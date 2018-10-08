@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-
     <div class="card">
       <span class="hl">{{ $t('home.database') }}</span>
       <div class="content">
@@ -13,8 +12,8 @@
       <div class="btn" @click="$refs.uploadedFile.click()">
         {{ $t('home.upload') }}
       </div>
-      <div class="btn" @click="resetData">
-        {{ $t('reset') }}
+      <div class="btn" @click="useDefault">
+        {{ $t('home.useDefault') }}
       </div>
     </div>
 
@@ -87,9 +86,8 @@ export default {
       };
       reader.readAsText(event.target.files[0]);
     },
-    resetData() {
-      this.$refs.uploadedFile.value = '';
-      this.$store.commit('resetData');
+    useDefault() {
+      this.$store.commit('useDefaultData');
     },
     resetAll() {
       localStorage.clear();
