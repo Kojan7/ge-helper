@@ -14,7 +14,7 @@
     "title": "Home",
     "database": "Database",
     "settings": "Settings",
-    "currentVer": "Current version",
+    "currentVer": "Version",
     "upload": "Upload & apply",
     "dataCorrupt": "Database is missing or corrupt",
     "dataOutdated": "Database is outdated or incompatible",
