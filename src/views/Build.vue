@@ -495,6 +495,9 @@ export default {
       this.installedList = [];
     },
     tileClick(coord) {
+      if (this.module.size === 0 && this.module.item > 20) {
+        return;
+      }
       this.undoLog();
       this.installedList.push([
         coord, // 0
