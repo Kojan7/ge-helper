@@ -629,6 +629,7 @@ input[type="range"] {
   flex-wrap: wrap;
   overflow-y: auto;
   flex: 1 1 auto;
+  max-height: 500px;
 }
 .build {
   background-color: var(--base-color);
@@ -637,6 +638,7 @@ input[type="range"] {
   margin: 48px 0 0 0;
   max-width: none;
   overflow: hidden;
+  padding: 0;
 }
 .main-panel {
   z-index: 100;
@@ -644,14 +646,12 @@ input[type="range"] {
   top: 0;
   left: 0;
   bottom: 0;
-  margin: 10px;
   width: 300px;
   background-color: var(--bg-color);
   color: var(--dark-text-color);
   border-radius: 3px;
   display: flex;
   flex-direction: column;
-  max-height: 680px;
 }
 .row {
   display: flex;
