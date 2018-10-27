@@ -44,6 +44,7 @@
     "dps": "DPS: ",
     "mining": "Mining: ",
     "cargo": "Cargo: ",
+    "shieldRegen": "Regeneration: ",
     "mCminingTime": "Mining time: ",
     "mCtransitTime": "Moving time: ",
     "mCtotalTime": "Total time: ",

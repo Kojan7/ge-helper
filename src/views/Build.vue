@@ -174,12 +174,34 @@
         :max=30
         :value="skills.operation[5]">
       </app-slider>
+      <br>
       <app-slider
         @input="skills.navigation=$event"
         :text="$t('build.navigation')"
         :min=0
         :max=20
         :value="skills.navigation">
+      </app-slider>
+      <app-slider
+        @input="skills.energy=$event"
+        :text="$t('build.energy')"
+        :min=0
+        :max=30
+        :value="skills.energy">
+      </app-slider>
+      <app-slider
+        @input="skills.shield=$event"
+        :text="$t('build.shield')"
+        :min=0
+        :max=20
+        :value="skills.shield">
+      </app-slider>
+      <app-slider
+        @input="skills.shieldRegen=$event"
+        :text="$t('build.shieldRegen')"
+        :min=0
+        :max=20
+        :value="skills.shieldRegen">
       </app-slider>
       <br>
       <app-slider
@@ -291,6 +313,9 @@ export default {
         spaceMining: 0,
         dm1: 0,
         dm2: 0,
+        energy: 0,
+        shield: 0,
+        shieldRegen: 0,
       },
     };
   },
@@ -341,6 +366,15 @@ export default {
         1 +
         (this.skills.dm1 * 0.1) +
         (this.skills.dm2 * 0.15);
+      const energyBuff = 1 + (this.skills.energy * 0.01);
+      const shieldBuff = 1 + (this.skills.shield * 0.05);
+      const shieldRegenBuff = 1 + (this.skills.shieldRegen * 0.02);
+
+      const shipDefBuffArray = this.hull[12].find(el => el[0] === 48);
+      let shipDefBuff = 1;
+      if (typeof shipDefBuffArray !== 'undefined') {
+        shipDefBuff += shipDefBuffArray[1] / 10000;
+      }
 
       const shipCargoBuffArray = this.hull[12].find(el => el[0] === 43);
       let shipCargoBuff = 1;
@@ -378,9 +412,9 @@ export default {
           const modInfo = this.mods[this.installedList[i][4]];
           powerUsage += modInfo[6];
           powerOutput += modInfo[7];
-          energy += modInfo[11];
-          shield += modInfo[34];
-          regen += modInfo[35];
+          energy += modInfo[11] * energyBuff;
+          shield += modInfo[34] * shieldBuff * shipDefBuff;
+          regen += modInfo[35] * shieldRegenBuff;
           hp += modInfo[5];
           thrust += modInfo[8] * shipThrustBuff * thrustBuff;
           mass += modInfo[9];
@@ -395,9 +429,9 @@ export default {
       return {
         powerUsage,
         powerOutput,
-        energy,
-        shield,
-        regen: regen / 10,
+        energy: Math.floor(energy),
+        shield: Math.floor(shield),
+        regen: Math.floor(regen / 10),
         hp,
         speed: Math.floor((thrust * 10000) / mass) + 1,
         dps: Math.floor(dps),
