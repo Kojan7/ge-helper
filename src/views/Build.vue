@@ -696,10 +696,9 @@ input[type="range"] {
   z-index: 200;
   position: absolute;
   top: 0; right: 0; bottom: 0; left: 0;
-  margin: 10px;
   padding: 5px;
   color: var(--dark-text-color);
-  border-radius: 3px;
+  overflow-y: auto;
 }
 @media screen and (max-width: 700px) {
   .main-panel {
