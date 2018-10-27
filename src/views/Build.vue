@@ -606,12 +606,14 @@ export default {
       const duplicate =
         this.installedList.find(el => el[0][0] === coord[0] && el[0][1] === coord[1]);
       if (typeof duplicate !== 'undefined') {
-        this.removeMod(duplicate);
+        this.removeMod(duplicate, false);
       }
       this.installedList.push([coord, size, this.module.item]);
     },
-    removeMod(mod) {
-      this.undoLog();
+    removeMod(mod, human = true) {
+      if (human) {
+        this.undoLog();
+      }
       this.installedList.splice(this.installedList.indexOf(mod), 1);
     },
     undoLog() {
