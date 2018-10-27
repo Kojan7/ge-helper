@@ -528,8 +528,35 @@ export default {
     clearMod() {
       this.installedList = [];
     },
+    tileCoordGen(coord, position) {
+      switch (position) {
+        case 'bottomLeft':
+          return [coord[0] + 1, coord[1] + 1 - (coord[0] % 2 ? 1 : 0)];
+        case 'bottomRight':
+          return [coord[0] + 1, coord[1] - (coord[0] % 2 ? 1 : 0)];
+        case 'bottom':
+          return [coord[0] + 2, coord[1]];
+        case 'mostBottomLeft':
+          return [coord[0] + 2, coord[1] + 1];
+        case 'mostBottomRight':
+          return [coord[0] + 2, coord[1] - 1];
+        case 'left':
+          return [coord[0], coord[1] + 1];
+        case 'right':
+          return [coord[0], coord[1] - 1];
+        case 'top':
+          return [coord[0] - 2, coord[1]];
+        case 'topLeft':
+          return [coord[0] - 1, coord[1] + 1 - (coord[0] % 2 ? 1 : 0)];
+        case 'topRight':
+          return [coord[0] - 1, coord[1] - (coord[0] % 2 ? 1 : 0)];
+        default:
+          return coord;
+      }
+    },
     tileClick(coord) {
       if (this.module.size === 0 && this.module.item > 20) {
+        // S sized aircraft exception prevention
         return;
       }
       this.undoLog();
@@ -540,62 +567,40 @@ export default {
         this.module.level, // 3
         this.modId, // 4
       ]);
-      if (this.module.size === 1) {
-        this.tileExpand(
-          [coord[0] + 1, coord[1] + 1 - (coord[0] % 2 ? 1 : 0)],
-          5,
-        );
-        this.tileExpand([coord[0] + 1, coord[1] - (coord[0] % 2 ? 1 : 0)], 6);
-      } else if (this.module.size === 2) {
-        this.tileExpand(
-          [coord[0] + 1, coord[1] + 1 - (coord[0] % 2 ? 1 : 0)],
-          7,
-        );
-        this.tileExpand([coord[0] + 1, coord[1] - (coord[0] % 2 ? 1 : 0)], 8);
-        this.tileExpand([coord[0] + 2, coord[1]], 9);
-        this.tileExpand([coord[0] + 2, coord[1] + 1], 5);
-        this.tileExpand([coord[0] + 2, coord[1] - 1], 6);
-      } else if (this.module.size === 3) {
-        this.tileExpand(
-          [coord[0] + 1, coord[1] + 1 - (coord[0] % 2 ? 1 : 0)],
-          10,
-        );
-        this.tileExpand([coord[0] + 1, coord[1] - (coord[0] % 2 ? 1 : 0)], 11);
-        this.tileExpand([coord[0] + 2, coord[1]], 12);
-      } else if (this.module.size === 4 && (this.module.item < 11 || this.module.item > 20)) {
-        this.tileExpand(
-          [coord[0] + 1, coord[1] + 1 - (coord[0] % 2 ? 1 : 0)],
-          15,
-        );
-        this.tileExpand([coord[0] + 1, coord[1] - (coord[0] % 2 ? 1 : 0)], 16);
-        this.tileExpand(
-          [coord[0] - 1, coord[1] + 1 - (coord[0] % 2 ? 1 : 0)],
-          7,
-        );
-        this.tileExpand([coord[0] - 1, coord[1] - (coord[0] % 2 ? 1 : 0)], 8);
-        this.tileExpand([coord[0], coord[1] + 1], 10);
-        this.tileExpand([coord[0], coord[1] - 1], 11);
-        this.tileExpand([coord[0] - 2, coord[1]], 17);
-      } else if (this.module.size === 4) {
-        this.tileExpand(
-          [coord[0] + 1, coord[1] + 1 - (coord[0] % 2 ? 1 : 0)],
-          15,
-        );
-        this.tileExpand([coord[0] + 1, coord[1] - (coord[0] % 2 ? 1 : 0)], 16);
-        this.tileExpand(
-          [coord[0] - 1, coord[1] + 1 - (coord[0] % 2 ? 1 : 0)],
-          13,
-        );
-        this.tileExpand([coord[0] - 1, coord[1] - (coord[0] % 2 ? 1 : 0)], 14);
-        this.tileExpand([coord[0], coord[1] + 1], 10);
-        this.tileExpand([coord[0], coord[1] - 1], 11);
+      switch (this.module.size) {
+        case 3: // M+
+          this.tileExpand(this.tileCoordGen(coord, 'bottomLeft'), 10);
+          this.tileExpand(this.tileCoordGen(coord, 'bottomRight'), 11);
+          this.tileExpand(this.tileCoordGen(coord, 'bottom'), 12);
+          break;
+        case 1: // M
+          this.tileExpand(this.tileCoordGen(coord, 'bottomLeft'), 5);
+          this.tileExpand(this.tileCoordGen(coord, 'bottomRight'), 6);
+          break;
+        case 2: // L
+          this.tileExpand(this.tileCoordGen(coord, 'bottomLeft'), 7);
+          this.tileExpand(this.tileCoordGen(coord, 'bottomRight'), 8);
+          this.tileExpand(this.tileCoordGen(coord, 'bottom'), 9);
+          this.tileExpand(this.tileCoordGen(coord, 'mostBottomLeft'), 5);
+          this.tileExpand(this.tileCoordGen(coord, 'mostBottomRight'), 6);
+          break;
+        case 4: // L+
+          this.tileExpand(this.tileCoordGen(coord, 'bottomLeft'), 15);
+          this.tileExpand(this.tileCoordGen(coord, 'bottomRight'), 16);
+          this.tileExpand(this.tileCoordGen(coord, 'left'), 10);
+          this.tileExpand(this.tileCoordGen(coord, 'right'), 11);
+          if (this.module.item < 11 || this.module.item > 20) {
+            this.tileExpand(this.tileCoordGen(coord, 'topLeft'), 7);
+            this.tileExpand(this.tileCoordGen(coord, 'topRight'), 8);
+            this.tileExpand(this.tileCoordGen(coord, 'top'), 17);
+          } else {
+            this.tileExpand(this.tileCoordGen(coord, 'topLeft'), 13);
+            this.tileExpand(this.tileCoordGen(coord, 'topRight'), 14);
+          }
+          break;
+        default:
+          break;
       }
-      // this is to prevent the list of modules from being updated
-      this.module = {
-        size: this.module.size,
-        level: this.module.level,
-        item: this.module.item,
-      };
     },
     tileExpand(coord, size) {
       const duplicate =
