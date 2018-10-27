@@ -36,6 +36,9 @@
       <div class="btn" @click="resetAll">
         {{ $t('resetAll') }}
       </div>
+      <div class="btn" onclick="window.open('https://github.com/zyntuz/ge-helper','Github');">
+        GitHub
+      </div>
     </div>
 
   </div>
