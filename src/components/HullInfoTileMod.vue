@@ -1,7 +1,5 @@
 <template>
-  <div class="tile"
-    :style="style"
-    @click="$emit('deleted', mod)">
+  <div class="tile" :style="style">
     <svg v-if="mod[1] === 0" :width="256 * zoom" :height="256 * zoom" draggable="false" viewBox="0 0 256 256">
       <g v-if="mod[1] === 0"> <!-- S sized -->
         <!-- bed tile -->
@@ -23,8 +21,15 @@
         <!-- else -->
         <path v-else :style="imageStyle" d="m128 24.776 89.395 154.84h-178.79z" stroke-width="10"/>
       </g>
+      <!-- click event -->
+      <path d="m128 5.7735 105.85 61.113v122.23l-105.85 61.113-105.85-61.113 4e-6 -122.23z"
+        fill="transparent" stroke="transparent" stroke-width="20"
+        @click="$emit('deleted', mod)"/>
     </svg>
     <svg v-else :width="256 * zoom" :height="256 * zoom" draggable="false" viewBox="0 0 20 20">
+      <!-- bed tile -->
+      <polygon points="10,0.5 18.1,5 18.1,15 10,19.5 1.9,15 1.9,5"
+        fill="#808080" stroke="#000" stroke-width="1"/>
       <!-- for M & L & M+ sized armors top tile -->
       <polygon
         v-if="mod[1] < 4 && mod[2] < 17 && mod[2] > 12"
@@ -55,8 +60,13 @@
       <polygon v-else-if="mod[1] === 15" :style="imageStyle" points="-5,-6.3 22,-2 22,15 8.5,15" style="stroke-width:1" />
       <polygon v-else-if="mod[1] === 16" :style="imageStyle" points="-2,-2 25,-6.8 12,15 -2,15" style="stroke-width:1" />
       <polygon v-else :style="imageStyle" points="10,1 26.1658,29 -6.1658,29" style="stroke-width:1" />
+      <!-- click event -->
+      <polygon points="10,0.5 18.1,5 18.1,15 10,19.5 1.9,15 1.9,5"
+        fill="transparent" stroke="transparent" stroke-width="4"
+        @click="$emit('deleted', mod)"/>
     </svg>
-    <div v-if="mod[1] < 5" class="level" :style="levelStyle">
+    <div v-if="mod[1] < 5" class="level" :style="levelStyle"
+      @click="$emit('deleted', mod)">
       <span  v-if="mod[1] > 0 || (mod[2] > 4 && mod[2] < 9)">{{ modInfo.abbr }}<br></span>{{ modSize }}{{ mod[3] }}
     </div>
   </div>
