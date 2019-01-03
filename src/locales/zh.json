@@ -1,5 +1,6 @@
 {
   "title": "GE 助手",
+  "dbNotice": "数据库丢失或损数据库，请前往主页。",
   "reset": "重置",
   "resetAll": "全部重置",
   "level": "等级",

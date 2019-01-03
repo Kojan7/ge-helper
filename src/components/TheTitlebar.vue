@@ -1,24 +1,29 @@
 <template>
-  <div class="title-bar">
-    <div class="title">{{ $t('title') }}</div>
-    <div class="links" :class="{ showLinks }">
-      <router-link class="link"
-        v-for="link in links"
-        :key="link"
-        @click.native="showLinks = false"
-        :to="'/' + link">
-        {{ $t(link + '.title') }}
-      </router-link>
+  <div>
+    <div class="title-bar">
+      <div class="title">{{ $t('title') }}</div>
+      <div class="links" :class="{ showLinks }">
+        <router-link class="link"
+          v-for="link in links"
+          :key="link"
+          @click.native="showLinks = false"
+          :to="'/' + link">
+          {{ $t(link + '.title') }}
+        </router-link>
+      </div>
+      <div class="menu" @click="showLinks = !showLinks">
+        <svg width="24" height="24" viewBox="0 0 24 24">
+          <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" fill="var(--dark-text-color)"/>
+        </svg>
+      </div>
     </div>
-    <div class="menu" @click="showLinks = !showLinks">
-      <svg width="24" height="24" viewBox="0 0 24 24">
-        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" fill="var(--dark-text-color)"/>
-      </svg>
-    </div>
+    <div :class="{ showNotice }">{{ $t('dbNotice') }}</div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'TheTitlebar',
   data() {
@@ -27,6 +32,14 @@ export default {
       showLinks: false,
     };
   },
+  computed: mapState({
+    showNotice(state) {
+      if (typeof state.data.versionDate === 'string') {
+        return false;
+      }
+      return true;
+    },
+  }),
 };
 </script>
 
@@ -34,7 +47,7 @@ export default {
 .title-bar {
   font-size: 18px;
   height: 48px;
-  position: absolute;
+  position: fixed;
   top: 0; left: 0; right: 0;
   background-color: var(--menu-color);
   color: var(--dark-text-color);
@@ -98,5 +111,15 @@ export default {
   .menu {
     display: inline-flex;
   }
+}
+
+.showNotice {
+  position: relative;
+  top: 48px;
+  background-color: #ef2929;
+  color: white;
+  font-weight: bold;
+  z-index: 900;
+  padding: 5px;
 }
 </style>

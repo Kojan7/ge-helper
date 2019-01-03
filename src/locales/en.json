@@ -1,5 +1,6 @@
 {
   "title": "GE Helper",
+  "dbNotice": "The database is missing or corrupted, please go to the home page.",
   "reset": "Reset",
   "resetAll": "Reset all",
   "level": "Level",
