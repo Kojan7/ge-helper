@@ -56,8 +56,8 @@ export default {
   data() {
     return {
       langs: [
-        { value: 'en', textzh: 'English', texten: 'English' },
-        { value: 'zh', textzh: '中文', texten: '中文' },
+        { value: 'en', zh: 'English', en: 'English' },
+        { value: 'zh', zh: '中文', en: '中文' },
       ],
     };
   },

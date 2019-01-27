@@ -1,6 +1,6 @@
 <template>
   <div class="el" v-if="elvalue > 0">
-    {{ $i18n.locale === "en" ? el.titleen : el.title }}: {{ elvalue }}
+    {{ $i18n.locale === "en" ? el.en : el.zh }}: {{ elvalue }}
   </div>
 </template>
 

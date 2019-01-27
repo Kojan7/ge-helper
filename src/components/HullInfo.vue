@@ -1,11 +1,11 @@
 <template>
   <div class='info'>
-    <hull-info-buff class="buff" v-bind:buffs="ship[12]"></hull-info-buff>
+    <hull-info-buff class="buff" v-bind:buffs="hull[12]"></hull-info-buff>
     <hull-info-el
-      v-for="el in shipDesc"
+      v-for="el in hullDesc"
       :el="el"
       :key="el.id"
-      :elvalue="ship[el.shipIndex]">
+      :elvalue="hull[el.value]">
     </hull-info-el>
     <hull-info-tile
       v-for="tile in layout"
@@ -24,7 +24,7 @@ import HullInfoTile from '@/components/HullInfoTile.vue';
 export default {
   name: 'HullInfo',
   props: {
-    shipId: Number,
+    hullId: Number,
   },
   components: {
     HullInfoBuff,
@@ -32,23 +32,23 @@ export default {
     HullInfoTile,
   },
   computed: {
-    shipbody() {
-      return this.$store.state.data.shipbody;
+    hulls() {
+      return this.$store.state.data.hull;
     },
-    technology() {
-      return this.$store.state.data.technology;
+    tech() {
+      return this.$store.state.data.tech;
     },
-    shipDesc() {
-      return this.$store.state.data.shipDesc;
+    hullDesc() {
+      return this.$store.state.data.hullDesc;
     },
-    ship() {
-      return this.shipbody[this.shipId];
+    hull() {
+      return this.hulls[this.hullId];
     },
     layout() {
-      if (this.ship[1] < 36) {
-        return this.technology[this.ship[1]][11].slice(0, this.ship[6]);
+      if (this.hull[1] < 36) {
+        return this.tech[this.hull[1]][11].slice(0, this.hull[6]);
       } // workaround for titans
-      return this.technology[this.ship[1] - 61][11].slice(0, this.ship[6]);
+      return this.tech[this.hull[1] - 61][11].slice(0, this.hull[6]);
     },
   },
 };

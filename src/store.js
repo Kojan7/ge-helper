@@ -1,15 +1,15 @@
 /* eslint no-param-reassign: 0 */
 import Vue from 'vue';
 import Vuex from 'vuex';
-import GEdatabase from '@/GEdatabase.json';
+import GeDatabase from '@/GeDatabase.json';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     appVersion: '1.2.1',
-    dataVersion: 2,
-    defaultData: GEdatabase,
+    dataVersion: 3,
+    defaultData: GeDatabase,
     data: {},
   },
   mutations: {

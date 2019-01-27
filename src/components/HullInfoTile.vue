@@ -22,8 +22,8 @@ export default {
     zoom: Number,
   },
   computed: {
-    shipLimit() {
-      return this.$store.state.data.shipLimit;
+    hullLimit() {
+      return this.$store.state.data.hullLimit;
     },
     halfWidth() {
       return 120 * this.zoom;
@@ -45,7 +45,7 @@ export default {
       };
     },
     limit() {
-      return this.shipLimit[this.coord[2]];
+      return this.hullLimit[this.coord[2]];
     },
     xycoord() {
       return [this.coord[0], this.coord[1]];

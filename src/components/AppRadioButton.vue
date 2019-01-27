@@ -9,8 +9,8 @@
         return {
           option: 0,
           options: [
-            { value: 0, textzh: "第一", texten: "first" },
-            { value: 1, textzh: "第二", texten: "second" },
+            { value: 0, zh: "第一", en: "first" },
+            { value: 1, zh: "第二", en: "second" },
           ],
         }
       }
@@ -24,7 +24,7 @@
         :value="option.value"
         v-model="choice"
         @change="$emit('chose', choice)">
-      {{ $i18n.locale === "en" ? option.texten : option.textzh }}
+      {{ $i18n.locale === "en" ? option.en : option.zh }}
     </label>
   </div>
 </template>
