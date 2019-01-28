@@ -16,6 +16,8 @@ export default new Vuex.Store({
     init(state) {
       if (localStorage.getItem('database')) {
         state.data = JSON.parse(localStorage.getItem('database'));
+      } else {
+        state.data = state.defaultData;
       }
     },
     setData(state, data) {

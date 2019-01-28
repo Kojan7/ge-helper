@@ -17,7 +17,8 @@
         </svg>
       </div>
     </div>
-    <div :class="{ showNotice }">{{ $t('dbNotice') }}</div>
+    <div class="showNotice" v-if="dataCorrupt">{{ $t('home.dataCorrupt') }}</div>
+    <div class="showNotice" v-else-if="dataOutdated">{{ $t('home.dataOutdated') }}</div>
   </div>
 </template>
 
@@ -33,8 +34,14 @@ export default {
     };
   },
   computed: mapState({
-    showNotice(state) {
-      if (typeof state.data.versionDate === 'string') {
+    dataCorrupt(state) {
+      if (typeof state.data.date === 'string') {
+        return false;
+      }
+      return true;
+    },
+    dataOutdated(state) {
+      if (state.data.version === state.dataVersion) {
         return false;
       }
       return true;

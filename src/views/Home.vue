@@ -64,10 +64,10 @@ export default {
   computed: mapState({
     appVersion: 'appVersion',
     dataVersion(state) {
-      return `${state.data.version}: ${state.data.versionDate}`;
+      return `${state.data.date} (${state.data.version})`;
     },
     dataCorrupt(state) {
-      if (typeof state.data.versionDate === 'string') {
+      if (typeof state.data.date === 'string') {
         return false;
       }
       return true;
