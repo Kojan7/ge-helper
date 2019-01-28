@@ -7,7 +7,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    appVersion: '1.2.1',
+    appVersion: '1.3.0',
     dataVersion: 3,
     defaultData: GeDatabase,
     data: {},
