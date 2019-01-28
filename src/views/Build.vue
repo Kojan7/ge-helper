@@ -6,14 +6,14 @@
           <option v-for="option in hullChoice.type"
             :value="option.value"
             :key="option.value">
-            {{ $i18n.locale === "en" ? option.texten : option.textzh }}
+            {{ $i18n.locale === "en" ? option.en : option.zh }}
           </option>
         </select>
         <select class="select" v-model.number="hullOption.size">
           <option v-for="option in hullChoice.size"
             :value="option.value"
             :key="option.value">
-            {{ $i18n.locale === "en" ? option.texten : option.textzh }}
+            {{ $i18n.locale === "en" ? option.en : option.zh }}
           </option>
         </select>
         <select class="select hull-level-select" v-model.number="hullOption.level">
@@ -82,7 +82,7 @@
           @input="module.level=$event"
           :text="$t('level')"
           :min=1
-          :max=12
+          :max=maxModuleLevel
           :value="module.level"/>
       </div>
       <app-radio-button class="wrap"
@@ -321,12 +321,14 @@ export default {
   },
   computed: {
     ...mapState({
-      hulls: state => state.data.shipbody,
-      techs: state => state.data.technology,
-      mods: state => state.data.component,
-      hullChoice: state => state.data.shipChoice,
+      hulls: state => state.data.hull,
+      techs: state => state.data.tech,
+      mods: state => state.data.module,
+      hullChoice: state => state.data.hullChoice,
+      maxHullLevel: state => state.data.maxHullLevel,
       modMap: state => state.data.modMap,
       modChoice: state => state.data.modChoice,
+      maxModuleLevel: state => state.data.maxModuleLevel,
     }),
     expandBtnStyle() {
       if (this.showHullInput) {
@@ -335,11 +337,9 @@ export default {
       return 'transform: rotate(180deg)';
     },
     hullId() {
-      return (
-        (this.hullOption.size * 84) +
-        (this.hullOption.type * 12) +
-        this.hullOption.level
-      );
+      return (this.hullOption.size * this.maxHullLevel * 7) +
+        (this.hullOption.type * this.maxHullLevel) +
+        this.hullOption.level;
     },
     hull() {
       return this.hulls[this.hullId];
@@ -352,7 +352,8 @@ export default {
       return this.techs[this.hull[1] - 61][11].slice(0, this.hull[6]);
     },
     modId() {
-      return this.modMap[this.module.size][this.module.item] + this.module.level;
+      const id = (this.modMap[this.module.size][this.module.item] + this.module.level) - 1;
+      return this.mods.findIndex(el => el[0] === id);
     },
     stats() {
       const operationBuff = 1 + (this.skills.operation[this.hullOption.size] * 0.1);
@@ -555,7 +556,7 @@ export default {
       }
     },
     tileClick(coord) {
-      if (this.module.size === 0 && this.module.item > 20) {
+      if (this.module.item > 20 && this.module.item < 25 && this.module.size === 0) {
         // S sized aircraft exception prevention
         return;
       }
