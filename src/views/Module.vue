@@ -8,14 +8,14 @@
         <option v-for="option in modChoice.item"
           :value="option.value"
           :key="option.value">
-          {{ $i18n.locale === "en" ? option.texten : option.textzh }}
+          {{ $i18n.locale === "en" ? option.en : option.zh }}
         </option>
       </select>
       <app-slider
         @input="level=$event"
         :text="$t('level')"
         :min=1
-        :max=12
+        :max=maxModuleLevel
         :value="level"/>
     </div>
     <ModInfo :modId="modId"/>
@@ -43,14 +43,21 @@ export default {
     };
   },
   computed: {
+    maxModuleLevel() {
+      return this.$store.state.data.maxModuleLevel;
+    },
     modMap() {
       return this.$store.state.data.modMap;
     },
     modChoice() {
       return this.$store.state.data.modChoice;
     },
+    modules() {
+      return this.$store.state.data.module;
+    },
     modId() {
-      return this.modMap[this.size][this.item] + this.level;
+      const id = (this.modMap[this.size][this.item] + this.level) - 1;
+      return this.modules.findIndex(el => el[0] === id);
     },
   },
 };

@@ -24,8 +24,8 @@ export default {
     modId: Number,
   },
   computed: {
-    component() {
-      return this.$store.state.data.component;
+    modules() {
+      return this.$store.state.data.module;
     },
     modDesc() {
       return this.$store.state.data.modDesc;
@@ -35,7 +35,7 @@ export default {
         // use a 0 filled array for module that doesn't exist
         return new Array(99).fill(0);
       }
-      return this.component[this.modId];
+      return this.modules[this.modId];
     },
   },
 };

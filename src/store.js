@@ -25,12 +25,12 @@ export default new Vuex.Store({
       localStorage.setItem('database', JSON.stringify(state.data));
     },
     useDefaultData(state) {
+      localStorage.removeItem('database');
       state.data = state.defaultData;
-      localStorage.setItem('database', JSON.stringify(state.data));
     },
     resetData(state) {
-      state.data = {};
       localStorage.removeItem('database');
+      state.data = {};
     },
   },
   actions: {
