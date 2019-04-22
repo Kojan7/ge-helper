@@ -52,7 +52,6 @@ export default {
   overflow: auto;
   box-shadow: var(--elevation);
   background-color: var(--base-color);
-  border-radius: 3px;
   align-content: stretch;
   height: 36px;
 }

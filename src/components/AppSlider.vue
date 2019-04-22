@@ -37,7 +37,6 @@ export default {
   justify-content: center;
   background-color: var(--base-color);
   box-shadow: var(--elevation);
-  border-radius: 3px;
   display: flex;
   align-items: center;
   height: 36px;

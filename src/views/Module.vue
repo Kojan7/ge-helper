@@ -69,10 +69,4 @@ export default {
   border-radius: 0;
   box-shadow: none;
 }
-.lbl-group {
-  border-radius: 3px 3px 0 0;
-}
-.slider {
-  border-radius: 0 0 3px 3px;
-}
 </style>

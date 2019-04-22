@@ -713,7 +713,6 @@ export default {
 .lbl-group {
   color: var(--dark-text-color);
   background-color: var(--bg-color);
-  border-radius: 0;
   box-shadow: none;
 }
 .hl {
@@ -755,7 +754,6 @@ input[type="range"] {
   width: 300px;
   background-color: var(--bg-color);
   color: var(--dark-text-color);
-  border-radius: 3px;
   display: flex;
   flex-direction: column;
 }

@@ -60,7 +60,6 @@ export default {
   padding: 5px 10px 5px 10px;
   background-color: var(--base-color);
   box-shadow: var(--elevation);
-  border-radius: 3px;
   height: 540px;
 }
 .buff {

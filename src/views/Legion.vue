@@ -185,7 +185,6 @@ label,
   height: 52px;
   background-color: var(--base-color);
   box-shadow: var(--elevation);
-  border-radius: 3px;
   margin: 5px;
   flex-basis: 0;
   flex-grow: 1;
@@ -215,7 +214,6 @@ input {
   margin: 5px 5px 10px 5px;
   background-color: var(--base-color);
   box-shadow: var(--elevation);
-  border-radius: 3px;
 }
 
 .active {

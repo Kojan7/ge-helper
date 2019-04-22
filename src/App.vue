@@ -55,13 +55,11 @@ body {
   display: block;
   box-shadow: var(--elevation);
   background-color: var(--base-color);
-  border-radius: 3px;
   padding: 10px;
   margin-bottom: 20px;
 }
 .btn {
   cursor: pointer;
-  border-radius: 3px;
   border: 1px solid var(--primary-color);
   color:var(--primary-color);
   display: inline-block;
@@ -85,6 +83,5 @@ body {
   height: 36px;
   font-size: 16px;
   box-shadow: var(--elevation);
-  border-radius: 3px;
 }
 </style>

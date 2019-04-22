@@ -46,7 +46,6 @@ export default {
   box-sizing: border-box;
   background-color: var(--base-color);
   box-shadow: var(--elevation);
-  border-radius: 3px;
   margin: 20px 0;
   padding: 5px 10px 5px 10px;
 }

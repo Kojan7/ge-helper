@@ -1,6 +1,6 @@
 <template>
   <div class="hull">
-    <app-radio-button class="first"
+    <app-radio-button
       :options="hullChoice.type"
       v-model="type"/>
     <app-radio-button
@@ -48,15 +48,8 @@ export default {
 };
 </script>
 <style scoped>
-.lbl-group {
-  box-shadow: none;
-  border-radius: 0;
-}
+.lbl-group,
 .slider {
   box-shadow: none;
-  border-radius: 0 0 3px 3px;
-}
-.first {
-  border-radius: 3px 3px 0 0;
 }
 </style>
