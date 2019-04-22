@@ -94,14 +94,16 @@
         <div :style="statsPowerColor">
           {{ $t('build.power') }}{{ stats.powerUsage }}/{{ stats.powerOutput }}
         </div>
-        <div>{{ $t('build.energy') }}{{ stats.energy }}</div>
-        <div>{{ $t('build.shield') }}{{ stats.shield }} ({{stats.regen}}/s)</div>
-        <div>{{ $t('build.hp') }}{{ stats.hp }}</div>
         <div>{{ $t('build.speed') }}{{ stats.speed }}</div>
-        <div>{{ $t('build.dps') }}{{ stats.dps }} dps</div>
-        <div>{{ $t('build.mining') }}{{ stats.mining }}</div>
         <div>{{ $t('build.cargo') }}{{ stats.cargo }}</div>
-        <div v-if="showMineCalc"><br>
+        <div v-if="showCombatStats">
+          <div>{{ $t('build.energy') }}{{ stats.energy }}</div>
+          <div>{{ $t('build.shield') }}{{ stats.shield }} ({{stats.regen}}/s)</div>
+          <div>{{ $t('build.hp') }}{{ stats.hp }}</div>
+          <div>{{ $t('build.dps') }}{{ stats.dps }} dps</div>
+        </div>
+        <div v-if="showMiningStats"><br>
+          <div>{{ $t('build.mining') }}{{ stats.mining }}</div>
           <div>{{ $t('build.mCminingTime') }}{{ mCminingTime[1] }}</div>
           <div>{{ $t('build.mCtransitTime') }}{{ mCtransitTime[1] }}</div>
           <div>{{ $t('build.mCtotalTime') }}{{ mCtotalTime[1] }}</div>
@@ -251,9 +253,6 @@
       <br><br>
       <span class="hl">{{ $t('build.miningCalc') }}</span>
       <div>{{ $t('build.miningDiff') }}<input v-model.number="mineDiff" placeholder="60.233"></div>
-      <div><label>
-        <input type="checkbox" id="checkbox" v-model="showMineCalc">{{ $t('build.showMineCalc') }}
-      </label></div>
     </div>
   </div>
 </template>
@@ -281,7 +280,6 @@ export default {
     return {
       showInput: false,
       showHullInput: true,
-      showMineCalc: true,
       mineDiff: 60.233,
       panX: 2,
       panY: 2,
@@ -330,6 +328,12 @@ export default {
       modChoice: state => state.data.modChoice,
       maxModuleLevel: state => state.data.maxModuleLevel,
     }),
+    showCombatStats() {
+      return this.stats.dps > 0;
+    },
+    showMiningStats() {
+      return this.stats.mining > 0;
+    },
     expandBtnStyle() {
       if (this.showHullInput) {
         return '';
@@ -518,7 +522,6 @@ export default {
       this.installedList = [];
     },
     tileClick(coord) {
-      console.log(coord)
       const mod = this.module;
       // S sized aircraft exception prevention
       if (mod.item > 20 && mod.item < 25 && mod.size === 0) return;
@@ -544,7 +547,6 @@ export default {
           break;
 
         case 4: // L+
-        console.log(1);
           this.removeMod(this.coordToMod(tileCoordGen(coord, 'bottomLeft')), false);
           this.removeMod(this.coordToMod(tileCoordGen(coord, 'bottomRight')), false);
           this.removeMod(this.coordToMod(tileCoordGen(coord, 'left')), false);
