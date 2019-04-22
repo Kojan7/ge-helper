@@ -266,6 +266,7 @@ import HullInfoBuff from '@/components/HullInfoBuff.vue';
 import HullInfoTile from '@/components/HullInfoTile.vue';
 import HullInfoTileMod from '@/components/HullInfoTileMod.vue';
 import { mapState } from 'vuex';
+import { tileCoordGen } from '@/helpers';
 
 export default {
   name: 'Build',
@@ -528,32 +529,6 @@ export default {
     clearMod() {
       this.installedList = [];
     },
-    tileCoordGen(coord, position) {
-      switch (position) {
-        case 'bottomLeft':
-          return [coord[0] + 1, coord[1] + 1 - (coord[0] % 2 ? 1 : 0)];
-        case 'bottomRight':
-          return [coord[0] + 1, coord[1] - (coord[0] % 2 ? 1 : 0)];
-        case 'bottom':
-          return [coord[0] + 2, coord[1]];
-        case 'mostBottomLeft':
-          return [coord[0] + 2, coord[1] + 1];
-        case 'mostBottomRight':
-          return [coord[0] + 2, coord[1] - 1];
-        case 'left':
-          return [coord[0], coord[1] + 1];
-        case 'right':
-          return [coord[0], coord[1] - 1];
-        case 'top':
-          return [coord[0] - 2, coord[1]];
-        case 'topLeft':
-          return [coord[0] - 1, coord[1] + 1 - (coord[0] % 2 ? 1 : 0)];
-        case 'topRight':
-          return [coord[0] - 1, coord[1] - (coord[0] % 2 ? 1 : 0)];
-        default:
-          return coord;
-      }
-    },
     tileClick(coord) {
       if (this.module.item > 20 && this.module.item < 25 && this.module.size === 0) {
         // S sized aircraft exception prevention
@@ -568,38 +543,44 @@ export default {
         this.modId, // 4
       ]);
       switch (this.module.size) {
-        case 3: // M+
-          this.tileExpand(this.tileCoordGen(coord, 'bottomLeft'), 10);
-          this.tileExpand(this.tileCoordGen(coord, 'bottomRight'), 11);
-          this.tileExpand(this.tileCoordGen(coord, 'bottom'), 12);
-          break;
         case 1: // M
-          this.tileExpand(this.tileCoordGen(coord, 'bottomLeft'), 5);
-          this.tileExpand(this.tileCoordGen(coord, 'bottomRight'), 6);
+          this.tileExpand(tileCoordGen(coord, 'bottomLeft'), 5);
+          this.tileExpand(tileCoordGen(coord, 'bottomRight'), 6);
+          break;
+        case 3: // M+
+          this.tileExpand(tileCoordGen(coord, 'bottomLeft'), 10);
+          this.tileExpand(tileCoordGen(coord, 'bottomRight'), 11);
+          this.tileExpand(tileCoordGen(coord, 'bottom'), 12);
           break;
         case 2: // L
-          this.tileExpand(this.tileCoordGen(coord, 'bottomLeft'), 7);
-          this.tileExpand(this.tileCoordGen(coord, 'bottomRight'), 8);
-          this.tileExpand(this.tileCoordGen(coord, 'bottom'), 9);
-          this.tileExpand(this.tileCoordGen(coord, 'mostBottomLeft'), 5);
-          this.tileExpand(this.tileCoordGen(coord, 'mostBottomRight'), 6);
+          this.tileExpand(tileCoordGen(coord, 'bottomLeft'), 7);
+          this.tileExpand(tileCoordGen(coord, 'bottomRight'), 8);
+          this.tileExpand(tileCoordGen(coord, 'bottom'), 9);
+          this.tileExpand(tileCoordGen(coord, 'mostBottomLeft'), 5);
+          this.tileExpand(tileCoordGen(coord, 'mostBottomRight'), 6);
           break;
         case 4: // L+
-          this.tileExpand(this.tileCoordGen(coord, 'bottomLeft'), 15);
-          this.tileExpand(this.tileCoordGen(coord, 'bottomRight'), 16);
-          this.tileExpand(this.tileCoordGen(coord, 'left'), 10);
-          this.tileExpand(this.tileCoordGen(coord, 'right'), 11);
+          this.tileExpand(tileCoordGen(coord, 'bottomLeft'), 15);
+          this.tileExpand(tileCoordGen(coord, 'bottomRight'), 16);
+          this.tileExpand(tileCoordGen(coord, 'left'), 10);
+          this.tileExpand(tileCoordGen(coord, 'right'), 11);
           if (this.module.item < 11 || this.module.item > 20) {
-            this.tileExpand(this.tileCoordGen(coord, 'topLeft'), 7);
-            this.tileExpand(this.tileCoordGen(coord, 'topRight'), 8);
-            this.tileExpand(this.tileCoordGen(coord, 'top'), 17);
+            this.tileExpand(tileCoordGen(coord, 'topLeft'), 7);
+            this.tileExpand(tileCoordGen(coord, 'topRight'), 8);
+            this.tileExpand(tileCoordGen(coord, 'top'), 17);
           } else {
-            this.tileExpand(this.tileCoordGen(coord, 'topLeft'), 13);
-            this.tileExpand(this.tileCoordGen(coord, 'topRight'), 14);
+            this.tileExpand(tileCoordGen(coord, 'topLeft'), 13);
+            this.tileExpand(tileCoordGen(coord, 'topRight'), 14);
           }
           break;
         default:
           break;
+      }
+    },
+    rmTileWithCoord(coord) {
+      const t = this.installedList.find(el => el[0][0] === coord[0] && el[0][1] === coord[1]);
+      if (typeof t !== 'undefined') {
+        this.removeMod(t, false);
       }
     },
     tileExpand(coord, size) {
@@ -613,6 +594,15 @@ export default {
     removeMod(mod, human = true) {
       if (human) {
         this.undoLog();
+      }
+      const [coord, size] = mod;
+      switch (size) {
+        case 1: // M
+          this.rmTileWithCoord(tileCoordGen(coord, 'bottomLeft'));
+          this.rmTileWithCoord(tileCoordGen(coord, 'bottomRight'));
+          break;
+        default:
+          break;
       }
       this.installedList.splice(this.installedList.indexOf(mod), 1);
     },

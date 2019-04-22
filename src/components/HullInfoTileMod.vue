@@ -47,6 +47,7 @@
         points=" 10,0.5 18.1,5 18.1,15 10,19.5 1.9,15 -2,15 -2,-15"/>
       <!-- for all L+ internal tile -->
       <polygon v-else-if="mod[1] === 4" :style="imageStyle" points="-3,-3 -3,23 23,23 23,-3" style="stroke-width:1" />
+      <!-- 5: left bottom of M -->
       <polygon v-else-if="mod[1] === 5" :style="imageStyle" points="22,-19.7 22,15 1.9171,15" style="stroke-width:1" />
       <polygon v-else-if="mod[1] === 6" :style="imageStyle" points="-2,-19.7 18.0829,15 -2,15" style="stroke-width:1" />
       <polygon v-else-if="mod[1] === 7" :style="imageStyle" points="22,-19.7 22,22 -2.13,22" style="stroke-width:1" />
@@ -54,6 +55,7 @@
       <polygon v-else-if="mod[1] === 9" :style="imageStyle" points="-2,-2 22,-2 22,15 -2,15" style="stroke-width:1" />
       <polygon v-else-if="mod[1] === 10" :style="imageStyle" points="22,-20.3 22,40.3 5,10" style="stroke-width:1" />
       <polygon v-else-if="mod[1] === 11" :style="imageStyle" points="-2,-20.3 -2,40.3 15,10" style="stroke-width:1" />
+      <!-- 12: bottom of M+ (V) -->
       <polygon v-else-if="mod[1] === 12" :style="imageStyle" points="10,19 26.1658,-9 -6.1658,-9" style="stroke-width:1" />
       <polygon v-else-if="mod[1] === 13" :style="imageStyle" points="8,5 24,5 24,29 -6.1658,29" style="stroke-width:1" />
       <polygon v-else-if="mod[1] === 14" :style="imageStyle" points="-6,5 12,5 26.1658,29 -6,29" style="stroke-width:1" />
