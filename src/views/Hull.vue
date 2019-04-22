@@ -7,11 +7,10 @@
       :options="hullChoice.size"
       v-model="size"/>
     <app-slider
-      @input="level=$event"
       :text="$t('level')"
       :min=1
       :max=maxLevel
-      :value="level"/>
+      v-model="level"/>
     <hull-info :hullId="hullId"/>
   </div>
 </template>

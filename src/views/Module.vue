@@ -12,11 +12,10 @@
         </option>
       </select>
       <app-slider
-        @input="level=$event"
         :text="$t('level')"
         :min=1
         :max=maxModuleLevel
-        :value="level"/>
+        v-model="level"/>
     </div>
     <ModInfo :modId="modId"/>
   </div>
