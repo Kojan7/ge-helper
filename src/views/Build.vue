@@ -266,7 +266,7 @@ import HullInfoBuff from '@/components/HullInfoBuff.vue';
 import HullInfoTile from '@/components/HullInfoTile.vue';
 import HullInfoTileMod from '@/components/HullInfoTileMod.vue';
 import { mapState } from 'vuex';
-import { tileCoordGen } from '@/helpers';
+import { tileCoordGen, toHHMMSS, is8Tiles } from '@/helpers';
 
 export default {
   name: 'Build',
@@ -461,21 +461,21 @@ export default {
       if (this.stats.mining === 0) {
         return [miningTime, '¯\\_(ツ)_/¯'];
       }
-      return [miningTime, this.toHHMMSS(miningTime)];
+      return [miningTime, toHHMMSS(miningTime)];
     },
     mCtransitTime() {
       const transitTime = Math.ceil(200000 / this.stats.speed);
       if (this.stats.mining === 0) {
         return [transitTime, '¯\\_(ツ)_/¯'];
       }
-      return [transitTime, this.toHHMMSS(transitTime)];
+      return [transitTime, toHHMMSS(transitTime)];
     },
     mCtotalTime() {
       const totalTime = this.mCminingTime[0] + (this.mCtransitTime[0] * 2);
       if (this.stats.mining === 0) {
         return [totalTime, '¯\\_(ツ)_/¯'];
       }
-      return [totalTime, this.toHHMMSS(totalTime)];
+      return [totalTime, toHHMMSS(totalTime)];
     },
     mCrocksPerHour() {
       return Math.floor((this.stats.cargo / this.mCtotalTime[0]) * 3600);
@@ -510,18 +510,6 @@ export default {
     zoomLayout(event) {
       this.zoom = this.zoom * ((event.scale - 1) / 50 + 1);
     },
-    toHHMMSS(sec) {
-      const hours = Math.floor(sec / 3600);
-      let minutes = Math.floor((sec - (hours * 3600)) / 60);
-      let seconds = sec - (hours * 3600) - (minutes * 60);
-      if (minutes < 10) {
-        minutes = `0${minutes}`;
-      }
-      if (seconds < 10) {
-        seconds = `0${seconds}`;
-      }
-      return `${hours}:${minutes}:${seconds}`;
-    },
     resetView() {
       this.zoom = 0.3;
       this.padding = { top: 30, right: 15 };
@@ -530,81 +518,163 @@ export default {
       this.installedList = [];
     },
     tileClick(coord) {
-      if (this.module.item > 20 && this.module.item < 25 && this.module.size === 0) {
-        // S sized aircraft exception prevention
-        return;
-      }
+      console.log(coord)
+      const mod = this.module;
+      // S sized aircraft exception prevention
+      if (mod.item > 20 && mod.item < 25 && mod.size === 0) return;
+
+      // log undo history
       this.undoLog();
-      this.installedList.push([
-        coord, // 0
-        this.module.size, // 1
-        this.module.item, // 2
-        this.module.level, // 3
-        this.modId, // 4
-      ]);
-      switch (this.module.size) {
+
+      // clear mod tiles to avoid duplicate
+      switch (mod.size) {
+        case 2: // L
+          this.removeMod(this.coordToMod(tileCoordGen(coord, 'mostBottomLeft')), false);
+          this.removeMod(this.coordToMod(tileCoordGen(coord, 'mostBottomRight')), false);
+          // fall through
+        case 3: // M+
+          this.removeMod(this.coordToMod(tileCoordGen(coord, 'bottom')), false);
+          // fall through
         case 1: // M
-          this.tileExpand(tileCoordGen(coord, 'bottomLeft'), 5);
-          this.tileExpand(tileCoordGen(coord, 'bottomRight'), 6);
+          this.removeMod(this.coordToMod(tileCoordGen(coord, 'bottomLeft')), false);
+          this.removeMod(this.coordToMod(tileCoordGen(coord, 'bottomRight')), false);
+          // fall through
+        case 0: // S
+          this.removeMod([coord, mod.size, mod.item], false);
+          break;
+
+        case 4: // L+
+        console.log(1);
+          this.removeMod(this.coordToMod(tileCoordGen(coord, 'bottomLeft')), false);
+          this.removeMod(this.coordToMod(tileCoordGen(coord, 'bottomRight')), false);
+          this.removeMod(this.coordToMod(tileCoordGen(coord, 'left')), false);
+          this.removeMod(this.coordToMod(tileCoordGen(coord, 'right')), false);
+          this.removeMod(this.coordToMod(tileCoordGen(coord, 'topLeft')), false);
+          this.removeMod(this.coordToMod(tileCoordGen(coord, 'topRight')), false);
+          if (is8Tiles(mod.item)) this.removeMod(this.coordToMod(tileCoordGen(coord, 'top')), false);
+          this.removeMod([coord, mod.size, mod.item], false);
+          break;
+        default:
+          break;
+      }
+
+      // add main mod tile
+      this.addModTile(coord, mod.size, mod.item, mod.level, this.modId);
+      // expands...
+      switch (mod.size) {
+        case 1: // M
+          this.addModTile(tileCoordGen(coord, 'bottomLeft'), 5, mod.item);
+          this.addModTile(tileCoordGen(coord, 'bottomRight'), 6, mod.item);
           break;
         case 3: // M+
-          this.tileExpand(tileCoordGen(coord, 'bottomLeft'), 10);
-          this.tileExpand(tileCoordGen(coord, 'bottomRight'), 11);
-          this.tileExpand(tileCoordGen(coord, 'bottom'), 12);
+          this.addModTile(tileCoordGen(coord, 'bottomLeft'), 10, mod.item);
+          this.addModTile(tileCoordGen(coord, 'bottomRight'), 11, mod.item);
+          this.addModTile(tileCoordGen(coord, 'bottom'), 12, mod.item);
           break;
         case 2: // L
-          this.tileExpand(tileCoordGen(coord, 'bottomLeft'), 7);
-          this.tileExpand(tileCoordGen(coord, 'bottomRight'), 8);
-          this.tileExpand(tileCoordGen(coord, 'bottom'), 9);
-          this.tileExpand(tileCoordGen(coord, 'mostBottomLeft'), 5);
-          this.tileExpand(tileCoordGen(coord, 'mostBottomRight'), 6);
+          this.addModTile(tileCoordGen(coord, 'bottomLeft'), 7, mod.item);
+          this.addModTile(tileCoordGen(coord, 'bottomRight'), 8, mod.item);
+          this.addModTile(tileCoordGen(coord, 'bottom'), 9, mod.item);
+          this.addModTile(tileCoordGen(coord, 'mostBottomLeft'), 5, mod.item);
+          this.addModTile(tileCoordGen(coord, 'mostBottomRight'), 6, mod.item);
           break;
         case 4: // L+
-          this.tileExpand(tileCoordGen(coord, 'bottomLeft'), 15);
-          this.tileExpand(tileCoordGen(coord, 'bottomRight'), 16);
-          this.tileExpand(tileCoordGen(coord, 'left'), 10);
-          this.tileExpand(tileCoordGen(coord, 'right'), 11);
-          if (this.module.item < 11 || this.module.item > 20) {
-            this.tileExpand(tileCoordGen(coord, 'topLeft'), 7);
-            this.tileExpand(tileCoordGen(coord, 'topRight'), 8);
-            this.tileExpand(tileCoordGen(coord, 'top'), 17);
+          this.addModTile(tileCoordGen(coord, 'bottomLeft'), 15, mod.item);
+          this.addModTile(tileCoordGen(coord, 'bottomRight'), 16, mod.item);
+          this.addModTile(tileCoordGen(coord, 'left'), 10, mod.item);
+          this.addModTile(tileCoordGen(coord, 'right'), 11, mod.item);
+          if (is8Tiles(mod.item)) {
+            this.addModTile(tileCoordGen(coord, 'topLeft'), 7, mod.item);
+            this.addModTile(tileCoordGen(coord, 'topRight'), 8, mod.item);
+            this.addModTile(tileCoordGen(coord, 'top'), 17, mod.item);
           } else {
-            this.tileExpand(tileCoordGen(coord, 'topLeft'), 13);
-            this.tileExpand(tileCoordGen(coord, 'topRight'), 14);
+            this.addModTile(tileCoordGen(coord, 'topLeft'), 13, mod.item);
+            this.addModTile(tileCoordGen(coord, 'topRight'), 14, mod.item);
           }
           break;
         default:
           break;
       }
     },
-    rmTileWithCoord(coord) {
-      const t = this.installedList.find(el => el[0][0] === coord[0] && el[0][1] === coord[1]);
-      if (typeof t !== 'undefined') {
-        this.removeMod(t, false);
-      }
-    },
-    tileExpand(coord, size) {
-      const duplicate =
-        this.installedList.find(el => el[0][0] === coord[0] && el[0][1] === coord[1]);
-      if (typeof duplicate !== 'undefined') {
-        this.removeMod(duplicate, false);
-      }
-      this.installedList.push([coord, size, this.module.item]);
-    },
     removeMod(mod, human = true) {
-      if (human) {
-        this.undoLog();
-      }
-      const [coord, size] = mod;
+      if (!mod) return;
+      if (human) this.undoLog();
+      const [coord, size, item] = mod;
       switch (size) {
+        case 2: // L
+          this.rmModTile(this.coordToMod(tileCoordGen(coord, 'mostBottomLeft')));
+          this.rmModTile(this.coordToMod(tileCoordGen(coord, 'mostBottomRight')));
+          // fall through
+        case 3: // M+
+          this.rmModTile(this.coordToMod(tileCoordGen(coord, 'bottom')));
+          // fall through
         case 1: // M
-          this.rmTileWithCoord(tileCoordGen(coord, 'bottomLeft'));
-          this.rmTileWithCoord(tileCoordGen(coord, 'bottomRight'));
+          this.rmModTile(this.coordToMod(tileCoordGen(coord, 'bottomLeft')));
+          this.rmModTile(this.coordToMod(tileCoordGen(coord, 'bottomRight')));
+          // fall through
+        case 0: // S
+          this.rmModTile(mod);
           break;
+
+        case 4: // L+
+          this.rmModTile(mod);
+          this.rmModTile(this.coordToMod(tileCoordGen(coord, 'bottomLeft')));
+          this.rmModTile(this.coordToMod(tileCoordGen(coord, 'bottomRight')));
+          this.rmModTile(this.coordToMod(tileCoordGen(coord, 'left')));
+          this.rmModTile(this.coordToMod(tileCoordGen(coord, 'right')));
+          this.rmModTile(this.coordToMod(tileCoordGen(coord, 'topLeft')));
+          this.rmModTile(this.coordToMod(tileCoordGen(coord, 'topRight')));
+          if (is8Tiles(item)) this.rmModTile(this.coordToMod(tileCoordGen(coord, 'top')));
+          break;
+
+        case 7: // left side L
+          this.removeMod(this.coordToMod(tileCoordGen(coord, 'bottomRight')));
+          // fall through
+        case 5: // left bottom of M
+        case 10: // left side M+
+        case 15: // bottom left corner L+
+          this.removeMod(this.coordToMod(tileCoordGen(coord, 'topRight')));
+          break;
+
+        case 8: // right side L
+          this.removeMod(this.coordToMod(tileCoordGen(coord, 'bottomLeft')));
+          // fall through
+        case 6: // right bottom of M
+        case 11: // right side M+
+        case 16: // bottom right corner L+
+          this.removeMod(this.coordToMod(tileCoordGen(coord, 'topLeft')));
+          break;
+
+        case 9: // bottom L
+        case 12: // bottom M+
+          this.removeMod(this.coordToMod(tileCoordGen(coord, 'top')));
+          break;
+
+        case 13: // left top corner L+
+          this.removeMod(this.coordToMod(tileCoordGen(coord, 'bottomRight')));
+          break;
+
+        case 14: // right top corner L+
+          this.removeMod(this.coordToMod(tileCoordGen(coord, 'bottomLeft')));
+          break;
+
+        case 17: // top L+ weapons
+          this.removeMod(this.coordToMod(tileCoordGen(coord, 'bottom')));
+          break;
+
         default:
           break;
       }
-      this.installedList.splice(this.installedList.indexOf(mod), 1);
+    },
+    addModTile(coord, size, item, level, modId) {
+      this.installedList.push(level > 0 ? [coord, size, item, level, modId] : [coord, size, item]);
+    },
+    coordToMod(coord) {
+      return this.installedList.find(el => el[0][0] === coord[0] && el[0][1] === coord[1]);
+    },
+    rmModTile(mod) {
+      const i = this.installedList.indexOf(mod);
+      if (i > -1) this.installedList.splice(i, 1);
     },
     undoLog() {
       this.oldestInstalledList = this.olderInstalledList.slice();
