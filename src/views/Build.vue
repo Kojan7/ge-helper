@@ -74,8 +74,7 @@
       <div class="row">
         <app-radio-button
           :options="modChoice.size"
-          @chose="module.size=$event"
-          :value="module.size"/>
+          v-model="module.size"/>
       </div>
       <div class="row">
         <app-slider
@@ -87,7 +86,7 @@
       </div>
       <app-radio-button class="wrap"
         :options="modChoice.item"
-        @chose="module.item=$event"/>
+        v-model="module.item"/>
     </div>
     <v-touch class="v-touch" @panstart="initMoveLayout" @pan="moveLayout" @pinch="zoomLayout">
       <div class="text-zone">

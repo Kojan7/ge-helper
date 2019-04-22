@@ -22,9 +22,7 @@
       <div class="content">
         <app-radio-button
           :options="langs"
-          :defaultChoice="$i18n.locale"
-          @chose="changeLocale($event)">
-        </app-radio-button>
+          v-model="lang" />
       </div>
     </div>
 
@@ -59,6 +57,7 @@ export default {
         { value: 'en', zh: 'English', en: 'English' },
         { value: 'zh', zh: '中文', en: '中文' },
       ],
+      lang: this.$i18n.locale,
     };
   },
   computed: mapState({
@@ -79,6 +78,12 @@ export default {
       return true;
     },
   }),
+  watch: {
+    lang(locale) {
+      this.$i18n.locale = locale;
+      localStorage.setItem('locale', JSON.stringify(locale));
+    },
+  },
   methods: {
     handleFile(event) {
       const reader = new FileReader();
@@ -95,10 +100,6 @@ export default {
     resetAll() {
       localStorage.clear();
       window.location.reload();
-    },
-    changeLocale(locale) {
-      this.$i18n.locale = locale;
-      localStorage.setItem('locale', JSON.stringify(locale));
     },
   },
 };

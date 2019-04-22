@@ -2,7 +2,7 @@
   <!--
       <app-radio-button
         :options="options"
-        @chose="option = $event">
+        v-model="option">
       </app-radio-button>
 
       data() {
@@ -23,7 +23,7 @@
       <input class="dot" type="radio"
         :value="option.value"
         v-model="choice"
-        @change="$emit('chose', choice)">
+        @change="$emit('input', choice)">
       {{ $i18n.locale === "en" ? option.en : option.zh }}
     </label>
   </div>
@@ -34,13 +34,11 @@ export default {
   name: 'AppRadioButton',
   props: {
     options: Array,
-    defaultChoice: {
-      default: 0,
-    },
+    value: [String, Number],
   },
   data() {
     return {
-      choice: this.defaultChoice,
+      choice: this.value,
     };
   },
 };

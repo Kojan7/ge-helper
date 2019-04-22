@@ -2,10 +2,10 @@
   <div class="hull">
     <app-radio-button class="first"
       :options="hullChoice.type"
-      @chose="type=$event"/>
+      v-model="type"/>
     <app-radio-button
       :options="hullChoice.size"
-      @chose="size=$event"/>
+      v-model="size"/>
     <app-slider
       @input="level=$event"
       :text="$t('level')"

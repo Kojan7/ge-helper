@@ -3,7 +3,7 @@
     <div class="inputs">
       <app-radio-button
         :options="modChoice.size"
-        @chose="size=$event"/>
+        v-model="size"/>
       <select class="select" v-model.number="item">
         <option v-for="option in modChoice.item"
           :value="option.value"
