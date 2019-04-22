@@ -12,13 +12,13 @@
       </label>
     </div>
     <div class="selection">
-      <label  :class="{ active: type === 'other' }">
+      <label :class="{ active: type === 'other' }">
         <input type="radio" value="other" v-model="type">{{ $t('other') }}
       </label>
-      <label  :class="{ active: type === 'def' }">
+      <label :class="{ active: type === 'def' }">
         <input type="radio" value="def" v-model="type">{{ $t('def') }}
       </label>
-      <label  :class="{ active: type === 'core' }">
+      <label :class="{ active: type === 'core' }">
         <input type="radio" value="core" v-model="type">{{ $t('core') }}
       </label>
     </div>
@@ -37,11 +37,28 @@
       </div>
     </div>
     <div class="output">
-      {{ $t('lp') }}{{ lp }}（{{ techAmount }} × lv. {{ tech }}）
+      {{ $t('lp') }}: {{ lp }}（{{ techAmount }} × lv. {{ tech }}）
     </div>
     <div class="output">
       {{ $t('upgradeFee') }}{{ $i18n.locale === "en" ? upgradeFee : upgradeFeeBeautifiedCN }}
-      （{{ feeLp }} {{ $t('lp2') }})
+      （{{ feeLp }} {{ $t('lp') }})
+    </div>
+    <select class="select" v-model="item">
+      <option v-for="(price, key) in legionPrice.items"
+        :value="key"
+        :key="key">
+        {{ price[0] }} {{ $t(key) }} ⇀ {{ price[1] }} {{ $t('lp') }}
+      </option>
+    </select>
+    <div class="selection">
+      <div class="square">
+        {{ $t('item') }}
+        <input v-model.number="itemCount">
+      </div>
+      <div class="square">
+        {{ $t('lp') }}
+        <div>{{ itemLp }}</div>
+      </div>
     </div>
     <div class="card">
       S10 {{ $t('core') }}<br/>
@@ -80,6 +97,8 @@ export default {
       tech: 1,
       level: 1,
       amount: 1,
+      item: 'rock',
+      itemCount: 1,
       upgradeFeeRaw: {
         Score: 300,
         Sdef: 75,
@@ -104,14 +123,26 @@ export default {
         Ldef: 128000,   //250 *512
         Lother: 256000, //500 *512
         rateucp: 30000, //3000000/100
+        items: {
+          rock: [500000, 40],
+          metalOre: [50000, 15],
+          ice: [25000, 15],
+          silOre: [10000, 15],
+          reOre: [5000, 15],
+          debris: [2500, 225],
+          metal: [5000, 20],
+          sil: [1000, 20],
+          ucp: [30000, 1],
+          re: [500,20],
+          t2: [5000, 525],
+        },
       }
     };
   },
   computed: {
     lp() {
       return Math.ceil(this.legionPrice[this.size + this.type] /
-          Math.pow(2, 10 - this.level) *
-          this.amount);
+        Math.pow(2, 10 - this.level) * this.amount);
     },
     techAmount() {
       return this.amount * Math.pow(2, this.level - this.tech);
@@ -135,6 +166,10 @@ export default {
     feeLp() {
       return Math.round(this.upgradeFee / this.legionPrice.rateucp);
     },
+    itemLp() {
+      return Math.ceil(this.itemCount *
+        this.legionPrice.items[this.item][1] / this.legionPrice.items[this.item][0]);
+    }
   },
   methods: {
     saveLegion() {
@@ -161,17 +196,21 @@ export default {
 </script>
 
 <style scoped>
+.select {
+  height: 36px;
+}
+
 .card {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 5px;
 }
 .selection {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 10px 0;
 }
 input[type="radio"] {
   display: none;
@@ -184,8 +223,6 @@ label,
   justify-content: center;
   height: 52px;
   background-color: var(--base-color);
-  box-shadow: var(--elevation);
-  margin: 5px;
   flex-basis: 0;
   flex-grow: 1;
   user-select: none;
@@ -211,7 +248,7 @@ input {
   align-items: center;
   justify-content: center;
   height: 36px;
-  margin: 5px 5px 10px 5px;
+  margin: 10px 0;
   background-color: var(--base-color);
   box-shadow: var(--elevation);
 }
@@ -234,10 +271,20 @@ input {
     "tech": "Tech.",
     "level": "Level",
     "amount": "Amount",
-    "lp": "LP: ",
+    "lp": "LP",
     "upgradeFee": "Upgrade Fee: ",
-    "lp2": "LP"
-
+    "item": "Item",
+    "rock": "Rock",
+    "metalOre": "Metal ore",
+    "ice": "Ice",
+    "silOre": "Silicon ore",
+    "reOre": "Re ore",
+    "debris": "Debris",
+    "metal": "Metal",
+    "sil": "Silicon",
+    "ucp": "UCP",
+    "re": "RE",
+    "t2": "T2"
   },
   "zh": {
     "geaa": "银河勘探冒险家协会",
@@ -250,9 +297,20 @@ input {
     "tech": "科技",
     "level": "等级",
     "amount": "数量",
-    "lp": "军团点：",
+    "lp": "军团点",
     "upgradeFee": "合成费：",
-    "lp2": "军团点"
+    "item": "物品",
+    "rock": "沙",
+    "metalOre": "金属矿",
+    "ice": "冰",
+    "silOre": "硅矿",
+    "reOre": "稀土矿",
+    "debris": "残骸",
+    "metal": "金属",
+    "sil": "硅",
+    "ucp": "UCP",
+    "re": "稀土",
+    "t2": "T2"
   }
 }
 </i18n>
