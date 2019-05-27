@@ -134,46 +134,13 @@
       <div class="btn" @click="showInput = !showInput">{{ $t('build.exit') }}</div>
       <span class="hl">{{ $t('build.skills') }}</span>
       <app-slider
-        @input="skills.operation.splice(0, 1, $event)"
-        :text="$t('build.operation0')"
+        v-for="(_, i) in skills.operation"
+        :key="i"
+        @input="skills.operation.splice(i, 1, $event)"
+        :text="$t('build.operation' + i)"
         :min=0
-        :max=30
-        :value="skills.operation[0]">
-      </app-slider>
-      <app-slider
-        @input="skills.operation.splice(1, 1, $event)"
-        :text="$t('build.operation1')"
-        :min=0
-        :max=30
-        :value="skills.operation[1]">
-      </app-slider>
-      <app-slider
-        @input="skills.operation.splice(2, 1, $event)"
-        :text="$t('build.operation2')"
-        :min=0
-        :max=30
-        :value="skills.operation[2]">
-      </app-slider>
-      <app-slider
-        @input="skills.operation.splice(3, 1, $event)"
-        :text="$t('build.operation3')"
-        :min=0
-        :max=30
-        :value="skills.operation[3]">
-      </app-slider>
-      <app-slider
-        @input="skills.operation.splice(4, 1, $event)"
-        :text="$t('build.operation4')"
-        :min=0
-        :max=30
-        :value="skills.operation[4]">
-      </app-slider>
-      <app-slider
-        @input="skills.operation.splice(5, 1, $event)"
-        :text="$t('build.operation5')"
-        :min=0
-        :max=30
-        :value="skills.operation[5]">
+        :max=40
+        :value="skills.operation[i]">
       </app-slider>
       <br>
       <app-slider
